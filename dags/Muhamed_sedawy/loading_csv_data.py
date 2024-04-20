@@ -32,7 +32,7 @@ dag = DAG(
 
 start_task = EmptyOperator(task_id="start_task", dag=dag)
 
-hello_task = PythonOperator(
+load_task = PythonOperator(
     task_id="hello_task",
     python_callable=load_data,
     dag=dag,
@@ -40,4 +40,4 @@ hello_task = PythonOperator(
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
-start_task >> hello_task >> end_task
+start_task >> load_task >> end_task
