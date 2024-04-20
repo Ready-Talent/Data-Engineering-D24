@@ -32,7 +32,10 @@ load_csv = GCSToBigQueryOperator(
         {"name": "post_abbr", "type": "STRING", "mode": "NULLABLE"},
     ],
     write_disposition="WRITE_TRUNCATE",
-    create_disposition="CREATE_IF_NEEDED"
+    create_disposition="CREATE_IF_NEEDED",
+    skip_leading_rows=1,
+    schema_object=None,
+    dag = dag
 )
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
