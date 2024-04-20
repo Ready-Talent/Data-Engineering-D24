@@ -31,6 +31,7 @@ load_csv = GCSToBigQueryOperator(
     create_disposition="CREATE_IF_NEEDED",
     skip_leading_rows=1,
     schema_object=None,
+    field_delimiter=';',
     dag = dag
 )
 
