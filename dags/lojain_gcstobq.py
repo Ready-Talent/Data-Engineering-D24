@@ -27,7 +27,8 @@ TABLE_NAME="taxi"
 load_csv = GCSToBigQueryOperator(
     task_id="lojain_gcstobq",
     bucket="chicago-taxi-test-de24",
-    source_objects=["chicago-taxi-test-de24/*.csv"],
+
+    source_objects=["chicago-taxi-test-de24/data/*.csv"],
     destination_project_dataset_table=f"{DATASET_NAME}.{TABLE_NAME}",
     schema_fields=[
         {"name": "name", "type": "STRING", "mode": "NULLABLE"},
