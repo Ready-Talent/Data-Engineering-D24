@@ -23,6 +23,7 @@ load_csv = GCSToBigQueryOperator(
     source_objects=["data/*.csv"],
     destination_project_dataset_table="chicago_taxi_01.test_table",
     dag=dag,
+    field_delimiter=';'
 )
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
