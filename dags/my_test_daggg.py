@@ -9,7 +9,7 @@ from airflow.operators.python import PythonOperator
 
 
 def print_myame():
-    logging.info("Helloooo")
+    logging.info("Hellooo")
     return "printed"
 
 
