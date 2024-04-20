@@ -10,7 +10,7 @@ from airflow.operators.python import PythonOperator
 
 
 dag = DAG(
-    dag_id="hello_lojain",
+    dag_id="lojain_gcstobq",
     description="Simple tutorial DAG",
     schedule_interval=None,
     start_date=datetime(2021, 1, 1),
