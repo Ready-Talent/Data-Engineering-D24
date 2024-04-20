@@ -36,7 +36,7 @@ load_csv = GCSToBigQueryOperator(
     ],
     create_disposition='CREATE_IF_NEEDED',
     write_disposition="WRITE_TRUNCATE",
-    schema= True
+    autodetect = True
 )
 
 end_task = EmptyOperator(task_id="end", dag=dag)
