@@ -8,13 +8,13 @@ from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import PythonOperator
 
 
-def print_myame():
+def print_myname():
     logging.info("Hellooo")
     return "printed"
 
 
 dag = DAG(
-    dag_id="name",
+    dag_id="test_dag_sedawy",
     description="Simple tutorial DAG",
     schedule_interval=None,
     start_date=datetime(2021, 1, 1),
