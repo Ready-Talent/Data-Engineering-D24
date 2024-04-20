@@ -14,7 +14,7 @@ def print_myname():
 
 
 dag = DAG(
-    dag_id="name",
+    dag_id="test_dag_sedawy",
     description="Simple tutorial DAG",
     schedule_interval=None,
     start_date=datetime(2021, 1, 1),
