@@ -27,7 +27,7 @@ load_csv = GCSToBigQueryOperator(
     task_id="gcs_to_bigquery_example",
     bucket="chicago-taxi-test-de24",
     source_objects="{{ task_instance.xcom_pull(task_ids='list_csv_files') }}",
-    destination_project_dataset_table="ready-data-engineering-p24.Nadine_Airflow.your_table",
+    destination_project_dataset_table="ready-data-engineering-p24.Nadine_Airflow.chicago-taxi",
     autodetect=True,
     write_disposition="WRITE_APPEND",
     dag=dag
