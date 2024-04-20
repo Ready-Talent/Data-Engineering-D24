@@ -7,7 +7,8 @@ from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQue
 dag = DAG (
         dag_id="abdelrahman_06_gcs_to_bq", 
         schedule_interval=None, 
-        start_date=datetime(2021, 1, 1), catchup=False
+        start_date=datetime(2021, 1, 1), 
+        catchup=False
     )
 
 start = EmptyOperator(task_id="start_task", dag=dag)
@@ -15,10 +16,11 @@ start = EmptyOperator(task_id="start_task", dag=dag)
 load_data = GCSToBigQueryOperator(
     task_id = "chicago_taxi_gcs_to_bq",
     bucket="chicago-taxi-test-de24",
-    source_objects="data/*",
+    source_objects="data/*.csv",
     source_format="CSV",
     destination_project_dataset_table="SRC_06.chicago_taxi",
     autodetect=True,
+    field_delimiter=';',
     write_disposition="WRITE_TRUNCATE",
     create_disposition="CREATE_IF_NEEDED",
     dag=dag
