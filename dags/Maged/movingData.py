@@ -31,11 +31,12 @@ load_csv = GCSToBigQueryOperator(
     autodetect=True,
     field_delimiter=";",
     dag = move_data_dag,
+    skip_leading_rows=1,
 )
 
-first_task = EmptyOperator(task_id="first_task", dag=dag)
+first_task = EmptyOperator(task_id="first_task", dag=move_data_dag)
 
-last_task = EmptyOperator(task_id="last_task", dag=dag)
+last_task = EmptyOperator(task_id="last_task", dag=move_data_dag)
 
 
 first_task >> load_csv >> last_task
