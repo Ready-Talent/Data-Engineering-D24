@@ -14,7 +14,7 @@ dag=DAG(
     dag_id="Ashraf_dag",
     description="Simple tutorial DAG",
     schedule_interval=None,
-    start_date=datetime(2021, 1, 1),
+    start_date=datetime(2024, 4, 1),
     catchup=False,
     )
 
