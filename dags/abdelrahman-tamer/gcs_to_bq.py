@@ -21,6 +21,7 @@ load_data = GCSToBigQueryOperator(
     destination_project_dataset_table="SRC_06.chicago_taxi",
     autodetect=True,
     field_delimiter=';',
+    skip_leading_rows=1,
     write_disposition="WRITE_TRUNCATE",
     create_disposition="CREATE_IF_NEEDED",
     dag=dag
