@@ -14,7 +14,7 @@ dag = DAG(
     dag_id="Maged's first Dag",
     description="first trial",
     schedule_interval=None,
-    start_date=datetime(2024, 20, 4),
+    start_date=datetime(2024, 4, 20),
     catchup=False,
 )
 
