@@ -4,7 +4,8 @@ from datetime import datetime
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import PythonOperator
-from airflow.operators.google import GCSToBigQueryOperator
+from airflow.contrib.operators.gcs_to_bigquery_operator import GCSToBigQueryOperator
+
 
 
 
