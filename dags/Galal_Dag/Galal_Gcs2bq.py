@@ -6,7 +6,7 @@ from datetime import datetime
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import PythonOperator
-from airflow.operators.python import GCSToBigQueryOperator
+from airflow.providers.google.cloud.transfers import GCSToBigQueryOperator
 
 
 
