@@ -4,7 +4,7 @@ import logging
 from datetime import datetime
 
 from airflow import DAG
-import airflow.providers.google.cloud.transfers.gcs_to_bigquery
+from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator
 from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import PythonOperator
 
