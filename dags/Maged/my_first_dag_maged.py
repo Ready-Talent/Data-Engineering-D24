@@ -11,7 +11,7 @@ def print_hello() :
     return "printed"
 
 dag = DAG(
-    dag_id="Maged's first Dag",
+    dag_id="Maged's_first_Dag",
     description="first trial",
     schedule_interval=None,
     start_date=datetime(2024, 4, 20),
