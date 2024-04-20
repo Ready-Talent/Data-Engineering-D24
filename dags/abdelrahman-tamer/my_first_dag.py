@@ -19,7 +19,7 @@ task1 = EmptyOperator(task_id="start_task", dag=dag)
 task2 = PythonOperator(task_id="print_hello_task", python_callable=print_hello, dag=dag)
 task3 = EmptyOperator(task_id="end_task", dag=dag)
 
-
+task1 >> task2 >> task3
 
 
 
