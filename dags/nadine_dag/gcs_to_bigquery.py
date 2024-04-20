@@ -1,6 +1,6 @@
 from airflow.operators.empty import EmptyOperator
 from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator
-from airflow.providers.google.cloud.operators.gcs import GoogleCloudStorageListOperator
+from airflow.contrib.operators.gcs_list_operator import GoogleCloudStorageListOperator
 from airflow import DAG
 from datetime import datetime
 
@@ -27,7 +27,7 @@ load_csv = GCSToBigQueryOperator(
     task_id="gcs_to_bigquery_example",
     bucket="chicago-taxi-test-de24",
     source_objects="{{ task_instance.xcom_pull(task_ids='list_csv_files') }}",
-    destination_project_dataset_table="ready-data-engineering-p24.Nadine_Airflow.chicago-taxi",
+    destination_project_dataset_table="ready-data-engineering-p24.Nadine_Airflow.your_table",
     autodetect=True,
     write_disposition="WRITE_APPEND",
     dag=dag
