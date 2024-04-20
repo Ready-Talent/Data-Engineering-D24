@@ -4,8 +4,10 @@ import logging
 from datetime import datetime
 
 from airflow import DAG
+import airflow.providers.google.cloud.transfers.gcs_to_bigquery
 from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import PythonOperator
+
 
 
 
@@ -20,7 +22,8 @@ dag = DAG(
 
 start_task = EmptyOperator(task_id="start", dag=dag)
 DATASET_NAME="lojain_fromgcs"
-TABLE_NAME="taxi_info"
+TABLE_NAME="taxi"
+
 load_csv = GCSToBigQueryOperator(
     task_id="lojain_gcstobq",
     bucket="chicago-taxi-test-de24",
