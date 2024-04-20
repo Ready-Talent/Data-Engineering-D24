@@ -1,5 +1,5 @@
 from airflow import DAG
-import datetime
+from datetime import datetime
 from airflow.operators.empty import EmptyOperator
 from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator
 
