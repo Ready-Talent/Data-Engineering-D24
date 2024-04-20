@@ -31,7 +31,7 @@ start_task = EmptyOperator(task_id="start_task", dag=dag)
 load_csv = GCSToBigQueryOperator(
     task_id="gcs_to_bigquery_example_Galal",
     bucket="chicago-taxi-test-de24",
-    source_objects=["chicago-taxi-test-de24/*.csv"],
+    source_objects=["chicago-taxi-test-de24/data/*.csv"],
     destination_project_dataset_table=f"{DATASET_NAME}.{TABLE_NAME}",create_disposition='CREATE_IF_NEEDED',
     write_disposition="WRITE_TRUNCATE",
 )
