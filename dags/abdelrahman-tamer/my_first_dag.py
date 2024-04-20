@@ -12,7 +12,7 @@ def print_hello():
     print("hello world")
     
 
-dag = DAG(dag_id="my_first_dag", schedule_interval=None, start_date=datetime(2021, 1, 1), catchup=False)
+dag = DAG(dag_id="abdelrahman_06_first_dag", schedule_interval=None, start_date=datetime(2021, 1, 1), catchup=False)
 
 
 task1 = EmptyOperator(task_id="start_task", dag=dag)
