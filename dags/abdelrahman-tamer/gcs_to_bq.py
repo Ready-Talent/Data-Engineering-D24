@@ -1,5 +1,6 @@
 from airflow import DAG
 from datetime import datetime
+import os
 from airflow.operators.empty import EmptyOperator
 from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator
 
@@ -11,22 +12,49 @@ dag = DAG (
         catchup=False
     )
 
+
+gcs_bucket = 'chicago-taxi-test-de24'
+data_directory = 'data/'
+
+csv_files = [f for f in os.listdir(data_directory) if f.endswith('.csv')]
+
+
 start = EmptyOperator(task_id="start_task", dag=dag)
 
-load_data = GCSToBigQueryOperator(
-    task_id = "chicago_taxi_gcs_to_bq",
-    bucket="chicago-taxi-test-de24",
-    source_objects="data/*.csv",
-    source_format="CSV",
-    destination_project_dataset_table="SRC_06.chicago_taxi",
-    autodetect=True,
-    field_delimiter=';',
-    skip_leading_rows=1,
-    write_disposition="WRITE_TRUNCATE",
-    create_disposition="CREATE_IF_NEEDED",
-    encoding='UTF-8',
-    dag=dag
+
+for csv_file in csv_files:
+    task_id = f'load_{csv_file[:-4]}_to_bq'  # Task ID based on file name
+    source_objects = f'{data_directory}{csv_file}'
+
+    load_data = GCSToBigQueryOperator(
+        task_id=task_id,
+        bucket=gcs_bucket,
+        source_objects=source_objects,
+        source_format='CSV',
+        destination_project_dataset_table='SRC_06.chicago_taxi',
+        autodetect=True,
+        field_delimiter=';',
+        skip_leading_rows=1,
+        write_disposition='WRITE_TRUNCATE',
+        create_disposition='CREATE_IF_NEEDED',
+        encoding='UTF-8',
+        dag=dag,
     )
+
+# load_data = GCSToBigQueryOperator(
+#     task_id = "chicago_taxi_gcs_to_bq",
+#     bucket="chicago-taxi-test-de24",
+#     source_objects="data/*.csv",
+#     source_format="CSV",
+#     destination_project_dataset_table="SRC_06.chicago_taxi",
+#     autodetect=True,
+#     field_delimiter=';',
+#     skip_leading_rows=1,
+#     write_disposition="WRITE_TRUNCATE",
+#     create_disposition="CREATE_IF_NEEDED",
+#     encoding='UTF-8',
+#     dag=dag
+#     )
 
 end = EmptyOperator(task_id="end_task", dag=dag)
 
