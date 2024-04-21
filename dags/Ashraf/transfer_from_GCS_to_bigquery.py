@@ -20,7 +20,7 @@ start_task = EmptyOperator(task_id="start_task", dag=dag)
 load_csv = GCSToBigQueryOperator(
     task_id="gcs_to_bigquery_01",
     bucket="chicago-taxi-test-de24",
-    source_objects=["data/*.csv"],
+    source_objects=["data/data_000000000001.csv"],
     destination_project_dataset_table="chicago_taxi_01.test_table",
     dag=dag,
     field_delimiter=';',
