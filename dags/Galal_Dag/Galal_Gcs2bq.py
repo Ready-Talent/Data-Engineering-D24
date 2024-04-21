@@ -35,7 +35,9 @@ load_csv = GCSToBigQueryOperator(
     destination_project_dataset_table=f"{DATASET_NAME}.{TABLE_NAME}",create_disposition='CREATE_IF_NEEDED',
     write_disposition="WRITE_TRUNCATE",
     field_delimiter=';',
-    skip_leading_rows =1
+    skip_leading_rows =1,
+    ignore_unknown_values=True
+
 )
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
