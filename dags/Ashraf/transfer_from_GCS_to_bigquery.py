@@ -25,6 +25,8 @@ load_csv = GCSToBigQueryOperator(
     dag=dag,
     field_delimiter=';',
     ignore_unknown_values=True,
+    skip_leading_rows=1,
+    source_format='CSV'
 )
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
