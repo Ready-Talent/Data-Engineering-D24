@@ -37,7 +37,7 @@ load_csv = GCSToBigQueryOperator(
     field_delimiter=';',
     skip_leading_rows =1,
     ignore_unknown_values=True,
-    max_bad_records=1000
+    max_bad_records=100000
 
 )
 
