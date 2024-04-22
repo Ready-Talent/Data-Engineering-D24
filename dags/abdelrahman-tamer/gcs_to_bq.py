@@ -8,6 +8,14 @@ logging.basicConfig(level=logging.INFO)
 
 def log_error(context):
     logging.error(f"Error Occurred: {context['exception']}")
+    
+    if 'ti' in context:
+        ti = context['ti']
+        errors = ti.task.get_task_errors()
+        if errors:
+            logging.error("Additional errors found in the errors collection:")
+            for error in errors:
+                logging.error("- %s", error)
 
 
 dag = DAG (
@@ -32,7 +40,7 @@ load_data = GCSToBigQueryOperator(
     autodetect=True,
     field_delimiter=';',
     skip_leading_rows=1,
-    write_disposition="WRITE_TRUNCATE",
+    write_disposition="WRITE_APPEND",
     create_disposition="CREATE_IF_NEEDED",
     encoding='UTF-8',
     dag=dag
