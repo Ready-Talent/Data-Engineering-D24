@@ -11,7 +11,7 @@ from airflow.operators.python import PythonOperator
 
 
 dag = DAG(
-    dag_id="load_dataaa",
+    dag_id="Sedawy_Dag",
     description="Simple tutorial DAG",
     schedule_interval=None,
     start_date=datetime(2021, 1, 1),
@@ -28,7 +28,6 @@ load_task = GoogleCloudStorageToBigQueryOperator(
         source_format='CSV',
         create_disposition='CREATE_IF_NEEDED',
         write_disposition='WRITE_TRUNCATE',
-        bigquery_conn_id='google_cloud_default',
         dag=dag,
     )
 end_task = EmptyOperator(task_id="end_task", dag=dag)
