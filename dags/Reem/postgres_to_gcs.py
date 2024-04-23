@@ -1,7 +1,5 @@
 import logging
 from datetime import datetime
-from random import expovariate
-from webbrowser import get
 
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
