@@ -33,7 +33,7 @@ load_csv = GCSToBigQueryOperator(
     schema_object=None,
     field_delimiter=';',
     dag = dag,
-    max_bad_rows = 10000
+    max_bad_records = 10000
 )
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
