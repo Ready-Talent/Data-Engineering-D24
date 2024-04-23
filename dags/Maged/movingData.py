@@ -27,6 +27,7 @@ load_csv = GCSToBigQueryOperator(
     source_format="CSV",
     destination_project_dataset_table="SRC_08.trips",
     write_disposition="WRITE_TRUNCATE",
+    max_bad_records = 10000,
     create_disposition="CREATE_IF_NEEDED",
     autodetect=True,
     ignore_unknown_values=True,
