@@ -4,7 +4,7 @@ from airflow import DAG
 from datetime import datetime
 
 dag = DAG(
-    dag_id="gcs_to_bigquery_Nadine",
+    dag_id="postgres_to_gcs_Nadine",
     description="Transfer data from GCS to bigquery",
     schedule_interval=None,
     start_date=datetime(2021, 1, 1),
