@@ -15,14 +15,6 @@ dag = DAG(
 start_task = EmptyOperator(task_id="start_task", dag=dag)
 
 
-list_csv_files = GoogleCloudStorageListOperator(
-    task_id="list_csv_files",
-    bucket="chicago-taxi-test-de24",
-    prefix="bigquery/chicago-taxi-test-de24/data/",
-    delimiter=".csv",
-    dag=dag
-)
-
 load_csv = GCSToBigQueryOperator(
     task_id="gcs_to_bigquery_example",
     bucket="chicago-taxi-test-de24",
@@ -30,14 +22,15 @@ load_csv = GCSToBigQueryOperator(
     source_objects=["data/*csv"],
     skip_leading_rows = 1,
     source_format = 'CSV',
-    max_bad_records = 10000000,
+    max_bad_records = 100000000,
+    ignore_unknown_values = True,
     destination_project_dataset_table="ready-data-engineering-p24.Nadine_Airflow.chicago-taxi",
     autodetect=True,
-    write_disposition="WRITE_APPEND",
+    write_disposition="WRITE_TRUNCATE",
     dag=dag
 )
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
 
-start_task >> list_csv_files >> load_csv >> end_task
+start_task >> load_csv >> end_task
