@@ -39,7 +39,7 @@ load_csv = GCSToBigQueryOperator(
 
 get_data = PostgresToGCSOperator(
     task_id='postgres_to_gcs',
-    sql='SELECT * FROM src01.orders;',
+    sql='SELECT * FROM src01.order;',
     bucket="postgres-to-gcs",
     filename="essam/orders.csv",
     export_format='CSV',  # You can change the export format as needed
