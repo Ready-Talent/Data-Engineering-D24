@@ -31,9 +31,28 @@ postgres_to_gcs_task = PostgresToGCSOperator(
     use_server_side_cursor=False,
 )
 
+
+load_csv = GCSToBigQueryOperator(
+    task_id="gcs_to_bigquery_Maged2",
+    bucket="postgres-to-gcs",
+    source_objects=[
+        "Maged/*.csv"
+    ],
+    source_format="CSV",
+    destination_project_dataset_table="SRC_08.customer2",
+    write_disposition="WRITE_TRUNCATE",
+    create_disposition="CREATE_IF_NEEDED",
+    autodetect=True,
+    ignore_unknown_values=True,
+    field_delimiter=",",
+    dag = postgres_to_gcs_Dag,
+    skip_leading_rows=1,
+)
+
+
 first_task = EmptyOperator(task_id="first_task", dag=postgres_to_gcs_Dag)
 
 last_task = EmptyOperator(task_id="last_task", dag=postgres_to_gcs_Dag)
 
 
-first_task >> postgres_to_gcs_task >> last_task
+first_task >> postgres_to_gcs_task >> load_csv >> last_task
