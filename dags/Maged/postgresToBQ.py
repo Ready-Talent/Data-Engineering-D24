@@ -6,7 +6,7 @@ from airflow.operators.python import PythonOperator
 from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator
 from airflow.providers.google.cloud.transfers.postgres_to_gcs import PostgresToGCSOperator
 
-postgres_to_gcs = DAG(
+postgres_to_gcs_Dag = DAG(
     dag_id="Maged_second_Dag",
     description="second trial",
     schedule_interval=None,
@@ -31,9 +31,9 @@ postgres_to_gcs_task = PostgresToGCSOperator(
     use_server_side_cursor=False,
 )
 
-first_task = EmptyOperator(task_id="first_task", dag=postgres_to_gcs)
+first_task = EmptyOperator(task_id="first_task", dag=postgres_to_gcs_Dag)
 
-last_task = EmptyOperator(task_id="last_task", dag=postgres_to_gcs)
+last_task = EmptyOperator(task_id="last_task", dag=postgres_to_gcs_Dag)
 
 
 first_task >> postgres_to_gcs_task >> last_task
