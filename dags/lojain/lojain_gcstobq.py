@@ -30,7 +30,7 @@ pgtogcs= PostgresToGCSOperator(
         postgres_conn_id="lojain_pg_connection",
         sql="SELECT * FROM src01.order;",
         bucket="postgres-to-gcs",
-        filename="Lojain/order.csv"
+        filename="Lojain/order.csv",
         export_format='CSV')
 
 
