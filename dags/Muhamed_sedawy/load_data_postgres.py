@@ -1,6 +1,6 @@
 from airflow import DAG
-from airflow.operators.postgres_operator import PostgresToGCSOperator
-from airflow.operators.gcs_to_bigquery import GCSToBigQueryOperator
+from airflow.providers.google.cloud.transfers.postgres_to_gcs import PostgresToGCSOperator
+from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator
 from datetime import datetime, timedelta
 
 
