@@ -28,8 +28,7 @@ ignore_unknown_values = True,
 source_format = "CSV",
 autodetect = True,
 write_disposition = "WRITE_TRUNCATE",
-dag = dag
-)
+dag = dag)
     
 
 start_task = EmptyOperator(task_id="start_task", dag=dag)
