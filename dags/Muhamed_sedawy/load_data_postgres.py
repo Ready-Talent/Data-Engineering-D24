@@ -5,11 +5,12 @@ from datetime import datetime, timedelta
 
 
 dag = DAG(
-    dag_id="test_dag_sedawy",
+    dag_id="postgres_to_bigquery_sedawy",
     description='A DAG to transfer data from PostgreSQL to Google Cloud Storage to BigQuery',
     schedule_interval=None,
     start_date=datetime(2021, 1, 1),
     catchup=False,
+)
 
 with dag:
     # Task to execute SQL command in PostgreSQL to extract data and save to GCS
