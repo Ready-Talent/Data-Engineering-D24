@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS Data_platform_01.dim_customer (
+CREATE TABLE  Data_platform_01.dim_customer (
     customer_key INT64,
     customer_id INT64,
     customer_name STRING,
