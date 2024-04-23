@@ -14,10 +14,11 @@ def move_data():
     source_objects=["data/*.csv"],
     destination_project_dataset_table=f"ready-data-engineering-p24.Rowym_from_GCS.chicago_taxi_05",
     field_delimiter=';',
-    max_bad_records = 1000000,
+    max_bad_records = 10000,
     skip_leading_rows = 1,
-    ignore_unkown_values = True,
+    ignore_unknown_values = True,
     source_format = "CSV",
+    write_disposition = "WRITE_TRUNCATE"
     )
     
 
