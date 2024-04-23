@@ -23,7 +23,7 @@ dag = DAG(
 
 DATASET_NAME="Galal_Airflow_pg2bq"
 TABLE_NAME="order"
-bucket="postgres-to-gcs",
+bucket="postgres-to-gcs"
 
 start_task = EmptyOperator(task_id="start_task", dag=dag)
 get_data = PostgresToGCSOperator(
