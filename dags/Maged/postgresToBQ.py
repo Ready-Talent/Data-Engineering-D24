@@ -16,7 +16,7 @@ postgres_to_gcs_Dag = DAG(
 
 GCS_BUCKET = 'postgres-to-gcs/Maged'
 GCS_OBJECT_PATH = 'Maged'
-SOURCE_TABLE_NAME = 'customer'
+SOURCE_TABLE_NAME = 'src01.customer'
 FILE_FORMAT = 'csv'
 #POSTGRESS_CONNECTION_ID = 'postgres'
 
@@ -24,7 +24,7 @@ postgres_to_gcs_task = PostgresToGCSOperator(
     task_id ='postgres_to_gcs',
     postgres_conn_id="postgresConnection_Maged",
     bucket=GCS_BUCKET,
-    sql = 'SELECT * FROM customer',
+    sql = 'SELECT * FROM src01.customer',
     filename='Maged',
     export_format='csv',
     gzip=False,
