@@ -20,7 +20,8 @@ start_task = EmptyOperator(task_id="start_task", dag=dag)
 ecx_query = BigQueryExecuteQueryOperator(
     task_id="BigQuery_Execute_Query",
     sql= 'create_table.sql',
-    dag=dag
+    dag=dag,
+    use_legacy_sql=False
 )
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
