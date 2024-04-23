@@ -29,6 +29,7 @@ get_data = PostgresToGCSOperator(
     bucket="postgres-to-gcs",
     filename="Reemaa/",
     gzip=False,
+    dag=dag
 )
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
