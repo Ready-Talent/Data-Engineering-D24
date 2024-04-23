@@ -4,7 +4,7 @@ from airflow import DAG
 from datetime import datetime
 
 dag = DAG(
-    dag_id="insert_into_bigquery_from_airflow",
+    dag_id="insert_into_bigquery_from_airflow",             # appears in airflow
     description="Transfer data into bigquery from airflow",
     schedule_interval=None,
     start_date=datetime(2021, 1, 1),
@@ -17,7 +17,6 @@ insert_bigquery = mobile_push_stat = BigQueryExecuteQueryOperator(
         task_id="into_bigquery_from_airflow",
         sql="sql_queries\sql_customers.sql",
         destination_dataset_table=f"data_platform_Nadine",
-        use_legacy_sql=False,
         #api_resource_configs={"jobTimeoutMs": "3600000"},
         gcp_conn_id="bigquery_work",
         write_disposition="WRITE_TRUNCATE",
