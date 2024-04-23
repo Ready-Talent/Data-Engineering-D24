@@ -1,7 +1,7 @@
 import logging
 from airflow import DAG
 from datetime import datetime
-from airflow.operators.dummy import DummyOperator
+from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import PythonOperator
 from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator
 
@@ -13,7 +13,7 @@ def move_data():
     task_id="gcs_to_bigquery_rowym",
     bucket="chicago-taxi-test-de24",
     source_objects=["chicago-taxi-test-de24/data/*.csv"],
-    destination_project_dataset_table=f"ready-data-engineering-p24.Rowym_from_GCS",
+    destination_project_dataset_table=f"ready-data-engineering-p24.Rowym_from_GCS.chicago_taxi_05",
     schema_fields = [
     {'name': 'unique_key', 'type': 'STRING'},
     {'name': 'taxi_id', 'type': 'STRING'},
