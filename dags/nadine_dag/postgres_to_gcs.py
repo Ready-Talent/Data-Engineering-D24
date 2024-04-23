@@ -13,16 +13,16 @@ dag = DAG(
 
 get_data = PostgresToGCSOperator(
         task_id="get_data",
-        postgres_conn_id='Nadine_07_postgres_connection',
+        postgres_conn_id='Nadine_07_postgres_connection',    # connection in airflow
         sql='select * from src01."order" o',
         bucket='postgres-to-gcs',
-        filename='Nadine/',
+        filename='Nadine/orders.csv',      # in gcs
+        source_format = 'CSV',
         gzip=False,
         dag = dag
     )
 
 start_task = EmptyOperator(task_id="start_task", dag=dag)
-
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
