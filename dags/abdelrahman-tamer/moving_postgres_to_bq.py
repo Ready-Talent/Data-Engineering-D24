@@ -6,17 +6,17 @@ from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQue
 
 gcs_bucket = "postgres-to-gcs"
 
-address_schema = [
-    {'name': 'customer_id', 'type': 'INTEGER', 'mode': 'NULLABLE'},
-    {'name': 'street', 'type': 'STRING', 'mode': 'NULLABLE'},
-    {'name': 'city', 'type': 'STRING', 'mode': 'NULLABLE'},
-    {'name': 'state', 'type': 'STRING', 'mode': 'NULLABLE'},
-    {'name': 'zipcode', 'type': 'STRING', 'mode': 'NULLABLE'},
-    {'name': 'created_by', 'type': 'STRING', 'mode': 'NULLABLE'},
-    {'name': 'created_at', 'type': 'TIMESTAMP', 'mode': 'NULLABLE'},
-    {'name': 'modified_by', 'type': 'STRING', 'mode': 'NULLABLE'},
-    {'name': 'modified_at', 'type': 'TIMESTAMP', 'mode': 'NULLABLE'},
-]
+# address_schema = [
+#     {'name': 'customer_id', 'type': 'INTEGER', 'mode': 'NULLABLE'},
+#     {'name': 'street', 'type': 'STRING', 'mode': 'NULLABLE'},
+#     {'name': 'city', 'type': 'STRING', 'mode': 'NULLABLE'},
+#     {'name': 'state', 'type': 'STRING', 'mode': 'NULLABLE'},
+#     {'name': 'zipcode', 'type': 'STRING', 'mode': 'NULLABLE'},
+#     {'name': 'created_by', 'type': 'STRING', 'mode': 'NULLABLE'},
+#     {'name': 'created_at', 'type': 'TIMESTAMP', 'mode': 'NULLABLE'},
+#     {'name': 'modified_by', 'type': 'STRING', 'mode': 'NULLABLE'},
+#     {'name': 'modified_at', 'type': 'TIMESTAMP', 'mode': 'NULLABLE'},
+# ]
 
 dag  = DAG(
         dag_id="abdelrahman_06_postgres_bq_dag", 
@@ -44,13 +44,11 @@ move_data_to_bigquery_table = GCSToBigQueryOperator(
         source_objects="abdelrahman_06/address.csv",
         source_format="CSV",
         destination_project_dataset_table="SRC_06.address",
-        schema_fields=address_schema,
         field_delimiter=',',
-        max_bad_records=1000000,
+        autodetect=True,
         skip_leading_rows=1,
         write_disposition="WRITE_TRUNCATE",
         create_disposition="CREATE_IF_NEEDED",
-        encoding='UTF-8',
         dag=dag
     )
 
