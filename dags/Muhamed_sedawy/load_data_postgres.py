@@ -3,22 +3,13 @@ from airflow.operators.postgres_operator import PostgresToGCSOperator
 from airflow.operators.gcs_to_bigquery import GCSToBigQueryOperator
 from datetime import datetime, timedelta
 
-default_args = {
-    'owner': 'airflow',
-    'depends_on_past': False,
-    'start_date': datetime(2024, 4, 23),
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 1,
-    'retry_delay': timedelta(minutes=5),
-}
 
 dag = DAG(
-    'postgres_to_gcs_to_bigquery',
-    default_args=default_args,
+    dag_id="test_dag_sedawy",
     description='A DAG to transfer data from PostgreSQL to Google Cloud Storage to BigQuery',
     schedule_interval=None,
-)
+    start_date=datetime(2021, 1, 1),
+    catchup=False,
 
 with dag:
     # Task to execute SQL command in PostgreSQL to extract data and save to GCS
