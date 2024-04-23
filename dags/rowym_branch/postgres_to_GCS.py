@@ -31,7 +31,7 @@ get_data = PostgresToGCSOperator(
 load_data_to_bigquery = GCSToBigQueryOperator(
 task_id="from_gcs_to_bigquery",
 bucket="postgres-to-gcs",
-source_objects=["data/*csv"],
+source_objects=["Rowym/order.csv"],
 destination_project_dataset_table= "Rowym_from_GCS.orders",
 field_delimiter=';',
 max_bad_records = 1000000,
@@ -42,6 +42,7 @@ autodetect = True,
 write_disposition = "WRITE_TRUNCATE",
 dag = dag
 ) 
+
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
 start_task >> get_data >> load_data_to_bigquery >> end_task
