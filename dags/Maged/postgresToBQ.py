@@ -7,7 +7,7 @@ from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQue
 from airflow.providers.google.cloud.transfers.postgres_to_gcs import PostgresToGCSOperator
 
 postgres_to_gcs_Dag = DAG(
-    dag_id="Maged_second_Dag",
+    dag_id="PG_to_GCS_Maged",
     description="second trial",
     schedule_interval=None,
     start_date=datetime(2024, 4, 20),
@@ -25,7 +25,7 @@ postgres_to_gcs_task = PostgresToGCSOperator(
     postgres_conn_id="postgresConnection_Maged",
     bucket=GCS_BUCKET,
     sql = 'SELECT * FROM dim_customer',
-    filename='Maged/customer.csv',
+    filename='Maged',
     export_format='csv',
     gzip=False,
     use_server_side_cursor=False,
