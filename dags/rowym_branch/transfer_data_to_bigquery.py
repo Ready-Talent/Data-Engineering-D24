@@ -18,7 +18,7 @@ def move_data():
     skip_leading_rows = 1,
     ignore_unknown_values = True,
     source_format = "CSV",
-    write_disposition = "WRITE_TRUNCATE"
+    write_disposition = "WRITE_TRUNCATE",
     )
     
 
