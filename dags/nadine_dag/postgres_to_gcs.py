@@ -17,7 +17,7 @@ get_data = PostgresToGCSOperator(
         sql='select * from src01."order" o',
         bucket='postgres-to-gcs',
         filename='Nadine/orders.csv',      # in gcs
-        source_format = 'CSV',
+        export_format = 'CSV',
         gzip=False,
         dag = dag
     )
