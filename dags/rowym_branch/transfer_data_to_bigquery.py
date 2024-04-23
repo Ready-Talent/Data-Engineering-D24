@@ -16,25 +16,23 @@ dag = DAG(
 )
 
 # Function that transfers data
-def move_data():
-    load_csv = GCSToBigQueryOperator(
-    task_id="gcs_to_bigquery_rowym",
-    bucket="chicago-taxi-test-de24",
-    source_objects=["data/*csv"],
-    destination_project_dataset_table= "Rowym_from_GCS.chicago_taxi_05",
-    field_delimiter=';',
-    max_bad_records = 1000000,
-    skip_leading_rows = 1,
-    ignore_unknown_values = True,
-    source_format = "CSV",
-    autodetect = True,
-    write_disposition = "WRITE_TRUNCATE",
-    dag = dag
-    )
+load_csv = GCSToBigQueryOperator(
+task_id="gcs_to_bigquery_rowym",
+bucket="chicago-taxi-test-de24",
+source_objects=["data/*csv"],
+destination_project_dataset_table= "Rowym_from_GCS.chicago_taxi_05",
+field_delimiter=';',
+max_bad_records = 1000000,
+skip_leading_rows = 1,
+ignore_unknown_values = True,
+source_format = "CSV",
+autodetect = True,
+write_disposition = "WRITE_TRUNCATE",
+dag = dag)
     
 
 start_task = EmptyOperator(task_id="start_task", dag=dag)
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
-start_task >> move_data >> end_task
+start_task >> load_csv >> end_task
