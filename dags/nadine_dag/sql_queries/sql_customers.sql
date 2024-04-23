@@ -6,4 +6,3 @@ select c.customer_id , c."name" customer_name, c.email , c.phone
 from src01.customer c
 left join src01.address a
 on a.customer_id =c.customer_id;
-
