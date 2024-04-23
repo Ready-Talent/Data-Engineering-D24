@@ -10,7 +10,7 @@ from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQue
 
 PG_SCHEMA = "src01"
 PG_TABLE = "order"
-BQ_BUCKET = ""
+BQ_BUCKET = "postgres-to-gcs"
 FILENAME = "Ashraf/ORDER.csv"
 PG_CONN_ID = "postgres_01"
 
