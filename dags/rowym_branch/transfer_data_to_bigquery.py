@@ -1,6 +1,7 @@
 import logging
 from airflow import DAG
 from datetime import datetime
+from airflow.operators.python import PythonOperator
 from airflow.operators.empty import EmptyOperator
 from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator
 
@@ -17,7 +18,6 @@ def move_data():
     skip_leading_rows = 1,
     ignore_unkown_values = True,
     source_format = "CSV",
-    write_disposition="WRITE_APPEND",
     )
     
 
