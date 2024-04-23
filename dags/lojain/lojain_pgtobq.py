@@ -1,5 +1,3 @@
-# implement Hello World DAG
-
 import logging
 from datetime import datetime
 
@@ -7,15 +5,12 @@ from airflow import DAG
 from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator
 from airflow.operators.empty import EmptyOperator
 from airflow.operators.python import PythonOperator
-from airflow.providers.google.cloud.transfers.postgres_to_gcs import PostgresToGCSOperator
 
 
 
-DATASET_NAME="lojain_fromgcs"
-TABLE_NAME="order"
 
 dag = DAG(
-    dag_id="lojain_pgtobq",
+    dag_id="lojain_gcstobq",
     description="Simple tutorial DAG",
     schedule_interval=None,
     start_date=datetime(2021, 1, 1),
@@ -24,31 +19,24 @@ dag = DAG(
 
 
 start_task = EmptyOperator(task_id="start", dag=dag)
+DATASET_NAME="lojain_fromgcs"
+TABLE_NAME="taxi"
 
-pgtogcs= PostgresToGCSOperator(
-        task_id="get_pg_data",
-        postgres_conn_id="lojain_pg_connection",
-        sql="SELECT * FROM src01.order;",
-        bucket="postgres-to-gcs",
-        filename="Lojain/order.csv"
-        export_format='CSV')
+load_csv = GCSToBigQueryOperator(
+    task_id="lojain_gcstobq",
+    bucket="chicago-taxi-test-de24",
 
-
-gcstobq=GCSToBigQueryOperator(
-    task_id="transfer_to_bq",
-    bucket="postgres-to-gcs",
-    source_objects=["Lojain/order.csv"],
+    source_objects=["chicago-taxi-test-de24/data/*.csv"],
     destination_project_dataset_table=f"{DATASET_NAME}.{TABLE_NAME}",
+    schema_fields=[
+        {"name": "name", "type": "STRING", "mode": "NULLABLE"},
+        {"name": "post_abbr", "type": "STRING", "mode": "NULLABLE"},
+    ],
     create_disposition='CREATE_IF_NEEDED',
     write_disposition="WRITE_TRUNCATE",
     autodetect = True
-    skip_leading_rows=1
 )
-
-
-
 
 end_task = EmptyOperator(task_id="end", dag=dag)
 
-start_task >> pgtogcs>> gcstobq >> end_task
-
+start_task >> load_csv >> end_task
