@@ -13,7 +13,7 @@ def move_data():
 
 
 dag = DAG(
-    dag_id="move_from_gcs_to_bigquery",
+    dag_id="move_from_gcs_to_bigquery_reemaa",
     description="GCS to BQ DAG",
     schedule_interval=None,
     start_date=datetime(2021, 1, 1),
