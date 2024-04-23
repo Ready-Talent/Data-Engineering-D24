@@ -3,6 +3,7 @@ from airflow import DAG
 from datetime import datetime
 from airflow.operators.empty import EmptyOperator
 from airflow.providers.google.cloud.transfers.postgres_to_gcs import PostgresToGCSOperator
+from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator
 
 
 
@@ -27,6 +28,20 @@ get_data = PostgresToGCSOperator(
     dag = dag
 )
 
+load_data_to_bigquery = GCSToBigQueryOperator(
+task_id="from_gcs_to_bigquery",
+bucket="postgres-to-gcs",
+source_objects=["data/*csv"],
+destination_project_dataset_table= "Rowym_from_GCS.orders",
+field_delimiter=';',
+max_bad_records = 1000000,
+skip_leading_rows = 1,
+ignore_unknown_values = True,
+source_format = "CSV",
+autodetect = True,
+write_disposition = "WRITE_TRUNCATE",
+dag = dag
+) 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
-start_task >> get_data >> end_task
+start_task >> get_data >> load_data_to_bigquery >> end_task
