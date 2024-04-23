@@ -21,7 +21,8 @@ get_data = PostgresToGCSOperator(
     postgres_conn_id="Postgres_Rowym_conn",
     sql="SELECT * from src01.order",
     bucket="postgres-to-gcs",
-    filename="Rowym/",
+    source_format = "CSV",
+    filename="Rowym/order.csv",
     gzip=False,
     dag = dag
 )
