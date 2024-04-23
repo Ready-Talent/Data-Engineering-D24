@@ -3,6 +3,7 @@ from datetime import datetime
 
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
+from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator
 from airflow.providers.google.cloud.transfers.postgres_to_gcs import PostgresToGCSOperator
 
 
@@ -32,6 +33,24 @@ get_data = PostgresToGCSOperator(
     dag=dag
 )
 
+
+DATASET_NAME="Reema_AirFlow"
+TABLE_NAME="order"
+
+load_csv = GCSToBigQueryOperator(
+    task_id="gcs_to_bigquery",
+    bucket="postgres-to-gcs",
+    source_objects=["data/*.csv"],
+    destination_project_dataset_table=f"{DATASET_NAME}.{TABLE_NAME}",
+    create_disposition='CREATE_IF_NEEDED',
+    write_disposition='WRITE_TRUNCATE',
+    field_delimiter=';',
+    skip_leading_rows=1,
+    ignore_unknown_values=True,
+    max_bad_records= 100,
+    dag=dag
+)
+
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
-start_task >> get_data >> end_task
+start_task >> get_data >> load_csv >>end_task
