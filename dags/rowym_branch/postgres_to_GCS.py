@@ -23,6 +23,7 @@ get_data = PostgresToGCSOperator(
     bucket="postgres-to-gcs",
     filename="Rowym/",
     gzip=False,
+    dag = dag
 )
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
