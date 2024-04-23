@@ -6,21 +6,6 @@ from airflow.operators.empty import EmptyOperator
 from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator
 
 
-# Function that transfers data
-def move_data():
-    load_csv = GCSToBigQueryOperator(
-    task_id="gcs_to_bigquery_rowym",
-    bucket="chicago-taxi-test-de24",
-    source_objects=["data/*.csv"],
-    destination_project_dataset_table=f"ready-data-engineering-p24.Rowym_from_GCS.chicago_taxi_05",
-    field_delimiter=';',
-    max_bad_records = 10000,
-    skip_leading_rows = 1,
-    ignore_unknown_values = True,
-    source_format = "CSV",
-    write_disposition = "WRITE_TRUNCATE",
-    )
-    
 
 dag = DAG(
     dag_id="rowym_move_data_to_bigquery",
@@ -29,6 +14,26 @@ dag = DAG(
     start_date=datetime(2021, 1, 1),
     catchup=False,
 )
+
+# Function that transfers data
+def move_data():
+    load_csv = GCSToBigQueryOperator(
+    task_id="gcs_to_bigquery_rowym",
+    bucket="chicago-taxi-test-de24",
+    source_objects=["data/*csv"],
+    destination_project_dataset_table= "Rowym_from_GCS.chicago_taxi_05",
+    field_delimiter=';',
+    max_bad_records = 1000000,
+    skip_leading_rows = 1,
+    ignore_unknown_values = True,
+    source_format = "CSV",
+    autodetect = True,
+    write_disposition = "WRITE_TRUNCATE",
+    dag = dag
+    )
+    
+
+
 
 start_task = EmptyOperator(task_id="start_task", dag=dag)
 
