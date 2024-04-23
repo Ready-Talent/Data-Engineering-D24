@@ -27,7 +27,8 @@ get_data = PostgresToGCSOperator(
     postgres_conn_id="postgres_conn_reema",
     sql="SELECT * from src01.order",
     bucket="postgres-to-gcs",
-    filename="Reemaa/",
+    source_format="CSV",
+    filename="Reemaa/order.csv",
     gzip=False,
     dag=dag
 )
