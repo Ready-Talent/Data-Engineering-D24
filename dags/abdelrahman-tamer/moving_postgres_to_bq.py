@@ -22,6 +22,7 @@ pg_to_gcs = PostgresToGCSOperator(
         bucket=gcs_bucket,
         filename="abdelrahman_06/address.csv",
         sql="SELECT * FROM src01.address;",
+        export_format="csv",
         dag=dag
     )
 
