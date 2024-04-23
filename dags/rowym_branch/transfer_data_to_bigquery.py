@@ -2,43 +2,21 @@ import logging
 from airflow import DAG
 from datetime import datetime
 from airflow.operators.empty import EmptyOperator
-from airflow.operators.python import PythonOperator
 from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator
 
 
-
-
+# Function that transfers data
 def move_data():
     load_csv = GCSToBigQueryOperator(
     task_id="gcs_to_bigquery_rowym",
     bucket="chicago-taxi-test-de24",
-    source_objects=["chicago-taxi-test-de24/data/*.csv"],
+    source_objects=["data/*.csv"],
     destination_project_dataset_table=f"ready-data-engineering-p24.Rowym_from_GCS.chicago_taxi_05",
-    schema_fields = [
-    {'name': 'unique_key', 'type': 'STRING'},
-    {'name': 'taxi_id', 'type': 'STRING'},
-    {'name': 'trip_start_timestamp', 'type': 'TIMESTAMP'},
-    {'name': 'trip_end_timestamp', 'type': 'TIMESTAMP'},
-    {'name': 'trip_seconds', 'type': 'INTEGER'},
-    {'name': 'trip_miles', 'type': 'FLOAT'},
-    {'name': 'pickup_census_tract', 'type': 'STRING'},
-    {'name': 'dropoff_census_tract', 'type': 'STRING'},
-    {'name': 'pickup_community_area', 'type': 'INTEGER'},
-    {'name': 'dropoff_community_area', 'type': 'INTEGER'},
-    {'name': 'fare', 'type': 'FLOAT'},
-    {'name': 'tips', 'type': 'FLOAT'},
-    {'name': 'tolls', 'type': 'FLOAT'},
-    {'name': 'extras', 'type': 'FLOAT'},
-    {'name': 'trip_total', 'type': 'FLOAT'},
-    {'name': 'payment_type', 'type': 'STRING'},
-    {'name': 'company', 'type': 'STRING'},
-    {'name': 'pickup_latitude', 'type': 'FLOAT'},
-    {'name': 'pickup_longitude', 'type': 'FLOAT'},
-    {'name': 'pickup_location', 'type': 'STRING'},
-    {'name': 'dropoff_latitude', 'type': 'FLOAT'},
-    {'name': 'dropoff_longitude', 'type': 'FLOAT'},
-    {'name': 'dropoff_location', 'type': 'STRING'}
-    ],
+    field_delimiter=';',
+    max_bad_records = 1000000,
+    skip_leading_rows = 1,
+    ignore_unkown_values = True,
+    source_format = "CSV",
     write_disposition="WRITE_APPEND",
     )
     
