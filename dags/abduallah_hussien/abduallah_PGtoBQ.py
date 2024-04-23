@@ -3,8 +3,8 @@ from datetime import datetime
 
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
-from airflow.operators.python import PythonOperator
-
+from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator
+from airflow.providers.google.cloud.transfers.postgres_to_gcs import PostgresToGCSOperator
 def print_hello():
     logging.info("Abduallah")
     return "printed"
@@ -22,12 +22,21 @@ start_task = EmptyOperator(task_id="start_task", dag=dag)
 
 transfer_data = PostgresToGCSOperator(
         task_id="transfer_data_to_GCS",
-        postgres_conn_id=Abduallah_03_postgres,
+        postgres_conn_id='Abduallah_03_postgres',
         sql='select * from src01."order"',
         bucket='postgres-to-gcs',
-        filename='abduallah',
+        filename='abduallah/order.csv',
         gzip=False,
     )
+
+load_order = GCSToBigQueryOperator(
+    task_id="gcs_to_bigquery",
+    bucket="postgres-to-gcs",
+    source_objects=["abduallah/order.csv"],
+    destination_project_dataset_table=f"Abduallah_03.order",
+    create_disposition = "CREATE_IF_NEEDED",
+    write_disposition="WRITE_TRUNCATE"
+)
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
