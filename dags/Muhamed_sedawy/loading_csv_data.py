@@ -26,8 +26,10 @@ load_task = GoogleCloudStorageToBigQueryOperator(
         source_objects=['chicago-taxi-test-de24/data*.csv'],
         destination_project_dataset_table='ready-data-engineering-p24.sedawy_airflow',
         source_format='CSV',
+        Auto_dedict = 'TRUE',
+        field_delimiter =',',
+        write_disposition = 'Write_append',
         create_disposition='CREATE_IF_NEEDED',
-        write_disposition='WRITE_TRUNCATE',
         dag=dag,
     )
 end_task = EmptyOperator(task_id="end_task", dag=dag)
