@@ -22,13 +22,14 @@ load_csv = GCSToBigQueryOperator(
     task_id="gcs_to_bigquery_Maged",
     bucket="chicago-taxi-test-de24",
     source_objects=[
-        "chicago-taxi-test-de24/data/*.csv",
+        "data/*.csv"
     ],
     source_format="CSV",
-    destination_project_dataset_table=f"SRC_08.trips",
+    destination_project_dataset_table="SRC_08.trips",
     write_disposition="WRITE_TRUNCATE",
     create_disposition="CREATE_IF_NEEDED",
     autodetect=True,
+    ignore_unknown_values=True,
     field_delimiter=";",
     dag = move_data_dag,
     skip_leading_rows=1,
