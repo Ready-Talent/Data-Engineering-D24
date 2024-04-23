@@ -25,7 +25,7 @@ load_csv = GCSToBigQueryOperator(
         "chicago-taxi-test-de24/data/*.csv",
     ],
     source_format="CSV",
-    destination_project_dataset_table=f"chicagoTaxi.trips",
+    destination_project_dataset_table=f"SRC_08.trips",
     write_disposition="WRITE_TRUNCATE",
     create_disposition="CREATE_IF_NEEDED",
     autodetect=True,
