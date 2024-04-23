@@ -33,16 +33,8 @@ def move_data():
     )
     
 
-
-
 start_task = EmptyOperator(task_id="start_task", dag=dag)
-
-GCS_move_to_BigQuery = PythonOperator(
-    task_id="GCS_to_BigQuery",
-    python_callable=move_data,
-    dag=dag,
-)
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
-start_task >> GCS_move_to_BigQuery >> end_task
+start_task >> move_data >> end_task
