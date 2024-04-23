@@ -16,7 +16,7 @@ postgres_to_gcs_Dag = DAG(
 
 GCS_BUCKET = 'postgres-to-gcs/Maged'
 GCS_OBJECT_PATH = 'Maged'
-SOURCE_TABLE_NAME = 'dim_customer'
+SOURCE_TABLE_NAME = 'customer'
 FILE_FORMAT = 'csv'
 #POSTGRESS_CONNECTION_ID = 'postgres'
 
