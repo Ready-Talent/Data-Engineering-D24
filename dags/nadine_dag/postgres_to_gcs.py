@@ -5,7 +5,7 @@ from datetime import datetime
 
 dag = DAG(
     dag_id="postgres_to_gcs_Nadine",
-    description="Transfer data from GCS to bigquery",
+    description="Transfer data from postgres to gcs",
     schedule_interval=None,
     start_date=datetime(2021, 1, 1),
     catchup=False,
@@ -18,6 +18,7 @@ get_data = PostgresToGCSOperator(
         bucket='postgres-to-gcs',
         filename='Nadine/',
         gzip=False,
+        dag = dag
     )
 
 start_task = EmptyOperator(task_id="start_task", dag=dag)
