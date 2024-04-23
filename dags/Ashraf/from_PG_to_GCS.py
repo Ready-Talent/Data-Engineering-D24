@@ -33,7 +33,16 @@ postgres_to_gcs = PostgresToGCSOperator(
     dag = dag,
 )
 
+load_csv = GCSToBigQueryOperator(
+    task_id="gcs_to_bigquery",
+    bucket=BQ_BUCKET,
+    source_objects=FILENAME,
+    destination_project_dataset_table="SRC_01.order",
+    dag=dag,
+    skip_leading_rows=1,
+    source_format='CSV'
+)
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
-start_task >> postgres_to_gcs >> end_task
+start_task >> postgres_to_gcs >> load_csv >> end_task
