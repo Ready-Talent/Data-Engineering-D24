@@ -3,7 +3,6 @@ from datetime import datetime
 
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
-from airflow.operators.python import PythonOperator
 from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator
 
 
@@ -36,6 +35,7 @@ load_csv = GCSToBigQueryOperator(
     field_delimiter=';',
     skip_leading_rows=1,
     ignore_unknown_values=True,
+    max_bad_records= 1000000,
     dag=dag
 )
 
