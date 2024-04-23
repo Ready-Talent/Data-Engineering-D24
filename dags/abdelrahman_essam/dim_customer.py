@@ -15,7 +15,7 @@ def move_data():
 
 
 dag = DAG(
-    dag_id="from_gcs_to_bigquery_abdelrahman_essam",
+    dag_id= "adding_dim_customer_abdelrahman_essam",
     description="Simple tutorial DAG",
     schedule_interval=None,
     start_date=datetime(2021, 1, 1),
