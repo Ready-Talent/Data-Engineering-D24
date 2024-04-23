@@ -15,6 +15,8 @@ dag = DAG(
     catchup=False,
 )
 
+start_task = EmptyOperator(task_id="start_task", dag=dag)
+
 # Function that transfers data
 load_csv = GCSToBigQueryOperator(
 task_id="gcs_to_bigquery_rowym",
@@ -28,10 +30,9 @@ ignore_unknown_values = True,
 source_format = "CSV",
 autodetect = True,
 write_disposition = "WRITE_TRUNCATE",
-dag = dag)
+dag = dag
+)
     
-
-start_task = EmptyOperator(task_id="start_task", dag=dag)
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
