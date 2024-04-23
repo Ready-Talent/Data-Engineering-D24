@@ -14,7 +14,6 @@ dag = DAG(
 
 start_task = EmptyOperator(task_id="start_task", dag=dag)
 
-
 load_csv = GCSToBigQueryOperator(
     task_id="gcs_to_bigquery_example",
     bucket="chicago-taxi-test-de24",
