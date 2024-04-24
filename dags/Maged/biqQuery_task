@@ -1,0 +1,34 @@
+import logging
+from datetime import datetime
+from airflow import DAG
+from airflow.operators.empty import EmptyOperator
+from airflow.operators.python import PythonOperator
+from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQueryOperator
+from airflow.providers.google.cloud.transfers.postgres_to_gcs import PostgresToGCSOperator
+from airflow.providers.google.cloud.operators.bigquery import BigQueryExecuteQueryOperator
+
+create_Dimension_Dag = DAG(
+    dag_id="helloooooooooooo",
+    description="second trial",
+    schedule_interval=None,
+    start_date=datetime(2024, 4, 20),
+    catchup=False,
+) 
+
+
+first_task = EmptyOperator(task_id="first_task", dag=create_Dimension_Dag)
+
+last_task = EmptyOperator(task_id="last_task", dag=create_Dimension_Dag)
+
+
+bigquery_task = BigQueryExecuteQueryOperator(
+    task_id='create_Dimension_customer',
+    sql='Maged/queries.sql',
+    use_legacy_sql=False,
+    destination_dataset_table='SRC_08.dim_customer',
+    write_disposition='WRITE_TRUNCATE',
+    dag=create_Dimension_Dag
+)
+
+
+first_task >> bigquery_task >> last_task
