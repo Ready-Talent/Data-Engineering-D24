@@ -1,10 +1,6 @@
-
-import logging
 from datetime import datetime
-
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
-
 from airflow.providers.google.cloud.operators.bigquery import BigQueryExecuteQueryOperator
 
 dag = DAG(
@@ -19,7 +15,7 @@ start_task = EmptyOperator(task_id="start_task", dag=dag)
 
 ecx_query = BigQueryExecuteQueryOperator(
     task_id="BigQuery_Execute_Query",
-    sql= 'create_table.sql',
+    sql= 'create_dim_customer.sql',
     dag=dag,
     use_legacy_sql=False
 )
