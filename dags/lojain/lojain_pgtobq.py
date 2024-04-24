@@ -1,5 +1,3 @@
-# implement Hello World DAG
-
 import logging
 from datetime import datetime
 
@@ -42,4 +40,3 @@ load_csv = GCSToBigQueryOperator(
 end_task = EmptyOperator(task_id="end", dag=dag)
 
 start_task >> load_csv >> end_task
-
