@@ -4,226 +4,98 @@ from airflow.providers.google.cloud.transfers.gcs_to_bigquery import GCSToBigQue
 from datetime import datetime, timedelta
 bucket = 'postgres-to-gcs'
 
-dag1 = DAG(
-    dag_id="postgres_to_bigquery_sedawy1",
-    schedule_interval=None,
-    start_date=datetime(2021, 1, 1),
-    catchup=False,
-)
-dag2 = DAG(
-    dag_id="postgres_to_bigquery_sedawy2",
-    schedule_interval=None,
-    start_date=datetime(2021, 1, 1),
-    catchup=False,
-)
-dag3 = DAG(
-    dag_id="postgres_to_bigquery_sedawy3",
-    schedule_interval=None,
-    start_date=datetime(2021, 1, 1),
-    catchup=False,
-)
-dag4 = DAG(
-    dag_id="postgres_to_bigquery_sedawy4",
-    schedule_interval=None,
-    start_date=datetime(2021, 1, 1),
-    catchup=False,
-)
-dag5 = DAG(
-    dag_id="postgres_to_bigquery_sedawy5",
-    schedule_interval=None,
-    start_date=datetime(2021, 1, 1),
-    catchup=False,
-)
-dag6 = DAG(
-    dag_id="postgres_to_bigquery_sedawy6",
-    schedule_interval=None,
-    start_date=datetime(2021, 1, 1),
-    catchup=False,
-)
-dag7 = DAG(
-    dag_id="postgres_to_bigquery_sedawy7",
-    schedule_interval=None,
-    start_date=datetime(2021, 1, 1),
-    catchup=False,
-)
-dag8 = DAG(
-    dag_id="postgres_to_bigquery_sedawy8",
-    schedule_interval=None,
-    start_date=datetime(2021, 1, 1),
-    catchup=False,
+def create_postgres_to_bigquery_dag(task_id,dag_id, sql, gcs_filename, bq_table):
+    dag = DAG(
+        dag_id=dag_id,
+        schedule_interval=None,
+        start_date=datetime(2021, 1, 1),
+        catchup=False,
+    )
+
+    with dag:
+        # Task to execute SQL command in PostgreSQL to extract data and save to GCS
+        extract_to_gcs_task = PostgresToGCSOperator(
+            task_id=f"extract_data_from_{dag_id}",
+            postgres_conn_id='sedawy_connections',
+            sql=sql,
+            bucket=bucket,
+            filename=gcs_filename,
+            export_format='CSV',
+        )
+
+        # Task to load data from GCS to BigQuery
+        load_to_bigquery_task = GCSToBigQueryOperator(
+            task_id=f"{task_id}",
+            bucket=bucket,
+            source_objects=[gcs_filename],  # GCS source path
+            destination_project_dataset_table=bq_table,  # BigQuery table to load data into
+            create_disposition='CREATE_IF_NEEDED',
+            skip_leading_rows=1,  # If your CSV has a header row
+            source_format='CSV',  # Source data format
+        )
+
+        # Set task dependencies
+        extract_to_gcs_task >> load_to_bigquery_task
+
+    return dag
+dag1 = create_postgres_to_bigquery_dag(
+    task_id="task_1",
+    dag_id="postgres_to_bigquery_sedawy_1",
+    sql='select * from src01.address',
+    gcs_filename='Sedawy/address.csv',
+    bq_table='Data_Platform_Sedawy.address',
 )
 
+dag2 = create_postgres_to_bigquery_dag(
+    task_id="task_2",
+    dag_id="postgres_to_bigquery_sedawy_2",
+    sql='select * from src01.channel',
+    gcs_filename='Sedawy/channel.csv',
+    bq_table='Data_Platform_Sedawy.channel',
+)
+
+dag3 = create_postgres_to_bigquery_dag(
+    task_id="task_3",
+    dag_id="postgres_to_bigquery_sedawy_3",
+    sql='select * from src01.customer',
+    gcs_filename='Sedawy/customer.csv',
+    bq_table='Data_Platform_Sedawy.customer',
+)
 
 
+dag4 = create_postgres_to_bigquery_dag(
+    task_id="task_4",
+    dag_id="postgres_to_bigquery_sedawy_4",
+    sql='select * from src01.order',
+    gcs_filename='Sedawy/order.csv',
+    bq_table='Data_Platform_Sedawy.order',
+)
 
-    # Task to execute SQL command in PostgreSQL to extract data and save to GCS
-extract_to_gcs_task1 = PostgresToGCSOperator(
-    task_id="get_data1",
-    postgres_conn_id= 'sedawy_connections',
-    sql='select *  from src01.address',
-    bucket='postgres-to-gcs',
-    filename='Sedawy/address.csv',
-    export_format = 'CSV',
-    dag=dag1
-    )
-
-
-
-    # Task to execute SQL command in PostgreSQL to extract data and save to GCS
-extract_to_gcs_task2 = PostgresToGCSOperator(
-    task_id="get_data2",
-    postgres_conn_id= 'sedawy_connections',
-    sql='select *  from src01.channel',
-    bucket='postgres-to-gcs',
-    filename='Sedawy/channel.csv',
-    export_format = 'CSV',
-    dag=dag2
-    )
-
-extract_to_gcs_task3 = PostgresToGCSOperator(
-    task_id="get_data3",
-    postgres_conn_id= 'sedawy_connections',
-    sql='select *  from src01.customer',
-    bucket='postgres-to-gcs',
-    filename='Sedawy/customer.csv',
-    export_format = 'CSV',
-    dag=dag3
-    )
-extract_to_gcs_task4 = PostgresToGCSOperator(
-    task_id="get_data4",
-    postgres_conn_id= 'sedawy_connections',
-    sql='select *  from src01.order',
-    bucket='postgres-to-gcs',
-    filename='Sedawy/order.csv',
-    export_format = 'CSV',
-    dag=dag4
-    )
-
-extract_to_gcs_task5 = PostgresToGCSOperator(
-    task_id="get_data5",
-    postgres_conn_id= 'sedawy_connections',
-    sql='select *  from src01.order_detail',
-    bucket='postgres-to-gcs',
-    filename='Sedawy/order_detail.csv',
-    export_format = 'CSV',
-    dag=dag5
-    )
-
-extract_to_gcs_task6 = PostgresToGCSOperator(
-    task_id="get_data6",
-    postgres_conn_id= 'sedawy_connections',
-    sql='select *  from src01.payment',
-    bucket='postgres-to-gcs',
-    filename='Sedawy/payment.csv',
-    export_format = 'CSV',
-    dag=dag6
-    )
-
-extract_to_gcs_task7 = PostgresToGCSOperator(
-    task_id="get_data7",
-    postgres_conn_id= 'sedawy_connections',
-    sql='select *  from src01.payment_type',
-    bucket='postgres-to-gcs',
-    filename='Sedawy/payment_type.csv',
-    export_format = 'CSV',
-    dag=dag7
-    )
-extract_to_gcs_task8 = PostgresToGCSOperator(
-    task_id="get_data8",
-    postgres_conn_id= 'sedawy_connections',
-    sql='select *  from src01.product',
-    bucket='postgres-to-gcs',
-    filename='Sedawy/product.csv',
-    export_format = 'CSV',
-    dag=dag8
-    )
-
-
-
-
-
-
-    # Task to load data from GCS to BigQuery
-load_to_bigquery_task1 = GCSToBigQueryOperator(
-    task_id='load_to_bigquery02',
-    bucket=bucket,
-    source_objects="Sedawy/address.csv",  # GCS source path
-    destination_project_dataset_table='Data_Platform_Sedawy.address',  # BigQuery table to load data into
-    create_disposition='CREATE_IF_NEEDED',
-    skip_leading_rows=1,  # If your CSV has a header row
-    source_format='CSV',  # Source data format
-    dag=dag1
-    )
-load_to_bigquery_task2 = GCSToBigQueryOperator(
-    task_id='load_to_bigquery02',
-    bucket=bucket,
-    source_objects="Sedawy/chanel.csv",  # GCS source path
-    destination_project_dataset_table='Data_Platform_channel.',  # BigQuery table to load data into
-    create_disposition='CREATE_IF_NEEDED',
-    skip_leading_rows=1,  # If your CSV has a header row
-    source_format='CSV',  # Source data format
-    dag=dag2
-    )
-load_to_bigquery_task3 = GCSToBigQueryOperator(
-    task_id='load_to_bigquery02',
-    bucket=bucket,
-    source_objects="Sedawy/customer.csv",  # GCS source path
-    destination_project_dataset_table='Data_Platform_Sedawy.customer',  # BigQuery table to load data into
-    create_disposition='CREATE_IF_NEEDED',
-    skip_leading_rows=1,  # If your CSV has a header row
-    source_format='CSV',  # Source data format
-    dag=dag3
-    )
-load_to_bigquery_task4 = GCSToBigQueryOperator(
-    task_id='load_to_bigquery02',
-    bucket=bucket,
-    source_objects="Sedawy/order.csv",  # GCS source path
-    destination_project_dataset_table='Data_Platform_Sedawy.order',  # BigQuery table to load data into
-    create_disposition='CREATE_IF_NEEDED',
-    skip_leading_rows=1,  # If your CSV has a header row
-    source_format='CSV',  # Source data format
-    dag=dag4
-    )
-load_to_bigquery_task5 = GCSToBigQueryOperator(
-    task_id='load_to_bigquery02',
-    bucket=bucket,
-    source_objects="Sedawy/order_detail.csv",  # GCS source path
-    destination_project_dataset_table='Data_Platform_Sedawy.order_detail',  # BigQuery table to load data into
-    create_disposition='CREATE_IF_NEEDED',
-    skip_leading_rows=1,  # If your CSV has a header row
-    source_format='CSV',  # Source data format
-    dag=dag5
-    )
-load_to_bigquery_task6 = GCSToBigQueryOperator(
-    task_id='load_to_bigquery02',
-    bucket=bucket,
-    source_objects="Sedawy/payment.csv",  # GCS source path
-    destination_project_dataset_table='Data_Platform_Sedawy.payment',  # BigQuery table to load data into
-    create_disposition='CREATE_IF_NEEDED',
-    skip_leading_rows=1,  # If your CSV has a header row
-    source_format='CSV',  # Source data format
-    dag=dag6
-    )
-load_to_bigquery_task7 = GCSToBigQueryOperator(
-    task_id='load_to_bigquery02',
-    bucket=bucket,
-    source_objects="Sedawy/payment_type.csv",  # GCS source path
-    destination_project_dataset_table='Data_Platform_Sedawy.payment_type',  # BigQuery table to load data into
-    create_disposition='CREATE_IF_NEEDED',
-    skip_leading_rows=1,  # If your CSV has a header row
-    source_format='CSV',  # Source data format
-    dag=dag7
-    )
-load_to_bigquery_task8 = GCSToBigQueryOperator(
-    task_id='load_to_bigquery02',
-    bucket=bucket,
-    source_objects="Sedawy/product.csv",  # GCS source path
-    destination_project_dataset_table='Data_Platform_Sedawy.product',  # BigQuery table to load data into
-    create_disposition='CREATE_IF_NEEDED',
-    skip_leading_rows=1,  # If your CSV has a header row
-    source_format='CSV',  # Source data format
-    dag=dag8
-    )
-
-    # Set task dependencies
-extract_to_gcs_task1>>extract_to_gcs_task2>>extract_to_gcs_task3>>extract_to_gcs_task4>>extract_to_gcs_task5>>extract_to_gcs_task6>>extract_to_gcs_task7>>extract_to_gcs_task8>>load_to_bigquery_task1>>load_to_bigquery_task2>>load_to_bigquery_task3>>load_to_bigquery_task4>>load_to_bigquery_task5>>load_to_bigquery_task6>>load_to_bigquery_task7>>load_to_bigquery_task8
+dag5 = create_postgres_to_bigquery_dag(
+    task_id="task_5",
+    dag_id="postgres_to_bigquery_sedawy_5",
+    sql='select * from src01.order_detail',
+    gcs_filename='Sedawy/order_detail.csv',
+    bq_table='Data_Platform_Sedawy.order_detail',
+)
+dag6 = create_postgres_to_bigquery_dag(
+    task_id="task_6",
+    dag_id="postgres_to_bigquery_sedawy_6",
+    sql='select * from src01.payment',
+    gcs_filename='Sedawy/payment.csv',
+    bq_table='Data_Platform_Sedawy.payment',
+)
+dag7 = create_postgres_to_bigquery_dag(
+    task_id="task_7",
+    dag_id="postgres_to_bigquery_sedawy_7",
+    sql='select * from src01.payment_type',
+    gcs_filename='Sedawy/payment_type.csv',
+    bq_table='Data_Platform_Sedawy.payment_type',
+)
+dag8 = create_postgres_to_bigquery_dag(
+    task_id="task_8",   
+    dag_id="postgres_to_bigquery_sedawy_8",
+    sql='select * from src01.product',
+    gcs_filename='Sedawy/product.csv',
+    bq_table='Data_Platform_Sedawy.product',
+)
