@@ -35,6 +35,7 @@ load_channel_table = gcs_etl.load_from_postgres(PG_SCHEMA, 'channel', BQ_BUCKET,
 load_address_table = gcs_etl.load_from_postgres(PG_SCHEMA, 'address', BQ_BUCKET, FILENAME + 'address', PG_CONN_ID, dag)
 load_customer_table = gcs_etl.load_from_postgres(PG_SCHEMA, 'customer', BQ_BUCKET, FILENAME + 'customer', PG_CONN_ID, dag)
 
+temp_task = EmptyOperator(task_id="temp_task", dag=dag)
 
 ## extract from GCS and load into Bigquery in CSV format
 extract_payment_table = gcs_etl.extract_to_bigquery(BQ_BUCKET, FILENAME + 'payment', destination, 'payment', dag)
@@ -48,7 +49,9 @@ extract_customer_table = gcs_etl.extract_to_bigquery(BQ_BUCKET, FILENAME + 'cust
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
-start_task >> [load_payment_table, load_payment_type_table, load_order_detail_table, load_order_table, load_product_table, load_channel_table, load_address_table, load_customer_table] >> [extract_payment_table, extract_payment_type_table, extract_order_detail_table, extract_order_table, extract_product_table, extract_channel_table, extract_address_table, extract_customer_table] >> end_task
+start_task >> [load_payment_table, load_payment_type_table, load_order_detail_table, load_order_table, load_product_table, load_channel_table, load_address_table, load_customer_table] >> temp_task
+[extract_payment_table, extract_payment_type_table, extract_order_detail_table, extract_order_table, extract_product_table, extract_channel_table, extract_address_table, extract_customer_table] >>\ 
+end_task
 
 
 
