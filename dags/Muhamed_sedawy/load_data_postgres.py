@@ -5,49 +5,49 @@ from datetime import datetime, timedelta
 bucket = 'postgres-to-gcs'
 
 dag1 = DAG(
-    dag_id="postgres_to_bigquery_sedawy",
+    dag_id="postgres_to_bigquery_sedawy1",
     schedule_interval=None,
     start_date=datetime(2021, 1, 1),
     catchup=False,
 )
 dag2 = DAG(
-    dag_id="postgres_to_bigquery_sedawy",
+    dag_id="postgres_to_bigquery_sedawy2",
     schedule_interval=None,
     start_date=datetime(2021, 1, 1),
     catchup=False,
 )
 dag3 = DAG(
-    dag_id="postgres_to_bigquery_sedawy",
+    dag_id="postgres_to_bigquery_sedawy3",
     schedule_interval=None,
     start_date=datetime(2021, 1, 1),
     catchup=False,
 )
 dag4 = DAG(
-    dag_id="postgres_to_bigquery_sedawy",
+    dag_id="postgres_to_bigquery_sedawy4",
     schedule_interval=None,
     start_date=datetime(2021, 1, 1),
     catchup=False,
 )
 dag5 = DAG(
-    dag_id="postgres_to_bigquery_sedawy",
+    dag_id="postgres_to_bigquery_sedawy5",
     schedule_interval=None,
     start_date=datetime(2021, 1, 1),
     catchup=False,
 )
 dag6 = DAG(
-    dag_id="postgres_to_bigquery_sedawy",
+    dag_id="postgres_to_bigquery_sedawy6",
     schedule_interval=None,
     start_date=datetime(2021, 1, 1),
     catchup=False,
 )
 dag7 = DAG(
-    dag_id="postgres_to_bigquery_sedawy",
+    dag_id="postgres_to_bigquery_sedawy7",
     schedule_interval=None,
     start_date=datetime(2021, 1, 1),
     catchup=False,
 )
 dag8 = DAG(
-    dag_id="postgres_to_bigquery_sedawy",
+    dag_id="postgres_to_bigquery_sedawy8",
     schedule_interval=None,
     start_date=datetime(2021, 1, 1),
     catchup=False,
@@ -58,7 +58,7 @@ dag8 = DAG(
 
     # Task to execute SQL command in PostgreSQL to extract data and save to GCS
 extract_to_gcs_task1 = PostgresToGCSOperator(
-    task_id="get_data",
+    task_id="get_data1",
     postgres_conn_id= 'sedawy_connections',
     sql='select *  from src01.address',
     bucket='postgres-to-gcs',
@@ -71,7 +71,7 @@ extract_to_gcs_task1 = PostgresToGCSOperator(
 
     # Task to execute SQL command in PostgreSQL to extract data and save to GCS
 extract_to_gcs_task2 = PostgresToGCSOperator(
-    task_id="get_data",
+    task_id="get_data2",
     postgres_conn_id= 'sedawy_connections',
     sql='select *  from src01.channel',
     bucket='postgres-to-gcs',
@@ -81,7 +81,7 @@ extract_to_gcs_task2 = PostgresToGCSOperator(
     )
 
 extract_to_gcs_task3 = PostgresToGCSOperator(
-    task_id="get_data",
+    task_id="get_data3",
     postgres_conn_id= 'sedawy_connections',
     sql='select *  from src01.customer',
     bucket='postgres-to-gcs',
@@ -90,7 +90,7 @@ extract_to_gcs_task3 = PostgresToGCSOperator(
     dag=dag3
     )
 extract_to_gcs_task4 = PostgresToGCSOperator(
-    task_id="get_data",
+    task_id="get_data4",
     postgres_conn_id= 'sedawy_connections',
     sql='select *  from src01.order',
     bucket='postgres-to-gcs',
@@ -100,7 +100,7 @@ extract_to_gcs_task4 = PostgresToGCSOperator(
     )
 
 extract_to_gcs_task5 = PostgresToGCSOperator(
-    task_id="get_data",
+    task_id="get_data5",
     postgres_conn_id= 'sedawy_connections',
     sql='select *  from src01.order_detail',
     bucket='postgres-to-gcs',
@@ -110,7 +110,7 @@ extract_to_gcs_task5 = PostgresToGCSOperator(
     )
 
 extract_to_gcs_task6 = PostgresToGCSOperator(
-    task_id="get_data",
+    task_id="get_data6",
     postgres_conn_id= 'sedawy_connections',
     sql='select *  from src01.payment',
     bucket='postgres-to-gcs',
@@ -120,7 +120,7 @@ extract_to_gcs_task6 = PostgresToGCSOperator(
     )
 
 extract_to_gcs_task7 = PostgresToGCSOperator(
-    task_id="get_data",
+    task_id="get_data7",
     postgres_conn_id= 'sedawy_connections',
     sql='select *  from src01.payment_type',
     bucket='postgres-to-gcs',
@@ -129,7 +129,7 @@ extract_to_gcs_task7 = PostgresToGCSOperator(
     dag=dag7
     )
 extract_to_gcs_task8 = PostgresToGCSOperator(
-    task_id="get_data",
+    task_id="get_data8",
     postgres_conn_id= 'sedawy_connections',
     sql='select *  from src01.product',
     bucket='postgres-to-gcs',
@@ -226,4 +226,4 @@ load_to_bigquery_task8 = GCSToBigQueryOperator(
     )
 
     # Set task dependencies
-[extract_to_gcs_task1,extract_to_gcs_task2,extract_to_gcs_task3,extract_to_gcs_task4,extract_to_gcs_task5,extract_to_gcs_task6,extract_to_gcs_task7,extract_to_gcs_task8] >> [load_to_bigquery_task1,load_to_bigquery_task2,load_to_bigquery_task3,load_to_bigquery_task4,load_to_bigquery_task5,load_to_bigquery_task6,load_to_bigquery_task7,load_to_bigquery_task8]
+extract_to_gcs_task1>>extract_to_gcs_task2>>extract_to_gcs_task3>>extract_to_gcs_task4>>extract_to_gcs_task5>>extract_to_gcs_task6>>extract_to_gcs_task7>>extract_to_gcs_task8>>load_to_bigquery_task1>>load_to_bigquery_task2>>load_to_bigquery_task3>>load_to_bigquery_task4>>load_to_bigquery_task5>>load_to_bigquery_task6>>load_to_bigquery_task7>>load_to_bigquery_task8
