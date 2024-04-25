@@ -27,7 +27,7 @@ with dag:
         task_id='load_to_bigquery02',
         bucket='postgres-to-gcs',
         source_objects=["Sedawy/order.csv"],  # GCS source path
-        destination_project_dataset_table="SRC_02.order",  # BigQuery table to load data into
+        destination_project_dataset_table="AirFlow_02.order",  # BigQuery table to load data into
         create_disposition='CREATE_IF_NEEDED',
         skip_leading_rows=1,  # If your CSV has a header row
         source_format='CSV',  # Source data format
