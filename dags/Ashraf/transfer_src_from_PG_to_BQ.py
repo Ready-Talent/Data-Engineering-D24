@@ -1,3 +1,5 @@
+import sys
+sys.path.insert(0,os.path.abspath(os.path.dirname(__file__)))
 from ETL_airflow import GCSEtL
 
 from datetime import datetime
