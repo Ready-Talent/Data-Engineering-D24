@@ -23,10 +23,7 @@ with dag:
         extract_task = PostgresOperator(
             task_id=f"extract_data_{table}",
             sql=f"select * from src01.{table}",
-            postgres_conn_id='sedawy_connections',
-            bucket=bucket,
-            filename=f'Sedawy/{table}.csv',
-            export_format='CSV',
+            postgres_conn_id='sedawy_connections'
         )
         extract_tasks.append(extract_task)
 
