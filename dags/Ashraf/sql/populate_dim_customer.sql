@@ -1,4 +1,4 @@
-INSERT INTO Data_platform_01.dim_customer
+INSERT INTO replica_01.dim_customer
 (customer_id, customer_name, email, phone , address_id, address_street, address_zipcode, city_id, city_name
 , state_id, state_name, country_id, country_name)
 
