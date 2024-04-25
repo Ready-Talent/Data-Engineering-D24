@@ -1,9 +1,10 @@
+from ETL_airflow import GCSEtL
+
 from datetime import datetime
 
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
 
-from ETL_airflow import GCSEtL
 
 PG_SCHEMA = "src01"
 BQ_BUCKET = "postgres-to-gcs"
