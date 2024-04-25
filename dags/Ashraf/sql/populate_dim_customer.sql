@@ -1,4 +1,4 @@
-INSERT INTO replica_01.dim_customer
+INSERT INTO Data_platform_01.dim_customer
 (customer_id, customer_name, email, phone , address_id, address_street, address_zipcode, city_id, city_name
 , state_id, state_name, country_id, country_name)
 
@@ -7,6 +7,6 @@ select c.customer_id , c.name customer_name, c.email , c.phone
 , -1 city_id, a.city city_name
 , -1 state_id, a.state state_name
 , -1 country_id, 'US' country_name
-from SRC_01.customer c
-left join SRC_01.address a
+from replica_01.customer c
+left join replica_01.address a
 on a.customer_id=c.customer_id;
