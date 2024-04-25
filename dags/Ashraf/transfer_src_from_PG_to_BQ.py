@@ -48,7 +48,7 @@ extract_customer_table = gcs_etl.extract_to_bigquery(BQ_BUCKET, FILENAME + 'cust
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
-start_task >> [load_payment_table, load_payment_type_table, load_order_detail_table, load_order_table, load_product_table, load_channel_table, load_address_table, load_customer_table]
+start_task >> [load_payment_table, load_payment_type_table, load_order_detail_table, load_order_table, load_product_table, load_channel_table, load_address_table, load_customer_table] >> 
 [extract_payment_table, extract_payment_type_table, extract_order_detail_table, extract_order_table, extract_product_table, extract_channel_table, extract_address_table, extract_customer_table] >> end_task
 
 
