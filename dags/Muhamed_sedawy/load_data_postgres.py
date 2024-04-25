@@ -18,7 +18,7 @@ extract_to_gcs_task = PostgresToGCSOperator(
     sql='select *  from src01.order',
     bucket='postgres-to-gcs',
     filename='Sedawy/order.csv',
-    export_format = 'CSV,
+    export_format = 'CSV',
     dag=dag
     )
 
