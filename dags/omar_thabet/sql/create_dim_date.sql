@@ -1,5 +1,5 @@
 create table if not exists data_platform.dim_date (
-    date_key INTEGEREGER,
+    date_key INTEGER,
     date date,
     day_of_week INTEGER,
     day_name STRING,
