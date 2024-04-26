@@ -30,7 +30,6 @@ for table in tables:
         dataset_id="data_platform",
         table_id=table,
         schema_fields=f"schema/" + table + ".json",
-        if_exists="ignore",
     )
 
     run_query = BigQueryExecuteQueryOperator(
