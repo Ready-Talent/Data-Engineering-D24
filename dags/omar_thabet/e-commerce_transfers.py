@@ -82,6 +82,7 @@ gcs_to_bq_address = GCSToBigQueryOperator(
     ignore_unknown_values=True,
     field_delimiter=",",
     dag=dag,
+    max_bad_records=1000000,
     skip_leading_rows=1,
 )
 
@@ -111,6 +112,7 @@ gcs_to_bq_channel = GCSToBigQueryOperator(
     ignore_unknown_values=True,
     field_delimiter=",",
     dag=dag,
+    max_bad_records=1000000,
     skip_leading_rows=1,
 )
 
@@ -140,6 +142,7 @@ gcs_to_bq_order = GCSToBigQueryOperator(
     ignore_unknown_values=True,
     field_delimiter=",",
     dag=dag,
+    max_bad_records=1000000,
     skip_leading_rows=1,
 )
 
@@ -169,6 +172,7 @@ gcs_to_bq_order_detail = GCSToBigQueryOperator(
     ignore_unknown_values=True,
     field_delimiter=",",
     dag=dag,
+    max_bad_records=1000000,
     skip_leading_rows=1,
 )
 
@@ -198,6 +202,7 @@ gcs_to_bq_payment = GCSToBigQueryOperator(
     ignore_unknown_values=True,
     field_delimiter=",",
     dag=dag,
+    max_bad_records=1000000,
     skip_leading_rows=1,
 )
 
@@ -227,6 +232,7 @@ gcs_to_bq_payment_type = GCSToBigQueryOperator(
     ignore_unknown_values=True,
     field_delimiter=",",
     dag=dag,
+    max_bad_records=1000000,
     skip_leading_rows=1,
 )
 
@@ -256,6 +262,7 @@ gcs_to_bq_product = GCSToBigQueryOperator(
     ignore_unknown_values=True,
     field_delimiter=",",
     dag=dag,
+    max_bad_records=1000000,
     skip_leading_rows=1,
 )
 
