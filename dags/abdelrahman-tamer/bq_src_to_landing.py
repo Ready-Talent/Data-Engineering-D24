@@ -3,9 +3,7 @@ from datetime import datetime
 from airflow.operators.empty import EmptyOperator
 from airflow.providers.google.cloud.operators.bigquery import BigQueryExecuteQueryOperator, BigQueryInsertJobOperator
 
-sql_file_path = 'sql/dim_customer.sql'
-destination_dataset = "data_platform_abdelrahman_tamer"
-destination_table_id = "customer"
+sql_file_path = 'dags/abdelrahman-tamer/sql/dim_customer.sql'
 
 with open(sql_file_path, 'r') as file:
     sql_query = file.read()
