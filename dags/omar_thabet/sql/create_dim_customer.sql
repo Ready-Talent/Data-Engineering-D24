@@ -1,5 +1,4 @@
 CREATE TABLE IF NOT EXISTS data_platform.dim_customer (
-    customer_key INTEGER,
     customer_id INTEGER,
     customer_name STRING,
     email STRING,
