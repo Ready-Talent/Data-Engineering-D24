@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS PL.dim_product (
+CREATE TABLE IF NOT EXISTS data_platform.dim_product (
     product_key serial PRIMARY KEY,
     product_id INTEGER,
     brand_id INTEGER,

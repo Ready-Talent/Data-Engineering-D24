@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS PL.dim_customer (
+CREATE TABLE IF NOT EXISTS data_platform.dim_customer (
     customer_key serial PRIMARY KEY,
     customer_id INTEGER,
     customer_name VARCHAR(255),

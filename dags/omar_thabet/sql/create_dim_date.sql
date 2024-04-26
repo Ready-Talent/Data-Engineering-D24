@@ -1,4 +1,4 @@
-create table if not exists PL.dim_date (
+create table if not exists data_platform.dim_date (
     date_key serial primary key,
     date date,
     day_of_week int,
