@@ -17,6 +17,7 @@ start_task = EmptyOperator(task_id="start_task", dag=dag)
 create_table_and_insert_data = BigQueryExecuteQueryOperator(
     task_id="create_table_and_insert_data",
     sql="sql/dim_customer.sql",
+    use_legacy_sql=False,
     dag=dag
 )
 
