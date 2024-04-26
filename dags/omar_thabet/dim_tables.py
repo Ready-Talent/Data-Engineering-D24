@@ -29,12 +29,12 @@ for table in tables:
         task_id=f"create_{table}",
         dataset_id="data_platform",
         table_id=table,
-        schema_file=f"schema/" + table + ".json",
     )
 
     run_query = BigQueryExecuteQueryOperator(
         task_id=f"execute_{table}",
         sql="sql/" + table + ".sql",
+        write_disposition="WRITE_TRUNCATE",
         dag=dag,
         use_legacy_sql=False,
     )
