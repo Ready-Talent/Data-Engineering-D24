@@ -25,19 +25,15 @@ start_task = EmptyOperator(task_id="start_task", dag=dag)
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
 tables = ["dim_customer", "dim_date", "dim_product"]
-parent_path = str(Path(__file__).parent)
 
 
 for table in tables:
 
-    schema_file = os.path.join(parent_path, "schema/" + table + ".json")
-
-    create_table = BigQueryCreateEmptyTableOperator(
+    create_table = BigQueryExecuteQueryOperator(
         task_id=f"create_{table}",
-        dataset_id="data_platform",
-        table_id=table,
-        table_resource=json.load(open(schema_file)),
+        sql="sql/create_" + table + ".sql",
         dag=dag,
+        use_legacy_sql=False,
     )
 
     run_query = BigQueryExecuteQueryOperator(
