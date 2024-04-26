@@ -52,7 +52,8 @@ gcs_to_bq_customer = GCSToBigQueryOperator(
     ignore_unknown_values=True,
     field_delimiter=",",
     dag=dag,
-    skip_leading_rows=1,
+    skip_leading_rows=1
+    max_bad_records = 1000000,
 )
 
 # address table transfers
