@@ -1,15 +1,15 @@
 CREATE TABLE IF NOT EXISTS data_platform.dim_product (
-    product_key serial PRIMARY KEY,
+    product_key INTEGER,
     product_id INTEGER,
     brand_id INTEGER,
     category_id INTEGER,
-    name VARCHAR(100),
-    price DECIMAL(10, 2),
-    description TEXT,
-    brand_name VARCHAR(100),
-    category_name VARCHAR(100),
-    created_by VARCHAR(100) DEFAULT 'user',
+    name STRING,
+    price FLOAT,
+    description STRING,
+    brand_name STRING,
+    category_name STRING,
+    created_by STRING DEFAULT 'user',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    modified_by VARCHAR(100),
+    modified_by STRING,
     modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
