@@ -5,6 +5,7 @@ from airflow.operators.empty import EmptyOperator
 from airflow.providers.google.cloud.operators.bigquery import (
     BigQueryCreateEmptyTableOperator,
 )
+import json
 
 from airflow.providers.google.cloud.operators.bigquery import (
     BigQueryExecuteQueryOperator,
@@ -25,10 +26,14 @@ tables = ["dim_customer", "dim_date", "dim_product"]
 
 for table in tables:
 
+    schema_file = "schema/" + table + ".json"
+
     create_table = BigQueryCreateEmptyTableOperator(
         task_id=f"create_{table}",
         dataset_id="data_platform",
         table_id=table,
+        table_resource=json.load(open(schema_file)),
+        dag=dag,
     )
 
     run_query = BigQueryExecuteQueryOperator(
