@@ -46,7 +46,7 @@ create_dim_customer_table = BigQueryCreateEmptyTableOperator(
 )
 
 insert_dim_customer = BigQueryInsertJobOperator(
-    task_id="creating_dim_customer",
+    task_id="populate_dim_customer",
     configuration={
         "query": "/sql/dim_customer.sql",
         "useLegacySql": False,
