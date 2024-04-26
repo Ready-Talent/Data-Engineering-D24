@@ -29,7 +29,7 @@ for table in tables:
         task_id=f"create_{table}",
         dataset_id="data_platform",
         table_id=table,
-        schema_fields=f"schema/" + table + ".json",
+        schema_file=f"schema/" + table + ".json",
     )
 
     run_query = BigQueryExecuteQueryOperator(
