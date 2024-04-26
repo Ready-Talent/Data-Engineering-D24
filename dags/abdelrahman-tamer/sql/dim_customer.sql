@@ -5,7 +5,7 @@ CREATE TABLE data_platform_abdelrahman_tamer.customer (
 	address_street STRING,
 	zipcode STRING,
 	created_by STRING,
-	created_at TIMESTAMP
+	created_at TIMESTAMP,
 	modified_by STRING,
 	modified_at TIMESTAMP
 );

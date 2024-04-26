@@ -11,7 +11,7 @@ dag  = DAG(
         schedule_interval=None, 
         start_date=datetime(2021, 1, 1), 
         catchup=False,
-        template_searchpath= "dags/abdelrahman-tamer/sql/"
+        template_searchpath= "/dags/abdelrahman-tamer/sql"
     )
 
 
@@ -22,7 +22,7 @@ create_table_and_insert_data = BigQueryInsertJobOperator(
     task_id = "create_table_and_insert_data",
     configuration={
         "query": {
-            "query": "/dim_customer.sql",
+            "query": "{% include 'dim_customer.sql' %}",
             "'createDisposition": "CREATE_IF_NEEDED",
             "writeDisposition": "WRITE_APPEND"
         }
