@@ -3,10 +3,7 @@ from datetime import datetime
 from airflow.operators.empty import EmptyOperator
 from airflow.providers.google.cloud.operators.bigquery import BigQueryExecuteQueryOperator, BigQueryInsertJobOperator
 
-sql_file_path = 'dags/abdelrahman-tamer/sql/dim_customer.sql'
 
-with open(sql_file_path, 'r') as file:
-    sql_query = file.read()
 
 
 dag  = DAG(
@@ -14,22 +11,18 @@ dag  = DAG(
         schedule_interval=None, 
         start_date=datetime(2021, 1, 1), 
         catchup=False,
+        template_searchpath= "dags/abdelrahman-tamer/sql/"
     )
 
 
 start_task = EmptyOperator(task_id="start_task", dag=dag)
 
-# excecute_sql_query = BigQueryExecuteQueryOperator(
-#         task_id="excecute_sql_query",
-#         sql=sql_query,
-#         dag=dag
-#     )
 
 create_table_and_insert_data = BigQueryInsertJobOperator(
     task_id = "create_table_and_insert_data",
     configuration={
         "query": {
-            "query": sql_query,
+            "query": "/dim_customer.sql",
             "'createDisposition": "CREATE_IF_NEEDED",
             "writeDisposition": "WRITE_APPEND"
         }
@@ -41,3 +34,4 @@ create_table_and_insert_data = BigQueryInsertJobOperator(
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
 
+start_task >> create_table_and_insert_data  >> end_task
