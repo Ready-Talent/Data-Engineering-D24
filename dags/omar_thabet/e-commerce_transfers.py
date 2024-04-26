@@ -18,9 +18,13 @@ dag = DAG(
 
 start = EmptyOperator(task_id="start", dag=dag)
 
+dummy = EmptyOperator(task_id="dummy_task", dag=dag)
+
 end = EmptyOperator(task_id="end", dag=dag)
 
 GCS_BUCKET = "postgres-to-gcs"
+
+tables = []
 
 # customer table transfers
 
@@ -267,6 +271,11 @@ gcs_to_bq_product = GCSToBigQueryOperator(
         postgres_to_gcs_payment_type,
         postgres_to_gcs_product,
     ]
+    >> dummy
+)
+
+(
+    dummy
     >> [
         gcs_to_bq_customer,
         gcs_to_bq_payment,
