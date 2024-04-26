@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS data_platform_abdelrahman_tamer.customer (
 	customer_name STRING,
 	address_id INT64,
 	address_street STRING,
-	zipcode STRING,
+	zipcode INT64,
 	created_by STRING,
 	created_at TIMESTAMP,
 	modified_by STRING,
