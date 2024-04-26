@@ -3,8 +3,10 @@ from datetime import datetime
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
 from airflow.providers.google.cloud.operators.bigquery import (
-    BigQueryInsertJobOperator,
     BigQueryCreateEmptyTableOperator,
+)
+from airflow.providers.google.cloud.operators.bigquery import (
+    BigQueryExecuteQueryOperator,
 )
 
 
@@ -45,13 +47,11 @@ create_dim_customer_table = BigQueryCreateEmptyTableOperator(
     exists_ok=True,
 )
 
-insert_dim_customer = BigQueryInsertJobOperator(
-    task_id="populate_dim_customer",
-    configuration={
-        "query": "/sql/dim_customer.sql",
-        "useLegacySql": False,
-        "timeoutMs": 100000,
-    },
+insert_dim_customer = BigQueryExecuteQueryOperator(
+    task_id="BigQuery_Execute_Query",
+    sql="sql/dim_customer.sql",
+    dag=dag,
+    use_legacy_sql=False,
 )
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
