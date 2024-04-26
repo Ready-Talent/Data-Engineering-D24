@@ -1,0 +1,20 @@
+CREATE TABLE IF NOT EXISTS PL.dim_customer (
+    customer_key serial PRIMARY KEY,
+    customer_id INTEGER,
+    customer_name VARCHAR(255),
+    email VARCHAR(255),
+    phone VARCHAR(20),
+    address_id INTEGER,
+    address_street VARCHAR(255),
+    address_zipcode VARCHAR(20),
+    city_id INTEGER,
+    city_name VARCHAR(255),
+    state_id INTEGER,
+    state_name VARCHAR(255),
+    country_id INTEGER,
+    country_name VARCHAR(255),
+    created_by VARCHAR(100) DEFAULT 'user',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    modified_by VARCHAR(100),
+    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
