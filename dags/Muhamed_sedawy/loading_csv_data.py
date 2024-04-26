@@ -30,6 +30,7 @@ load_task = GoogleCloudStorageToBigQueryOperator(
         field_delimiter=';',
         write_disposition='Write_append',
         create_disposition='CREATE_IF_NEEDED',
+        max_bad_records=100000
         dag=dag,
     )
 
