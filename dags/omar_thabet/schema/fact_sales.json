@@ -1,0 +1,93 @@
+[
+    {
+      "name": "customer_key",
+      "mode": "REQUIRED",
+      "type": "INTEGER",
+      "description": null,
+      "fields": []
+    },
+    {
+      "name": "product_key",
+      "mode": "REQUIRED",
+      "type": "INTEGER",
+      "description": null,
+      "fields": []
+    },
+    {
+      "name": "date_key",
+      "mode": "REQUIRED",
+      "type": "INTEGER",
+      "description": null,
+      "fields": []
+    },
+    {
+      "name": "time_key",
+      "mode": "REQUIRED",
+      "type": "INTEGER",
+      "description": null,
+      "fields": []
+    },
+    {
+      "name": "junk_key",
+      "mode": "REQUIRED",
+      "type": "INTEGER",
+      "description": null,
+      "fields": []
+    },
+    {
+      "name": "quantity",
+      "mode": "NULLABLE",
+      "type": "INTEGER",
+      "description": null,
+      "fields": []
+    },
+    {
+      "name": "price",
+      "mode": "NULLABLE",
+      "type": "NUMERIC",
+      "description": null,
+      "fields": []
+    },
+    {
+      "name": "amount",
+      "mode": "NULLABLE",
+      "type": "NUMERIC",
+      "description": null,
+      "fields": []
+    },
+    {
+      "name": "paid_amount",
+      "mode": "NULLABLE",
+      "type": "NUMERIC",
+      "description": null,
+      "fields": []
+    },
+    {
+      "name": "created_by",
+      "mode": "NULLABLE",
+      "type": "STRING",
+      "description": null,
+      "fields": []
+    },
+    {
+      "name": "created_at",
+      "mode": "NULLABLE",
+      "type": "TIMESTAMP",
+      "description": null,
+      "fields": []
+    },
+    {
+      "name": "modified_by",
+      "mode": "NULLABLE",
+      "type": "STRING",
+      "description": null,
+      "fields": []
+    },
+    {
+      "name": "modified_at",
+      "mode": "NULLABLE",
+      "type": "TIMESTAMP",
+      "description": null,
+      "fields": []
+    }
+  ]
