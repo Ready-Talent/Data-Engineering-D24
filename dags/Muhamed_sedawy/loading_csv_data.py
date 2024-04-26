@@ -21,13 +21,13 @@ dag = DAG(
 
 start_task = EmptyOperator(task_id="start_task", dag=dag)
 load_task = GoogleCloudStorageToBigQueryOperator(
-        task_id='load_to_bigquery',
+        task_id='load_to_bigquery_02',
         bucket='chicago-taxi-test-de24',
-        source_objects=['chicago-taxi-test-de24/data*.csv'],
+        source_objects=["data*.csv"],
         destination_project_dataset_table='ready-data-engineering-p24.sedawy_airflow',
         source_format='CSV',
         autodetect=True,
-        field_delimiter=',',
+        field_delimiter=';',
         write_disposition='Write_append',
         create_disposition='CREATE_IF_NEEDED',
         dag=dag,
