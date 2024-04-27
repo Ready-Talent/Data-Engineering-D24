@@ -23,7 +23,7 @@ start_task = EmptyOperator(task_id="start_task", dag=dag)
 
 
 
-create_dim_customer = BigQueryExecuteOperatr(
+create_dim_customer = BigQueryExecuteOperator(
     task_id="creating_dim_customer",
     sql = "Sql/create_dim_customer.sql",
     use_legacy_sql=False,
