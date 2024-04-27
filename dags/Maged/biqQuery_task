@@ -22,7 +22,7 @@ last_task = EmptyOperator(task_id="last_task", dag=create_Dimension_Dag)
 
 
 bigquery_task = BigQueryExecuteQueryOperator(
-    task_id='create_Dimension_customer',
+    task_id='create_Dimension_customer2024',
     sql='Maged/queries.sql',
     use_legacy_sql=False,
     destination_dataset_table='SRC_08.dim_customer',
