@@ -1,6 +1,6 @@
 import logging
 from datetime import datetime
-
+from pathlib import Path
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
 from airflow.providers.google.cloud.operators.bigquery import BigQueryInsertJobOperator
@@ -17,14 +17,17 @@ dag = DAG(
     start_date=datetime(2021, 1, 1),
     catchup=False,
 )
-
+import os
 start_task = EmptyOperator(task_id="start_task", dag=dag)
+
+parent_path = str(Path(__file__).parent)
+path = os.path.join(parent_path, "product.json" )
 
 create_table = BigQueryCreateEmptyTableOperator(
     task_id="create_product_table",
     dataset_id='Data_Platform_Abduallah',
     table_id="dim_product",
-    schema_fields='product.json'
+    schema_fields=os.open(path)
 )
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
