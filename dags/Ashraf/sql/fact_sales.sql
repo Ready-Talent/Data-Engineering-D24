@@ -11,7 +11,7 @@ select
 ,od.price
 ,(od.quantity * od.price ) amount
 ,coalesce(p.amount,0) paid_amount
-from src01.order_detail od
+from landing.order_detail od
 
 join landing.order o
 on o.order_id = od.order_id
