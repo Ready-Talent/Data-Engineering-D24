@@ -8,6 +8,6 @@ select c.customer_id , c.name customer_name, c.email , c.phone
 , -1 city_id, a.city city_name
 , -1 state_id, a.state state_name
 , -1 country_id, 'US' country_name
-from landing.customer c
-left join landing.address a
+from SRC_11.customer c
+left join SRC_11.address a
 on a.customer_id =c.customer_id;
