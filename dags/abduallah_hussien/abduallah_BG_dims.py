@@ -27,7 +27,7 @@ create_table = BigQueryCreateEmptyTableOperator(
     task_id="create_product_table",
     dataset_id='Data_Platform_Abduallah',
     table_id="dim_product",
-    schema_fields=os.open(path)
+    table_resource=os.open(path)
 )
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
