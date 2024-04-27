@@ -1,0 +1,15 @@
+[
+    {"name": "product_id", "type": "INT64", "mode": "NULLABLE"},
+    {"name": "branc_id", "type": "INT64", "mode": "NULLABLE"},
+    {"name": "category_id", "type": "INT64", "mode": "NULLABLE"},
+    {"name": "name", "type": "STRING", "mode": "NULLABLE"},
+    {"name": "product_id", "type": "INT64", "mode": "NULLABLE"},
+    {"name": "price", "type": "INT64", "mode": "NULLABLE"},
+    {"name": "description", "type": "STRING", "mode": "NULLABLE"},
+    {"name": "brand_name", "type": "STRING", "mode": "NULLABLE"},
+    {"name": "category_name", "type": "STRING", "mode": "NULLABLE"},
+    {"name": "created_by", "type": "STRING", "mode": "NULLABLE"},
+    {"name": "created_at", "type": "TIMESTAMP", "mode": "NULLABLE"},
+    {"name": "modified_by", "type": "STRING", "mode": "NULLABLE"},
+    {"name": "modified_at", "type": "TIMESTAMP", "mode": "NULLABLE"},
+]

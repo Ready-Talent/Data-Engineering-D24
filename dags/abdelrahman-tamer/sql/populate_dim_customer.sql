@@ -1,15 +1,3 @@
-CREATE TABLE IF NOT EXISTS data_platform_abdelrahman_tamer.customer (
-	customer_id INT64,
-	customer_name STRING,
-	address_id INT64,
-	address_street STRING,
-	zipcode INT64,
-	created_by STRING,
-	created_at TIMESTAMP,
-	modified_by STRING,
-	modified_at TIMESTAMP
-);
-
 INSERT INTO data_platform_abdelrahman_tamer.customer (customer_id, customer_name, address_id, address_street, zipcode, created_by, created_at, modified_by, modified_at)
 select 
 	customer.customer_id as customer_id,
