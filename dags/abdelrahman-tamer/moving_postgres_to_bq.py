@@ -24,32 +24,15 @@ dag  = DAG(
         catchup=False,
     )
 
-
 start_task = EmptyOperator(task_id="start_task", dag=dag)
 
-# move_data_to_bigquery_table = GCSToBigQueryOperator(
-#         task_id = "move_data_to_bigquery_table",
-#         bucket=gcs_bucket,
-#         source_objects="abdelrahman_06/address.csv",
-#         source_format="CSV",
-#         destination_project_dataset_table="SRC_06.address",
-#         field_delimiter=',',
-#         autodetect=True,
-#         skip_leading_rows=1,
-#         write_disposition="WRITE_TRUNCATE",
-#         create_disposition="CREATE_IF_NEEDED",
-#         dag=dag
-#     )
 
-end_task = EmptyOperator(task_id="end_task", dag=dag)
-
-start_task >> end_task
-previous_task_pg_to_gcs = start_task
-
+gcs_tasks = []
+bq_tasks = []
 for index, item in enumerate(tables_and_queries): 
 
     pg_to_gcs = PostgresToGCSOperator(
-            task_id=f"pg_to_gcs_{index}",
+            task_id=f"pg_to_gcs_{item['table']}",
             postgres_conn_id="abdelrahman_06_postgres_connection",
             bucket=gcs_bucket,
             filename=f"abdelrahman_06/{item['table']}.csv",
@@ -58,7 +41,28 @@ for index, item in enumerate(tables_and_queries):
             dag=dag
         )
     
-    previous_task_pg_to_gcs >> pg_to_gcs
-    previous_task_pg_to_gcs = pg_to_gcs
+    gcs_tasks.append(pg_to_gcs)
+    
+    move_data_to_bigquery_table = GCSToBigQueryOperator(
+        task_id = f"move_{item['table']}_to_bigquery_table",
+        bucket=gcs_bucket,
+        source_objects=f"abdelrahman_06/{item['table']}.csv",
+        source_format="CSV",
+        destination_project_dataset_table=f"SRC_06.{item['table']}",
+        field_delimiter=',',
+        autodetect=True,
+        skip_leading_rows=1,
+        write_disposition="WRITE_TRUNCATE",
+        create_disposition="CREATE_IF_NEEDED",
+        dag=dag
+    )
+    
+    bq_tasks.append(move_data_to_bigquery_table)
+    
+end_task = EmptyOperator(task_id="end_task", dag=dag)
 
-pg_to_gcs >> end_task
+start_task >> gcs_tasks >> bq_tasks >> end_task
+    
+
+    
+
