@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS Data_Platform_Lojain.dim_customer (
     modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );
 -- create dim_date
-CREATE TABLE IF NOT EXISTS Data_Data_Platform_Lojainatform_Lojain.dim_product (
+CREATE TABLE IF NOT EXISTS Data_Platform_Lojain.dim_product (
     product_key INT64,
     brand_id INT64,
     category_id INT64,
