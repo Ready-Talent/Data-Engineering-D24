@@ -1,4 +1,4 @@
-INSERT INTO data_platform.dim_date
+INSERT INTO data_platform_Maged.dim_date
 (date_key,date, day_of_week, day_name, day_of_month, day_of_year, week_of_year, month_name, quarter, year)
 
 SELECT
