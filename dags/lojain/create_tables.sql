@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS Data_Data_Platform_Lojainatform_Lojain.dim_customer (
+CREATE TABLE IF NOT EXISTS Data_Platform_Lojain.dim_customer (
     customer_key INT64,
     customer_id INT64,
     customer_name STRING,
