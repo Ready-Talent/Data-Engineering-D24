@@ -24,6 +24,9 @@ dag = DAG(
 
 
 start_task = EmptyOperator(task_id="start", dag=dag)
+end_task = EmptyOperator(task_id="end", dag=dag)
+
+
 
 pgtogcs= PostgresToGCSOperator(
         task_id="get_pg_data",
@@ -48,7 +51,7 @@ gcstobq=GCSToBigQueryOperator(
 
 
 
-end_task = EmptyOperator(task_id="end", dag=dag)
+
 
 start_task >> pgtogcs>> gcstobq >> end_task
 
