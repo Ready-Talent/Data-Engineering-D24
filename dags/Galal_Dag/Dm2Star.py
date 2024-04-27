@@ -28,5 +28,5 @@ dag = DAG(
 
 start_task = EmptyOperator(task_id="start_task", dag=dag)
 end_task = EmptyOperator(task_id="end_task", dag=dag)
-create_dim=BigQueryExecuteQueryOperator(task_id='Create_Dim',sql='sql/Create_dim.sql',dag=dag,legacy_sql=True)
+create_dim=BigQueryExecuteQueryOperator(task_id='Create_Dim',sql='sql/Create_dim.sql',dag=dag,use_legacy_sql=True)
 start_task >> create_dim >>end_task
