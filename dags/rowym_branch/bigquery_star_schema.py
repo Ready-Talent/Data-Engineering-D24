@@ -13,12 +13,12 @@ dag = DAG(
     catchup=False,
 )
 
-
 move_data = BigQueryExecuteQueryOperator(
     task_id='move_customer_data',
     sql = 'sqlQueries.sql',
-    destination_dataset_table='proj:ds.table_2',
+    destination_dataset_table='Data_Platform_Rowym.Customer',
     write_disposition='WRITE_EMPTY',
+    use_legacy_sql = False,
     dag=dag
 )
 
