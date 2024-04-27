@@ -20,7 +20,7 @@ dag = DAG(
 
 start_task = EmptyOperator(task_id="start", dag=dag)
 DATASET_NAME="lojain_fromgcs"
-TABLE_NAME="taxi"
+TABLE_NAME="order"
 
 load_csv = GCSToBigQueryOperator(
     task_id="lojain_gcstobq",
