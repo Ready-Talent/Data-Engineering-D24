@@ -8,10 +8,10 @@ from airflow.providers.google.cloud.transfers.postgres_to_gcs import PostgresToG
 from airflow.providers.google.cloud.operators.bigquery import BigQueryExecuteQueryOperator
 
 create_Dimension_Dag = DAG(
-    dag_id="helloooooooooooo",
+    dag_id="bigqueryTaskMaged",
     description="second trial",
     schedule_interval=None,
-    start_date=datetime(2024, 4, 20),
+    start_date=datetime(2024, 4, 27),
     catchup=False,
 ) 
 
