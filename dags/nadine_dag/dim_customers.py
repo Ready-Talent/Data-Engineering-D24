@@ -4,7 +4,7 @@ from airflow import DAG
 from datetime import datetime
 
 dag = DAG(
-    dag_id="insert_customer_dim_bigquery",
+    dag_id="insert_customer_dim_bigquery_Nadine",
     description="Run create and insert queries to transfer dimensions from postgres to bigquery",
     schedule_interval=None,
     start_date=datetime(2021, 1, 1),
@@ -12,12 +12,12 @@ dag = DAG(
 )
 
 create_table = BigQueryExecuteQueryOperator(task_id = "create_dim_customer_table",
-                                            SQL = 'dags\nadine_dag\sql_queries\create_customers.sql',
+                                            sql = 'dags\nadine_dag\sql_queries\create_customers.sql',
                                             uselegacySQL = False,
                                             dag = dag)
 
 insert_table = BigQueryExecuteQueryOperator(task_id = "insert_into_dim_customer_table",
-                                            SQL = 'dags\nadine_dag\sql_queries\insert_customers.sql',
+                                            sql = 'dags\nadine_dag\sql_queries\insert_customers.sql',
                                             uselegacySQL = False,
                                             dag = dag)
 
