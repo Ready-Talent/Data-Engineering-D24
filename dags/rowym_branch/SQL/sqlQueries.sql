@@ -1,4 +1,4 @@
-     TABLE IF NOT EXISTS Data_Platform_Rowym.dim_customer (
+CREATE TABLE IF NOT EXISTS Data_Platform_Rowym.dim_customer (
 	customer_id INT64,
 	customer_name STRING,
 	address_id INT64,
