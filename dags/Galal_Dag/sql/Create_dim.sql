@@ -1,4 +1,3 @@
-CREATE SCHEMA IF NOT EXISTS Data_Platform_Galal;
 
 -- Drop existing tables if they exist
 DROP TABLE IF EXISTS Data_Platform_Galal.Fact_sales;
