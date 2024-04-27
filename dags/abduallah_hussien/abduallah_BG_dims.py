@@ -5,6 +5,8 @@ from airflow import DAG
 from airflow.operators.empty import EmptyOperator
 from airflow.providers.google.cloud.operators.bigquery import BigQueryInsertJobOperator
 from airflow.providers.google.cloud.operators.bigquery import BigQueryCreateEmptyTableOperator
+from airflow.providers.google.cloud.operators.bigquery import BigQueryExecuteQueryOperator
+
 
 def print_hello():
     logging.info("Abduallah")
@@ -27,7 +29,15 @@ create_table = BigQueryCreateEmptyTableOperator(
     task_id="create_product_table",
     dataset_id='Data_Platform_Abduallah',
     table_id="dim_product",
-    table_resource=os.open(path)
+    sch=os.open(path)
+)
+
+create_table = BigQueryCreateEmptyTableOperator(
+    task_id="create_product_table",
+    dataset_id="Data_Platform_Abduallah",
+    table_id="dim_product",
+    sql='dim_product.sql',
+    dag=dag
 )
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
