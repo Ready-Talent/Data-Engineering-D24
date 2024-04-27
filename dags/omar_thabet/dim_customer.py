@@ -27,6 +27,7 @@ create_dim_customer_table = BigQueryExecuteQueryOperator(
 insert_dim_customer = BigQueryExecuteQueryOperator(
     task_id="BigQuery_Execute_Query",
     sql="sql/dim_customer.sql",
+    write_disposition="WRITE_TRUNCATE",
     dag=dag,
     use_legacy_sql=False,
 )
