@@ -42,7 +42,7 @@ for table in tables:
         task_id=f"gcs_to_bigquery{table}",
         bucket=GCS_BUCKET,
         source_objects=[f"Reemaa/{table}.csv"],
-        destination_project_dataset_table=f"Reema_Airflow.{table}",
+        destination_project_dataset_table=f"Reema_AirFlow.{table}",
         create_disposition='CREATE_IF_NEEDED',
         write_disposition='WRITE_TRUNCATE',
         field_delimiter=',',
