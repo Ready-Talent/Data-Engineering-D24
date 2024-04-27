@@ -2,7 +2,6 @@ from airflow import DAG
 from datetime import datetime
 from airflow.operators.empty import EmptyOperator
 from airflow.providers.google.cloud.operators.bigquery import BigQueryExecuteQueryOperator, BigQueryCreateEmptyTableOperator, BigQueryInsertJobOperator
-from helpers.tables import data_platform_tables
 from schemas.product import product_schema
 
 DATA_PLATFORM = "data_platform_abdelrahman_tamer"
