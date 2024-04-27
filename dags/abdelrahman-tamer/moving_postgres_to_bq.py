@@ -59,9 +59,10 @@ for index, item in enumerate(tables_and_queries):
     
     bq_tasks.append(move_data_to_bigquery_table)
     
+dummy_task = EmptyOperator(task_id="dummy_task", dag=dag)
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
-start_task >> gcs_tasks >> bq_tasks >> end_task
+start_task >> gcs_tasks >> dummy_task >> bq_tasks >> end_task
     
 
     
