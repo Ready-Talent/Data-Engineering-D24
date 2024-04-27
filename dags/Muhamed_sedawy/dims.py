@@ -3,12 +3,7 @@ import logging
 from datetime import datetime
 
 from airflow import DAG
-from airflow.contrib.operators.gcs_to_bq import GoogleCloudStorageToBigQueryOperator
-from airflow.operators.empty import EmptyOperator
-from airflow.contrib.operators.bigquery_operator import BigQueryInsertJobOperator
 from airflow.providers.google.cloud.operators.bigquery import BigQueryExecuteQueryOperator
-from airflow.operators.python import PythonOperator
-
 
 
 
