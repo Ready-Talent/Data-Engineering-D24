@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS data_platform_01.Fact_sales (
 
     quantity INT64,
     price Float64,
-    amount NUMERIC(10, 2),
+    amount Float64,
     paid_amount Float64,
 
 
