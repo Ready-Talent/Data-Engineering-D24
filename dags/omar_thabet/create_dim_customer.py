@@ -1,7 +1,7 @@
 from datetime import datetime
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
-from airflow.providers.google.cloud.transfers.postgres_to_gcs import (
+from airflow.providers.google.cloud.operators.bigquery import (
     BigQueryExecuteQueryOperator,
 )
 
