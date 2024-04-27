@@ -16,6 +16,8 @@ dag = DAG(
 )
 
 start_task = EmptyOperator(task_id="start_task", dag=dag)
+end_task = EmptyOperator(task_id="end_task", dag=dag)
+
 
 tables = ['customer','product','payment','order','order_detail','channel','payment_type','address']
 # postgres_to_gcs = []
@@ -46,7 +48,5 @@ for table in tables:
     write_disposition = "WRITE_TRUNCATE",
     dag = dag
     ) 
+    start_task >> postgres_to_gcs >> gcs_to_bigquery >> end_task
 
-end_task = EmptyOperator(task_id="end_task", dag=dag)
-
-start_task >> postgres_to_gcs >> gcs_to_bigquery >> end_task
