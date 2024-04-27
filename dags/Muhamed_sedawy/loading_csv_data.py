@@ -31,7 +31,6 @@ load_task = GoogleCloudStorageToBigQueryOperator(
         write_disposition='Write_append',
         create_disposition='CREATE_IF_NEEDED',
         dag=dag,
-
     )
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
