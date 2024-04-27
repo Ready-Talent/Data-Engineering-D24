@@ -16,7 +16,7 @@ dag = DAG(
 
     # Task to execute SQL command in PostgreSQL to extract data and save to GCS
 extract_to_gcs_task1 = PostgresToGCSOperator(
-    task_id="get_data",
+    task_id="get_data1",
     postgres_conn_id= 'sedawy_connections',
     sql='select *  from src01.address',
     bucket='postgres-to-gcs',
@@ -29,7 +29,7 @@ extract_to_gcs_task1 = PostgresToGCSOperator(
 
     # Task to execute SQL command in PostgreSQL to extract data and save to GCS
 extract_to_gcs_task2 = PostgresToGCSOperator(
-    task_id="get_data",
+    task_id="get_data2",
     postgres_conn_id= 'sedawy_connections',
     sql='select *  from src01.channel',
     bucket='postgres-to-gcs',
@@ -39,7 +39,7 @@ extract_to_gcs_task2 = PostgresToGCSOperator(
     )
 
 extract_to_gcs_task3 = PostgresToGCSOperator(
-    task_id="get_data",
+    task_id="get_data3",
     postgres_conn_id= 'sedawy_connections',
     sql='select *  from src01.customer',
     bucket='postgres-to-gcs',
@@ -48,7 +48,7 @@ extract_to_gcs_task3 = PostgresToGCSOperator(
     dag=dag
     )
 extract_to_gcs_task4 = PostgresToGCSOperator(
-    task_id="get_data",
+    task_id="get_data4",
     postgres_conn_id= 'sedawy_connections',
     sql='select *  from src01.order',
     bucket='postgres-to-gcs',
@@ -58,7 +58,7 @@ extract_to_gcs_task4 = PostgresToGCSOperator(
     )
 
 extract_to_gcs_task5 = PostgresToGCSOperator(
-    task_id="get_data",
+    task_id="get_data5",
     postgres_conn_id= 'sedawy_connections',
     sql='select *  from src01.order_detail',
     bucket='postgres-to-gcs',
@@ -68,7 +68,7 @@ extract_to_gcs_task5 = PostgresToGCSOperator(
     )
 
 extract_to_gcs_task6 = PostgresToGCSOperator(
-    task_id="get_data",
+    task_id="get_data6",
     postgres_conn_id= 'sedawy_connections',
     sql='select *  from src01.payment',
     bucket='postgres-to-gcs',
@@ -78,7 +78,7 @@ extract_to_gcs_task6 = PostgresToGCSOperator(
     )
 
 extract_to_gcs_task7 = PostgresToGCSOperator(
-    task_id="get_data",
+    task_id="get_data7",
     postgres_conn_id= 'sedawy_connections',
     sql='select *  from src01.payment_type',
     bucket='postgres-to-gcs',
@@ -87,7 +87,7 @@ extract_to_gcs_task7 = PostgresToGCSOperator(
     dag=dag
     )
 extract_to_gcs_task8 = PostgresToGCSOperator(
-    task_id="get_data",
+    task_id="get_data8",
     postgres_conn_id= 'sedawy_connections',
     sql='select *  from src01.product',
     bucket='postgres-to-gcs',
@@ -103,7 +103,7 @@ extract_to_gcs_task8 = PostgresToGCSOperator(
 
     # Task to load data from GCS to BigQuery
 load_to_bigquery_task1 = GCSToBigQueryOperator(
-    task_id='load_to_bigquery02',
+    task_id='load_to_bigquery1',
     bucket=bucket,
     source_objects="Sedawy/address.csv",  # GCS source path
     destination_project_dataset_table='Data_Platform_Sedawy.address',  # BigQuery table to load data into
@@ -113,7 +113,7 @@ load_to_bigquery_task1 = GCSToBigQueryOperator(
     dag=dag
     )
 load_to_bigquery_task2 = GCSToBigQueryOperator(
-    task_id='load_to_bigquery02',
+    task_id='load_to_bigquery2',
     bucket=bucket,
     source_objects="Sedawy/chanel.csv",  # GCS source path
     destination_project_dataset_table='Data_Platform_channel.',  # BigQuery table to load data into
@@ -123,7 +123,7 @@ load_to_bigquery_task2 = GCSToBigQueryOperator(
     dag=dag
     )
 load_to_bigquery_task3 = GCSToBigQueryOperator(
-    task_id='load_to_bigquery02',
+    task_id='load_to_bigquery3',
     bucket=bucket,
     source_objects="Sedawy/customer.csv",  # GCS source path
     destination_project_dataset_table='Data_Platform_Sedawy.customer',  # BigQuery table to load data into
@@ -133,7 +133,7 @@ load_to_bigquery_task3 = GCSToBigQueryOperator(
     dag=dag
     )
 load_to_bigquery_task4 = GCSToBigQueryOperator(
-    task_id='load_to_bigquery02',
+    task_id='load_to_bigquery4',
     bucket=bucket,
     source_objects="Sedawy/order.csv",  # GCS source path
     destination_project_dataset_table='Data_Platform_Sedawy.order',  # BigQuery table to load data into
@@ -143,7 +143,7 @@ load_to_bigquery_task4 = GCSToBigQueryOperator(
     dag=dag
     )
 load_to_bigquery_task5 = GCSToBigQueryOperator(
-    task_id='load_to_bigquery02',
+    task_id='load_to_bigquery5',
     bucket=bucket,
     source_objects="Sedawy/order_detail.csv",  # GCS source path
     destination_project_dataset_table='Data_Platform_Sedawy.order_detail',  # BigQuery table to load data into
@@ -153,7 +153,7 @@ load_to_bigquery_task5 = GCSToBigQueryOperator(
     dag=dag
     )
 load_to_bigquery_task6 = GCSToBigQueryOperator(
-    task_id='load_to_bigquery02',
+    task_id='load_to_bigquery6',
     bucket=bucket,
     source_objects="Sedawy/payment.csv",  # GCS source path
     destination_project_dataset_table='Data_Platform_Sedawy.payment',  # BigQuery table to load data into
@@ -163,7 +163,7 @@ load_to_bigquery_task6 = GCSToBigQueryOperator(
     dag=dag
     )
 load_to_bigquery_task7 = GCSToBigQueryOperator(
-    task_id='load_to_bigquery02',
+    task_id='load_to_bigquery7',
     bucket=bucket,
     source_objects="Sedawy/payment_type.csv",  # GCS source path
     destination_project_dataset_table='Data_Platform_Sedawy.payment_type',  # BigQuery table to load data into
@@ -173,7 +173,7 @@ load_to_bigquery_task7 = GCSToBigQueryOperator(
     dag=dag
     )
 load_to_bigquery_task8 = GCSToBigQueryOperator(
-    task_id='load_to_bigquery02',
+    task_id='load_to_bigquery8',
     bucket=bucket,
     source_objects="Sedawy/product.csv",  # GCS source path
     destination_project_dataset_table='Data_Platform_Sedawy.product',  # BigQuery table to load data into
