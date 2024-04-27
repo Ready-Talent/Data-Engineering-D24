@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS Data_Platform_Maged.dim_product (
     brand_id INTEGER,
     category_id INTEGER,
     name STRING,
-    price NUMERIC,
+    price FLOAT64,
     description STRING,
     brand_name STRING,
     category_name STRING,
