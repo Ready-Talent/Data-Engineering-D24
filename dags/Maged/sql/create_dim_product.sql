@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS data_platform.dim_product (
+CREATE TABLE IF NOT EXISTS data_platform_Maged.dim_product (
     product_key INTEGER,
     product_id INTEGER,
     brand_id INTEGER,
