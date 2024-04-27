@@ -52,7 +52,7 @@ for index, item in enumerate(tables_and_queries):
             task_id=f"pg_to_gcs_{index}",
             postgres_conn_id="abdelrahman_06_postgres_connection",
             bucket=gcs_bucket,
-            filename=f"abdelrahman_06/{item["table"]}.csv",
+            filename=f"abdelrahman_06/{item['table']}.csv",
             sql=item["query"],
             export_format="csv",
             dag=dag
