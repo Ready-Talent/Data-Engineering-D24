@@ -4,7 +4,7 @@ select
 	customer.name as customer_name,
 	address.address_id as address_id,
 	address.street as address_street,
-	address.zipcode as address_zipcode,
+	cast(address.zipcode as INT64)as address_zipcode,
 	customer.created_by as created_by,
 	customer.created_at as created_at,
 	customer.modified_by as modified_by,
