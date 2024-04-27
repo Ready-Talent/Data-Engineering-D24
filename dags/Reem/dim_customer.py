@@ -23,16 +23,21 @@ start_task = EmptyOperator(task_id="start_task", dag=dag)
 
 
 
-insert_dim_customer = BigQueryInsertJobOperator(
+create_dim_customer = BigQueryInsertJobOperator(
     task_id="creating_dim_customer",
-    configuration={
-        "query": "/sql/populate_dim_customer.sql",
-        "useLegacySql": False,
-        "timeoutMs": 1000000,
+    sql = "sql/create_dim_customer.sql",
+    use_legacy_sql=False,
+    dag=dag,
+)
 
-    },
+
+populate_dim_customer = BigQueryInsertJobOperator(
+    task_id="insert_in_dim_customer",
+    sql = "sql/populate_dim_customer.sql",\
+    use_legacy_sql=False,
+    dag=dag,
 )
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
-start_task >> insert_dim_customer >> end_task
+start_task >> create_dim_customer >> populate_dim_customer >> end_task
