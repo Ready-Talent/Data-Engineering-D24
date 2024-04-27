@@ -24,7 +24,7 @@ end = EmptyOperator(task_id="end", dag=dag)
 
 GCS_BUCKET = "postgres-to-gcs"
 
-tables = ["product","customer","order"]
+tables = ["product", "customer", "order"]
 
 for table in tables:
 
@@ -38,7 +38,6 @@ for table in tables:
         gzip=False,
         use_server_side_cursor=False,
     )
-
 
     gcs_to_bq = GCSToBigQueryOperator(
         task_id=f"gcs_to_bq_{table}",
@@ -56,7 +55,6 @@ for table in tables:
         max_bad_records=1000000,
     )
     start >> postgres_to_gcs >> gcs_to_bq >> end
-
 
 
 # # customer table transfers
@@ -328,4 +326,4 @@ for table in tables:
 #         gcs_to_bq_product,
 #     ]
 #     >> end
-)
+# )
