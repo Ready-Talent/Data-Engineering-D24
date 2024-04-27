@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `ready-data-engineering-p24.Data_Platform_Abduallah.PL.dim_product` (
+CREATE TABLE IF NOT EXISTS `ready-data-engineering-p24.Data_Platform_Abduallah.dim_product` (
   product_key INT64,
   product_id INT64,
   brand_id INT64,
