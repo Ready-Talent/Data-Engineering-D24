@@ -13,7 +13,7 @@ dag  = DAG(
         catchup=False
     )
 
-schema_file_path = "dags/abdelrahman-tamer/schemas/product.json"
+schema_file_path = "schemas/product.json"
 
 with open(schema_file_path, 'r') as f:
     product_schema = json.load(f)
