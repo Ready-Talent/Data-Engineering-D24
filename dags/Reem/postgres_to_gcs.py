@@ -48,7 +48,7 @@ for table in tables:
         field_delimiter=',',
         skip_leading_rows=1,
         ignore_unknown_values=True,
-        max_bad_records= 100,
+        max_bad_records= 1000000,
         dag=dag
     )
 
