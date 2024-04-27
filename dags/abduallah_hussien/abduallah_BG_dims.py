@@ -27,8 +27,6 @@ start_task = EmptyOperator(task_id="start_task", dag=dag)
 
 create_table = BigQueryExecuteQueryOperator(
     task_id="create_product_table",
-    dataset_id="Data_Platform_Abduallah",
-    table_id="dim_product",
     sql='dim_product.sql',
     use_legacy_sql=False,
     dag=dag
