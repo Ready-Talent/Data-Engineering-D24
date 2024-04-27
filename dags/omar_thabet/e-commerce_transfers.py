@@ -18,8 +18,6 @@ dag = DAG(
 
 start = EmptyOperator(task_id="start", dag=dag)
 
-dummy = EmptyOperator(task_id="dummy_task", dag=dag)
-
 end = EmptyOperator(task_id="end", dag=dag)
 
 GCS_BUCKET = "postgres-to-gcs"
