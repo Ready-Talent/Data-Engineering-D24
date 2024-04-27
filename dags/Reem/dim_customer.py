@@ -3,7 +3,7 @@ from datetime import datetime
 
 from airflow import DAG
 from airflow.operators.empty import EmptyOperator
-from airflow.providers.google.cloud.operators.bigquery import BigQueryInsertJobOperator
+from airflow.providers.google.cloud.operators.bigquery import BigQueryExecuteOperator
 
 
 def move_data():
@@ -23,7 +23,7 @@ start_task = EmptyOperator(task_id="start_task", dag=dag)
 
 
 
-create_dim_customer = BigQueryInsertJobOperator(
+create_dim_customer = BigQueryExecuteOperatr(
     task_id="creating_dim_customer",
     sql = "Sql/create_dim_customer.sql",
     use_legacy_sql=False,
@@ -31,7 +31,7 @@ create_dim_customer = BigQueryInsertJobOperator(
 )
 
 
-populate_dim_customer = BigQueryInsertJobOperator(
+populate_dim_customer = BigQueryExecuteOperator(
     task_id="insert_in_dim_customer",
     sql = "Sql/populate_dim_customer.sql",\
     use_legacy_sql=False,
