@@ -26,8 +26,8 @@ left join data_platform_01.junk_dim jd
 on jd.payment_type_code = coalesce(p.payment_type_id,-1)
 and jd.channel_code = o.channel_id
 
-left join data_platform_01.dim_time dt
-on dt.full_time = o.order_date :: timestamp :: time
+left join data_platform.dim_time dt
+on CAST(dt.full_time AS TIME) = TIME(o.order_date)
 
 left join data_platform_01.dim_date dd
 on dd.date = o.order_date
