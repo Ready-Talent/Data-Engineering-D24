@@ -1,5 +1,5 @@
 CREATE TABLE data_platform_Nadine.dim_customer (
-    customer_key PRIMARY KEY,
+    customer_key ,
     customer_id INTEGER,
     customer_name STRING,
     email STRING,
