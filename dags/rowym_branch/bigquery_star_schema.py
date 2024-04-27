@@ -13,7 +13,7 @@ dag = DAG(
     catchup=False,
 )
 
-create_data = BigQueryExecuteQueryOperator(
+create_table = BigQueryExecuteQueryOperator(
     task_id='create_dim_customer_table',
     sql = 'SQL/sqlQueries_create.sql',
     destination_dataset_table='Data_Platform_Rowym.dim_customer',
@@ -33,4 +33,4 @@ start_task = EmptyOperator(task_id="start_task", dag=dag)
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
-start_task >> move_data >> end_task
+start_task >> create_table >> insert_data >> end_task
