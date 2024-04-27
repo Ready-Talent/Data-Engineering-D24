@@ -1,4 +1,4 @@
-CREATE TABLE  data_platform_Maged.dim_customer (
+CREATE TABLE  Data_Platform_Maged.dim_customer (
     customer_key INT64,
     customer_id INT64,
     customer_name STRING,
