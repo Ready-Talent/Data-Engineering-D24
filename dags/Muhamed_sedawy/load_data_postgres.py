@@ -184,4 +184,4 @@ load_to_bigquery_task8 = GCSToBigQueryOperator(
     )
 
     # Set task dependencies
-[extract_to_gcs_task1,extract_to_gcs_task2,extract_to_gcs_task3,extract_to_gcs_task4,extract_to_gcs_task5,extract_to_gcs_task6,extract_to_gcs_task7,extract_to_gcs_task8] >> [load_to_bigquery_task1,load_to_bigquery_task2,load_to_bigquery_task3,load_to_bigquery_task4,load_to_bigquery_task5,load_to_bigquery_task6,load_to_bigquery_task7,load_to_bigquery_task8]
+extract_to_gcs_task1>>extract_to_gcs_task2>>extract_to_gcs_task3>>extract_to_gcs_task4>>extract_to_gcs_task5>>extract_to_gcs_task6>>extract_to_gcs_task7>>extract_to_gcs_task8>>load_to_bigquery_task1>>load_to_bigquery_task2>>load_to_bigquery_task3>>load_to_bigquery_task4>>load_to_bigquery_task5>>load_to_bigquery_task6>>load_to_bigquery_task7>>load_to_bigquery_task8
