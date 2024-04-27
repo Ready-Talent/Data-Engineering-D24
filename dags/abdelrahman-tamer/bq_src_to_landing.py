@@ -2,7 +2,7 @@ from airflow import DAG
 from datetime import datetime
 from airflow.operators.empty import EmptyOperator
 from airflow.providers.google.cloud.operators.bigquery import BigQueryExecuteQueryOperator, BigQueryCreateEmptyTableOperator, BigQueryInsertJobOperator
-from product import product_schema
+import json
 
 DATA_PLATFORM = "data_platform_abdelrahman_tamer"
 
@@ -13,6 +13,11 @@ dag  = DAG(
         catchup=False
     )
 
+schema_file_path = "dags/abdelrahman-tamer/schemas/product_schema.json"
+
+with open(schema_file_path, 'r') as f:
+    product_schema = json.load(f)
+    
 
 start_task = EmptyOperator(task_id="start_task", dag=dag)
 
