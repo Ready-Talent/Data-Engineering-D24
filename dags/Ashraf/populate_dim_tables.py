@@ -27,6 +27,11 @@ for table in tables:
         dag=dag,
         use_legacy_sql=False
     )
-    start_task >> create_query >> insert_query >> end_task
+    if table == 'fact_sales':
+        end_task >> create_query >> insert_query
+    else:
+        start_task >> create_query >> insert_query >> end_task
+
+
 
 
