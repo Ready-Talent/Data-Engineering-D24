@@ -12,7 +12,7 @@ DROP TABLE IF EXISTS Data_Platform_Galal.junk_dim;
 
 -- dim_date
 CREATE TABLE IF NOT EXISTS Data_Platform_Galal.dim_date (
-    date_key INT64 PRIMARY KEY,
+    date_key INT64 ,
     date DATE,
     day_of_week INT64,
     day_name STRING,
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS Data_Platform_Galal.dim_date (
 
 -- dim_time
 CREATE TABLE IF NOT EXISTS Data_Platform_Galal.dim_time (
-    time_key INT64 PRIMARY KEY,
+    time_key INT64 ,
     full_time TIME,
     hour INT64,
     minute INT64
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS Data_Platform_Galal.dim_time (
 
 -- dim_customer
 CREATE TABLE IF NOT EXISTS Data_Platform_Galal.dim_customer (
-    customer_key INT64 PRIMARY KEY,
+    customer_key INT64 ,
     customer_id INT64,
     customer_name STRING,
     email STRING,
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS Data_Platform_Galal.dim_customer (
 
 -- dim_product
 CREATE TABLE IF NOT EXISTS Data_Platform_Galal.dim_product (
-    product_key INT64 PRIMARY KEY,
+    product_key INT64 ,
     product_id INT64,
     brand_id INT64,
     category_id INT64,
@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS Data_Platform_Galal.dim_product (
 
 -- junk_dim
 CREATE TABLE IF NOT EXISTS Data_Platform_Galal.junk_dim (
-    junk_key INT64 PRIMARY KEY,
+    junk_key INT64 ,
     payment_type_code INT64,
     payment_type_name STRING,
     channel_code INT64,
@@ -102,10 +102,5 @@ CREATE TABLE IF NOT EXISTS Data_Platform_Galal.Fact_sales (
     created_by STRING DEFAULT 'user',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
     modified_by STRING,
-    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
-    FOREIGN KEY (customer_key) REFERENCES Data_Platform_Galal.dim_customer(customer_key),
-    FOREIGN KEY (product_key) REFERENCES Data_Platform_Galal.dim_product(product_key),
-    FOREIGN KEY (date_key) REFERENCES Data_Platform_Galal.dim_date(date_key),
-    FOREIGN KEY (time_key) REFERENCES Data_Platform_Galal.dim_time(time_key),
-    FOREIGN KEY (junk_key) REFERENCES Data_Platform_Galal.junk_dim(junk_key)
+    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );
