@@ -5,7 +5,7 @@ from airflow.operators.empty import EmptyOperator
 from airflow.providers.google.cloud.operators.bigquery import BigQueryExecuteQueryOperator
 
 create_Dimension_Dag = DAG(
-    dag_id="bigqueryTaskMaged",
+    dag_id="bigquery_task_maged",
     description="second trial",
     schedule_interval= None,
     start_date=datetime(2024, 4, 20),
@@ -19,7 +19,7 @@ last_task = EmptyOperator(task_id="end", dag=create_Dimension_Dag)
 
 
 bigquery_task = BigQueryExecuteQueryOperator(
-    task_id='create_Dimension_customer2024',
+    task_id='create_dimension_customer2024',
     sql='Maged/queries.sql',
     use_legacy_sql=False,
     destination_dataset_table='SRC_08.dim_customer',
