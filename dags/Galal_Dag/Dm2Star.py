@@ -16,7 +16,7 @@ from airflow.providers.google.cloud.operators.bigquery import BigQueryExecuteQue
 #hhhhhhhhhh
 
 
-
+#wadad
 
 dag = DAG(
     dag_id="Create_Dim_Galal",
