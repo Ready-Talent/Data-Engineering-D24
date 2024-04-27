@@ -33,6 +33,6 @@ load_task = GoogleCloudStorageToBigQueryOperator(
         dag=dag,
     )
 
-end_task = EmptyOperator(task_id="end_task", dag=dag)
+end_task = EmptyOperator(task_id="end_task", dag=dag )
 
 start_task >> load_task >> end_task
