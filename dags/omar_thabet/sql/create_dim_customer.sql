@@ -6,7 +6,7 @@ CREATE TABLE  data_platform.dim_customer (
     phone INT64,
     address_id INT64,
     address_street STRING,
-    address_zipcode STRING,
+    address_zipcode INT64,
     city_id INT64,
     city_name STRING,
     state_id INT64,
