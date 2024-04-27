@@ -20,7 +20,7 @@ start_task = EmptyOperator(task_id="start_task", dag=dag)
 get_data = PostgresToGCSOperator(
     task_id="get_data_from_postgres_to_GCS",
     postgres_conn_id="Postgres_Rowym_conn",
-    sql="SELECT * from src01.order",
+    sql='sqlPostgrestoGCS.sql',
     bucket="postgres-to-gcs",
     export_format = "CSV",
     filename="Rowym/order.csv",
