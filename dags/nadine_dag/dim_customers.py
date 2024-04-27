@@ -12,12 +12,12 @@ dag = DAG(
 )
 
 create_table = BigQueryExecuteQueryOperator(task_id = "create_dim_customer_table",
-                                            sql = 'sql_queries\create_customers.sql',
+                                            sql = 'sql_queries/create_customers.sql',
                                             use_legacy_sql = False,
                                             dag = dag)
 
 insert_table = BigQueryExecuteQueryOperator(task_id = "insert_into_dim_customer_table",
-                                            sql = 'sql_queries\insert_customers.sql',
+                                            sql = 'sql_queries/insert_customers.sql',
                                             use_legacy_sql = False,
                                             dag = dag)
 
