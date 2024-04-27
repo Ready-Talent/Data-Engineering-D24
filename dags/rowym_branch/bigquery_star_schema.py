@@ -13,7 +13,7 @@ dag = DAG(
     catchup=False,
 )
 
-move_data = BigQueryExecuteQueryOperator(
+create_data = BigQueryExecuteQueryOperator(
     task_id='create_dim_customer_table',
     sql = 'SQL/sqlQueries_create.sql',
     destination_dataset_table='Data_Platform_Rowym.dim_customer',
@@ -21,7 +21,7 @@ move_data = BigQueryExecuteQueryOperator(
     dag=dag
 )
 
-move_data = BigQueryExecuteQueryOperator(
+insert_data = BigQueryExecuteQueryOperator(
     task_id='insert_dim_customer_data',
     sql = 'SQL/sqlQueries_insert.sql',
     destination_dataset_table='Data_Platform_Rowym.dim_customer',
