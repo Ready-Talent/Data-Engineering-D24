@@ -1,4 +1,4 @@
-INSERT INTO data_platform_01.fact_sales
+INSERT INTO data_platform_01.Fact_sales
 (customer_key, product_key, date_key, time_key, junk_key, quantity, price, amount, paid_amount)
 
 select
