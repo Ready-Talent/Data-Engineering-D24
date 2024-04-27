@@ -1,8 +1,25 @@
-select c.customer_id , c."name" customer_name, c.email , c.phone
-, a.address_id , a.street address_street, a.zipcode address_zipcode
-, -1 city_id, a.city city_name
-, -1 state_id, a.state state_name
-, -1 country_id, 'US' country_name
-from src01.customer c
-left join src01.address a
-on a.customer_id =c.customer_id;
+CREATE TABLE IF NOT EXISTS data_platform_abdelrahman_tamer.customer (
+	customer_id INT64,
+	customer_name STRING,
+	address_id INT64,
+	address_street STRING,
+	zipcode INT64,
+	created_by STRING,
+	created_at TIMESTAMP,
+	modified_by STRING,
+	modified_at TIMESTAMP
+);
+
+INSERT INTO data_platform_abdelrahman_tamer.customer (customer_id, customer_name, address_id, address_street, zipcode, created_by, created_at, modified_by, modified_at)
+select 
+	customer.customer_id as customer_id,
+	customer.name as customer_name,
+	address.address_id as address_id,
+	address.street as address_street,
+	address.zipcode as address_zipcode,
+	customer.created_by as created_by,
+	customer.created_at as created_at,
+	customer.modified_by as modified_by,
+	customer.modified_at as modified_at 
+from SRC_06.customer  
+left join SRC_06.address on address.customer_id = customer.customer_id ;
