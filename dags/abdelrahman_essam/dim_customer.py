@@ -29,7 +29,7 @@ create_dim_customer_table = BigQueryCreateEmptyTableOperator(
     dataset_id="data_platform_essam",
     table_id="dim_customer_11",
     schema_fields=[
-        {"name": "customer_key", "type": "INTEGER", "mode": "REQUIRED"},
+        {"name": "customer_key", "type": "INTEGER", "mode": "NULLABLE"},
         {"name": "customer_id", "type": "INTEGER", "mode": "NULLABLE"},
         {"name": "customer_name", "type": "STRING", "mode": "NULLABLE"},
         {"name": "email", "type": "STRING", "mode": "NULLABLE"},
