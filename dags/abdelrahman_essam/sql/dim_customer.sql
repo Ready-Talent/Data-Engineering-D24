@@ -1,6 +1,6 @@
 
 INSERT INTO data_platform_essam.dim_customer_11
-(customer_id, customer_name, email, phone , address_id, address_street, address_zipcode, city_id, city_name
+(customer_key,customer_id, customer_name, email, phone , address_id, address_street, address_zipcode, city_id, city_name
 , state_id, state_name, country_id, country_name)
 
 select c.customer_id , c.name customer_name, c.email , c.phone
