@@ -5,6 +5,6 @@ select p.product_id , -1 brand_id, -1 category_id
 ,REGEXP_EXTRACT(name, r'\s(.*)') AS product_name
 ,p.price
 ,p.description
-, split_part(p.name, ' ', 1) AS brand_name
+,  SPLIT(SPLIT(p.name, ' ')[OFFSET(0)], ' ')[OFFSET(0)] AS brand_name
 , 'Cell Phones' category_name
 from landing.product p;
