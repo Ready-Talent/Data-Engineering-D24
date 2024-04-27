@@ -61,7 +61,7 @@ CREATE TABLE IF NOT EXISTS Data_Platform_Lojain.dim_time (
     hour INT64,
     minute INT64
 );
-CREATE TABLE IF NOT EXISTS PL.junk_dim (
+CREATE TABLE IF NOT EXISTS Data_Platform_Lojain.junk_dim (
     junk_key INT64,
     payment_type_code INT64,
     payment_type_name STRING,
