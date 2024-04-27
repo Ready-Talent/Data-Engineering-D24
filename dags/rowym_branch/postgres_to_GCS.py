@@ -26,7 +26,7 @@ for table in tables:
     postgres_to_gcs = PostgresToGCSOperator(
         task_id=f"get_data_from_postgres_to_GCS_{table}",
         postgres_conn_id="Postgres_Rowym_conn",
-        sql=f"SELECT * FROM SRC_01.{table}",
+        sql=f"SELECT * FROM src01.{table}",
         bucket="postgres-to-gcs",
         export_format = "CSV",
         filename=f"Rowym/{table}.csv",
@@ -49,4 +49,3 @@ for table in tables:
     dag = dag
     ) 
     start_task >> postgres_to_gcs >> gcs_to_bigquery >> end_task
-
