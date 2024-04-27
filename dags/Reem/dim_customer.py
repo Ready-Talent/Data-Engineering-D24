@@ -28,7 +28,7 @@ insert_dim_customer = BigQueryInsertJobOperator(
     configuration={
         "query": "/sql/populate_dim_customer.sql",
         "useLegacySql": False,
-        "timeoutMs": 3600000,
+        "timeoutMs": 1000000,
 
     },
 )
