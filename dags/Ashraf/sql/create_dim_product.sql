@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS data_platform_01.dim_product (
     brand_id INTEGER,
     category_id INTEGER,
     name STRING,
-    price FLOAT,
+    price FLOAT64,
     description STRING,
     brand_name STRING,
     category_name STRING,
