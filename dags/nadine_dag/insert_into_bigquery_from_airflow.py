@@ -13,7 +13,7 @@ dag = DAG(
 
 start_task = EmptyOperator(task_id="start_task", dag=dag)
 
-insert_bigquery = mobile_push_stat = BigQueryExecuteQueryOperator(
+insert_bigquery = mobile_push_stat = BigQueryExecuteQueryOperator( 
         task_id="into_bigquery_from_airflow",
         sql="sql_queries\sql_customers.sql",
         destination_dataset_table=f"data_platform_Nadine",
