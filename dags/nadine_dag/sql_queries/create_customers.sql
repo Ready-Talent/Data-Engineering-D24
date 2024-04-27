@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS data_platform_Nadine.dim_customer (
+CREATE TABLE data_platform_Nadine.dim_customer (
     customer_key serial PRIMARY KEY,
     customer_id INTEGER,
     customer_name STRING,
