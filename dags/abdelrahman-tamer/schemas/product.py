@@ -1,4 +1,4 @@
-[
+product_schema = [
     {"name": "product_id", "type": "INT64", "mode": "NULLABLE"},
     {"name": "branc_id", "type": "INT64", "mode": "NULLABLE"},
     {"name": "category_id", "type": "INT64", "mode": "NULLABLE"},
