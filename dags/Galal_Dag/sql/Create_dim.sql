@@ -1,105 +1,111 @@
-CREATE SCHEMA if not exists Data_Platform_Galal;
+CREATE SCHEMA IF NOT EXISTS Data_Platform_Galal;
 
-drop table if exists Data_Platform_Galal.Fact_sales;
-drop table if exists Data_Platform_Galal.dim_date;
-drop table if exists Data_Platform_Galal.dim_time;
-drop table if exists Data_Platform_Galal.dim_customer;
-drop table if exists Data_Platform_Galal.dim_product;
-drop table if exists Data_Platform_Galal.junk_dim;
+-- Drop existing tables if they exist
+DROP TABLE IF EXISTS Data_Platform_Galal.Fact_sales;
+DROP TABLE IF EXISTS Data_Platform_Galal.dim_date;
+DROP TABLE IF EXISTS Data_Platform_Galal.dim_time;
+DROP TABLE IF EXISTS Data_Platform_Galal.dim_customer;
+DROP TABLE IF EXISTS Data_Platform_Galal.dim_product;
+DROP TABLE IF EXISTS Data_Platform_Galal.junk_dim;
 
--- dimension tables:
+-- Create dimension tables
 
--- create dim_date
-create table if not exists Data_Platform_Galal.dim_date (
-    date_key serial primary key,
-    date date,
-    day_of_week int,
-    day_name varchar(10),
-    day_of_month int,
-    day_of_year int,
-    week_of_year int,
-    month_name varchar(10),
-    month_of_year int,
-    quarter int,
-    year int,
-    holiday_flag boolean,
-    weekend_flag boolean,
-    record_updated_date timestamp default now()
+-- dim_date
+CREATE TABLE IF NOT EXISTS Data_Platform_Galal.dim_date (
+    date_key INT64 PRIMARY KEY,
+    date DATE,
+    day_of_week INT64,
+    day_name STRING,
+    day_of_month INT64,
+    day_of_year INT64,
+    week_of_year INT64,
+    month_name STRING,
+    month_of_year INT64,
+    quarter INT64,
+    year INT64,
+    holiday_flag BOOL,
+    weekend_flag BOOL,
+    record_updated_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );
 
+-- dim_time
 CREATE TABLE IF NOT EXISTS Data_Platform_Galal.dim_time (
-    time_key serial PRIMARY KEY,
+    time_key INT64 PRIMARY KEY,
     full_time TIME,
-    hour INTEGER,
-    minute INTEGER
+    hour INT64,
+    minute INT64
 );
 
+-- dim_customer
 CREATE TABLE IF NOT EXISTS Data_Platform_Galal.dim_customer (
-    customer_key serial PRIMARY KEY,
-    customer_id INTEGER,
-    customer_name VARCHAR(255),
-    email VARCHAR(255),
-    phone VARCHAR(20),
-    address_id INTEGER,
-    address_street VARCHAR(255),
-    address_zipcode VARCHAR(20),
-    city_id INTEGER,
-    city_name VARCHAR(255),
-    state_id INTEGER,
-    state_name VARCHAR(255),
-    country_id INTEGER,
-    country_name VARCHAR(255),
---     contact_id INTEGER,
---     contact_type_code VARCHAR(10),
---     contact_info VARCHAR(255),
-    created_by VARCHAR(100) DEFAULT 'user',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    modified_by VARCHAR(100),
-    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    customer_key INT64 PRIMARY KEY,
+    customer_id INT64,
+    customer_name STRING,
+    email STRING,
+    phone STRING,
+    address_id INT64,
+    address_street STRING,
+    address_zipcode STRING,
+    city_id INT64,
+    city_name STRING,
+    state_id INT64,
+    state_name STRING,
+    country_id INT64,
+    country_name STRING,
+    created_by STRING DEFAULT 'user',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+    modified_by STRING,
+    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );
 
+-- dim_product
 CREATE TABLE IF NOT EXISTS Data_Platform_Galal.dim_product (
-    product_key serial PRIMARY KEY,
-    product_id INTEGER,
-    brand_id INTEGER,
-    category_id INTEGER,
-    name VARCHAR(100),
-    price DECIMAL(10, 2),
-    description TEXT,
-    brand_name VARCHAR(100),
-    category_name VARCHAR(100),
-    created_by VARCHAR(100) DEFAULT 'user',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    modified_by VARCHAR(100),
-    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    product_key INT64 PRIMARY KEY,
+    product_id INT64,
+    brand_id INT64,
+    category_id INT64,
+    name STRING,
+    price NUMERIC(10, 2),
+    description STRING,
+    brand_name STRING,
+    category_name STRING,
+    created_by STRING DEFAULT 'user',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+    modified_by STRING,
+    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );
 
+-- junk_dim
 CREATE TABLE IF NOT EXISTS Data_Platform_Galal.junk_dim (
-    junk_key serial PRIMARY KEY,
-    payment_type_code INTEGER,
-    payment_type_name VARCHAR(100),
-    channel_code INTEGER,
-    channel_name VARCHAR(100),
-    created_by VARCHAR(100) DEFAULT 'user',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    modified_by VARCHAR(100),
-    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    junk_key INT64 PRIMARY KEY,
+    payment_type_code INT64,
+    payment_type_name STRING,
+    channel_code INT64,
+    channel_name STRING,
+    created_by STRING DEFAULT 'user',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+    modified_by STRING,
+    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );
 
+-- Fact_sales
 CREATE TABLE IF NOT EXISTS Data_Platform_Galal.Fact_sales (
-    customer_key INTEGER references Data_Platform_Galal.dim_customer(customer_key),
-    product_key INTEGER references Data_Platform_Galal.dim_product(product_key),
-    date_key INTEGER references Data_Platform_Galal.dim_date(date_key),
-    time_key INTEGER references Data_Platform_Galal.dim_time(time_key),
-    junk_key INTEGER references Data_Platform_Galal.junk_dim(junk_key),
-
-    quantity INTEGER,
-    price DECIMAL(10, 2),
-    amount DECIMAL(10, 2),
-    paid_amount DECIMAL(10, 2),
-
-    created_by VARCHAR(100) DEFAULT 'user',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    modified_by VARCHAR(100),
-    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    customer_key INT64,
+    product_key INT64,
+    date_key INT64,
+    time_key INT64,
+    junk_key INT64,
+    quantity INT64,
+    price NUMERIC(10, 2),
+    amount NUMERIC(10, 2),
+    paid_amount NUMERIC(10, 2),
+    created_by STRING DEFAULT 'user',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+    modified_by STRING,
+    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
+    FOREIGN KEY (customer_key) REFERENCES Data_Platform_Galal.dim_customer(customer_key),
+    FOREIGN KEY (product_key) REFERENCES Data_Platform_Galal.dim_product(product_key),
+    FOREIGN KEY (date_key) REFERENCES Data_Platform_Galal.dim_date(date_key),
+    FOREIGN KEY (time_key) REFERENCES Data_Platform_Galal.dim_time(time_key),
+    FOREIGN KEY (junk_key) REFERENCES Data_Platform_Galal.junk_dim(junk_key)
 );
