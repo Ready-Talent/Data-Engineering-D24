@@ -17,7 +17,7 @@ first_task = EmptyOperator(task_id="first_task", dag=dag)
 last_task = EmptyOperator(task_id="last_task", dag=dag)
 
 
-tables = ["customer", "date", "time","product"]
+tables = ["customer","product"]
 
 for table in tables:
     GCS_BUCKET = 'postgres-to-gcs'
