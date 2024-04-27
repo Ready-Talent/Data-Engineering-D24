@@ -22,15 +22,8 @@ dag = DAG(
 import os
 start_task = EmptyOperator(task_id="start_task", dag=dag)
 
-parent_path = str(Path(__file__).parent)
-path = os.path.join(parent_path, "product.json" )
-
-create_table = BigQueryCreateEmptyTableOperator(
-    task_id="create_product_table",
-    dataset_id='Data_Platform_Abduallah',
-    table_id="dim_product",
-    sch=os.open(path)
-)
+#parent_path = str(Path(__file__).parent)
+#path = os.path.join(parent_path, "product.json" )
 
 create_table = BigQueryCreateEmptyTableOperator(
     task_id="create_product_table",
