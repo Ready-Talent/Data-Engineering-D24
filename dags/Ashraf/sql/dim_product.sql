@@ -7,4 +7,4 @@ select p.product_id , -1 brand_id, -1 category_id
 ,p.description
 , split_part(p.name, ' ', 1) AS brand_name
 , 'Cell Phones' category_name
-from replica_01.product p;
+from landing.product p;

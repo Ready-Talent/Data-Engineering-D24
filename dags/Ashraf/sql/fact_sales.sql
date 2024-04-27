@@ -13,13 +13,13 @@ select
 ,coalesce(p.amount,0) paid_amount
 from src01.order_detail od
 
-join replica_01.order o
+join landing.order o
 on o.order_id = od.order_id
 
-left join replica_01.payment p
+left join landing.payment p
 on od.order_detail_id = p.order_detail_id
 
-left join replica_01.address a
+left join landing.address a
 on a.address_id = o.address_id
 
 left join data_platform_01.junk_dim jd
