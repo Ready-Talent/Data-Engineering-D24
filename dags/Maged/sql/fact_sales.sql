@@ -1,4 +1,4 @@
-INSERT INTO data_platform.fact_sales
+INSERT INTO Data_Platform_Maged.fact_sales
 (customer_key, product_key, date_key, time_key, junk_key, quantity, price, amount, paid_amount)
 
 select
