@@ -15,7 +15,7 @@ def move_data():
 
 
 dag = DAG(
-    dag_id= "adding_dim_customer_abdelrahman_essam",
+    dag_id="adding_dim_customer_abdelrahman_essam",
     description="Simple tutorial DAG",
     schedule_interval=None,
     start_date=datetime(2021, 1, 1),
@@ -29,7 +29,7 @@ create_dim_customer_table = BigQueryCreateEmptyTableOperator(
     dataset_id="data_platform_essam",
     table_id="dim_customer_11",
     schema_fields=[
-        {"name": "customer_key", "type": "INTEGER", "mode": "REQUIRED"},
+        {"name": "customer_key", "type": "INTEGER", "mode": "NULLABLE"},
         {"name": "customer_id", "type": "INTEGER", "mode": "NULLABLE"},
         {"name": "customer_name", "type": "STRING", "mode": "NULLABLE"},
         {"name": "email", "type": "STRING", "mode": "NULLABLE"},
@@ -54,7 +54,10 @@ create_dim_customer_table = BigQueryCreateEmptyTableOperator(
 insert_dim_customer = BigQueryInsertJobOperator(
     task_id="creating_dim_customer",
     configuration={
-        "query": "/sql/dim_customer.sql",
+        "query": {
+            'query': "/sql/dim_customer.sql",
+            'useLegacySql': False
+        },
         "useLegacySql": False,
         "timeoutMs": 3600000,
 

@@ -16,33 +16,36 @@ dag = DAG(
 )
 
 start_task = EmptyOperator(task_id="start_task", dag=dag)
-
-get_data = PostgresToGCSOperator(
-    task_id="get_data_from_postgres_to_GCS",
-    postgres_conn_id="Postgres_Rowym_conn",
-    sql="SELECT * from src01.order",
-    bucket="postgres-to-gcs",
-    export_format = "CSV",
-    filename="Rowym/order.csv",
-    gzip=False,
-    dag = dag
-)
-
-load_data_to_bigquery = GCSToBigQueryOperator(
-task_id="from_gcs_to_bigquery",
-bucket="postgres-to-gcs",
-source_objects=["Rowym/order.csv"],
-destination_project_dataset_table= "Rowym_from_GCS.orders",
-field_delimiter=',',
-max_bad_records = 1000000,
-skip_leading_rows = 1,
-ignore_unknown_values = True,
-source_format = "CSV",
-autodetect = True,
-write_disposition = "WRITE_TRUNCATE",
-dag = dag
-) 
-
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
-start_task >> get_data >> load_data_to_bigquery >> end_task
+
+tables = ['customer','product','payment','order','order_detail','channel','payment_type','address']
+# postgres_to_gcs = []
+# gcs_to_bigquery = []
+for table in tables:
+    postgres_to_gcs = PostgresToGCSOperator(
+        task_id=f"get_data_from_postgres_to_GCS_{table}",
+        postgres_conn_id="Postgres_Rowym_conn",
+        sql=f"SELECT * FROM src01.{table}",
+        bucket="postgres-to-gcs",
+        export_format = "CSV",
+        filename=f"Rowym/{table}.csv",
+        gzip=False,
+        dag = dag
+    )
+
+    gcs_to_bigquery = GCSToBigQueryOperator(
+    task_id=f"from_gcs_to_bigquery_{table}",
+    bucket="postgres-to-gcs",
+    source_objects=[f"Rowym/{table}.csv"],
+    destination_project_dataset_table= f"Rowym_from_GCS.{table}",
+    field_delimiter=',',
+    max_bad_records = 1000000,
+    skip_leading_rows = 1,
+    ignore_unknown_values = True,
+    source_format = "CSV",
+    autodetect = True,
+    write_disposition = "WRITE_TRUNCATE",
+    dag = dag
+    ) 
+    start_task >> postgres_to_gcs >> gcs_to_bigquery >> end_task

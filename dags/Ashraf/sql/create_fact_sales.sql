@@ -6,9 +6,9 @@ CREATE TABLE IF NOT EXISTS data_platform_01.Fact_sales (
     junk_key INT64,
 
     quantity INT64,
-    price NUMERIC(10, 2),
-    amount NUMERIC(10, 2),
-    paid_amount NUMERIC(10, 2),
+    price Float64,
+    amount Float64,
+    paid_amount Float64,
 
 
 );

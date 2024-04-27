@@ -1,10 +1,10 @@
-CREATE TABLE IF NOT EXISTS data_platform_01.dim_product (
+CREATE TABLE IF NOT EXISTS data_platform.dim_product (
     product_key INTEGER,
     product_id INTEGER,
     brand_id INTEGER,
     category_id INTEGER,
     name STRING,
-    price FLOAT64,
+    price INTEGER,
     description STRING,
     brand_name STRING,
     category_name STRING,
