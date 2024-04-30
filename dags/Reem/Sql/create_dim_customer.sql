@@ -1,4 +1,4 @@
-CREATE TABLE if not exists  data_platform.dim_customer (
+CREATE TABLE if not exists Data_Platform_Reema.dim_customer (
     customer_key INT64,
     customer_id INT64,
     customer_name STRING,
