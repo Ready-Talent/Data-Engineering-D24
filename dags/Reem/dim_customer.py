@@ -20,14 +20,14 @@ end = EmptyOperator(task_id="end", dag=dag)
 
 create_table_ = BigQueryExecuteQueryOperator(
     task_id="creating_dim_customer",
-    sql = "Sql/create_dim_customer.sql",
+    sql = "/Sql/create_dim_customer.sql",
     use_legacy_sql=False,
     dag=dag,
 )
 
 populate_table = BigQueryExecuteQueryOperator(
     task_id="insert_in_dim_customer",
-    sql = "Sql/populate_dim_customer.sql",
+    sql = "/Sql/populate_dim_customer.sql",
     use_legacy_sql=False,
     dag=dag
 )
