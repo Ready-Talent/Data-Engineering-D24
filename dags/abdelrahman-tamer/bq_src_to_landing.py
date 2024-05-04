@@ -27,7 +27,6 @@ product_schema = [
         {"name": "brand_id", "type": "INT64", "mode": "NULLABLE"},
         {"name": "category_id", "type": "INT64", "mode": "NULLABLE"},
         {"name": "name", "type": "STRING", "mode": "NULLABLE"},
-        {"name": "product_id", "type": "INT64", "mode": "NULLABLE"},
         {"name": "price", "type": "INT64", "mode": "NULLABLE"},
         {"name": "description", "type": "STRING", "mode": "NULLABLE"},
         {"name": "brand_name", "type": "STRING", "mode": "NULLABLE"},
