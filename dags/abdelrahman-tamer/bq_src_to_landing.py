@@ -3,6 +3,7 @@ from datetime import datetime
 from airflow.operators.empty import EmptyOperator
 from airflow.providers.google.cloud.operators.bigquery import BigQueryExecuteQueryOperator, BigQueryCreateEmptyTableOperator, BigQueryInsertJobOperator
 import json
+import os
 
 DATA_PLATFORM = "data_platform_abdelrahman_tamer"
 
@@ -13,7 +14,9 @@ dag  = DAG(
         catchup=False
     )
 
-schema_file_path = "dags/abdelrahman-tamer/schemas/product.json"
+current_dir = os.path.dirname(__file__)
+
+schema_file_path = os.path.join(current_dir, "abdelrahman-tamer/schemas/product.json")
 
 with open(schema_file_path, 'r') as f:
     product_schema = json.load(f)
