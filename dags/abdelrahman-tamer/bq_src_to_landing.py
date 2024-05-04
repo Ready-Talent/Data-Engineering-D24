@@ -17,9 +17,31 @@ dag  = DAG(
 # current_dir = os.path.dirname(__file__)
 
 # schema_file_path = os.path.join(current_dir, "abdelrahman-tamer/schemas/product.json")
-schema_file_path = "product.json"
-with open(schema_file_path, 'r') as f:
-    product_schema = json.load(f)
+# schema_file_path = "product.json"
+# with open(schema_file_path, 'r') as f:
+#     product_schema = json.load(f)
+
+
+product_schema = [
+        {"name": "product_id", "type": "INT64", "mode": "NULLABLE"},
+        {"name": "brand_id", "type": "INT64", "mode": "NULLABLE"},
+        {"name": "category_id", "type": "INT64", "mode": "NULLABLE"},
+        {"name": "name", "type": "STRING", "mode": "NULLABLE"},
+        {"name": "product_id", "type": "INT64", "mode": "NULLABLE"},
+        {"name": "price", "type": "INT64", "mode": "NULLABLE"},
+        {"name": "description", "type": "STRING", "mode": "NULLABLE"},
+        {"name": "brand_name", "type": "STRING", "mode": "NULLABLE"},
+        {"name": "category_name", "type": "STRING", "mode": "NULLABLE"},
+        {"name": "created_by", "type": "STRING", "mode": "NULLABLE"},
+        {"name": "created_at", "type": "TIMESTAMP", "mode": "NULLABLE"},
+        {"name": "modified_by", "type": "STRING", "mode": "NULLABLE"},
+        {"name": "modified_at", "type": "TIMESTAMP", "mode": "NULLABLE"}
+]
+
+
+       
+
+
     
 
 start_task = EmptyOperator(task_id="start_task", dag=dag)
