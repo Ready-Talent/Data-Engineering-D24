@@ -14,10 +14,10 @@ dag  = DAG(
         catchup=False
     )
 
-current_dir = os.path.dirname(__file__)
+# current_dir = os.path.dirname(__file__)
 
-schema_file_path = os.path.join(current_dir, "abdelrahman-tamer/schemas/product.json")
-
+# schema_file_path = os.path.join(current_dir, "abdelrahman-tamer/schemas/product.json")
+schema_file_path = "product.json"
 with open(schema_file_path, 'r') as f:
     product_schema = json.load(f)
     
