@@ -8,9 +8,8 @@ DROP TABLE IF EXISTS Data_Platform_Galal.dim_product;
 DROP TABLE IF EXISTS Data_Platform_Galal.junk_dim;
 
 -- Create dimension tables
-
 -- dim_date
-CREATE TABLE if not exists  data_platform_01.dim_customer (
+CREATE TABLE if not exists  Data_Platform_Galal.dim_customer (
     customer_key INT64,
     customer_id INT64,
     customer_name STRING,
@@ -32,7 +31,7 @@ CREATE TABLE if not exists  data_platform_01.dim_customer (
 );
 
 -- dim_time
-create table if not exists data_platform_01.dim_date (
+create table if not exists Data_Platform_Galal.dim_date (
     date_key INT64,
     date date,
     day_of_week INT64,
@@ -47,7 +46,7 @@ create table if not exists data_platform_01.dim_date (
 );
 
 -- dim_customer
-CREATE TABLE IF NOT EXISTS data_platform_01.dim_product (
+CREATE TABLE IF NOT EXISTS Data_Platform_Galal.dim_product (
     product_key INT64,
     product_id INT64,
     brand_id INT64,
@@ -64,7 +63,7 @@ CREATE TABLE IF NOT EXISTS data_platform_01.dim_product (
 );
 
 -- dim_product
-CREATE TABLE IF NOT EXISTS data_platform_01.Fact_sales (
+CREATE TABLE IF NOT EXISTS Data_Platform_Galal.Fact_sales (
     customer_key INT64,
     product_key INT64,
     date_key INT64,
@@ -79,7 +78,7 @@ CREATE TABLE IF NOT EXISTS data_platform_01.Fact_sales (
 
 );
 
-CREATE TABLE IF NOT EXISTS data_platform_01.junk_dim (
+CREATE TABLE IF NOT EXISTS Data_Platform_Galal.junk_dim (
     junk_key INT64,
     payment_type_code INT64,
     payment_type_name STRING,
