@@ -26,41 +26,41 @@ CREATE TABLE if not exists  data_platform_01.dim_customer (
     country_id INT64,
     country_name STRING,
     created_by STRING ,
-    created_at TIMESTAMP ,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
     modified_by STRING,
-    modified_at TIMESTAMP
+    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );
 
 -- dim_time
 create table if not exists data_platform_01.dim_date (
-    date_key INTEGER,
+    date_key INT64,
     date date,
-    day_of_week INTEGER,
-    day_name INTEGER,
-    day_of_month INTEGER,
-    day_of_year INTEGER,
-    week_of_year INTEGER,
+    day_of_week INT64,
+    day_name INT64,
+    day_of_month INT64,
+    day_of_year INT64,
+    week_of_year INT64,
     month_name STRING,
-    month_of_year INTEGER,
-    quarter INTEGER,
-    year INTEGER,
+    month_of_year INT64,
+    quarter INT64,
+    year INT64,
 );
 
 -- dim_customer
 CREATE TABLE IF NOT EXISTS data_platform_01.dim_product (
-    product_key INTEGER,
-    product_id INTEGER,
-    brand_id INTEGER,
-    category_id INTEGER,
+    product_key INT64,
+    product_id INT64,
+    brand_id INT64,
+    category_id INT64,
     name STRING,
-    price INTEGER,
+    price INT64,
     description STRING,
     brand_name STRING,
     category_name STRING,
     created_by STRING DEFAULT 'user',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP(),
     modified_by STRING,
-    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );
 
 -- dim_product
