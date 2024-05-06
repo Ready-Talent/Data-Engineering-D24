@@ -89,14 +89,14 @@ for table in dim_tables:
     )
 
     populate_table = BigQueryExecuteQueryOperator(
-        task_id="populate_table",
+        task_id=f"populate_table_{table}",
         sql=f"sql/populate_{table}.sql",
         use_legacy_sql=False,
         dag=dag
     )
     
     start_task >> create_table >> populate_table >> end_task
-
+    
 
 
 
