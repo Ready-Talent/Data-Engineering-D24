@@ -26,7 +26,7 @@ table_list = ['dim_product','dim_date','dim_customer','junk_dim','fact_sales']
 table_list_sql = ['dim_product.sql','dim_date.sql','dim_customer.sql','junk_dim.sql','fact_sales.sql']
 
 tasks = [BigQueryExecuteQueryOperator(
-        task_id=f'create and insert {table_list[i]}',
+        task_id=f'create_and_insert_{table_list[i]}',
         sql=table_list_sql[i],
         use_legacy_sql=False,
         dag=dag
