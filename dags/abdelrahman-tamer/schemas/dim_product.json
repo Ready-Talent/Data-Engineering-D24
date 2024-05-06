@@ -1,4 +1,5 @@
 {
+    "table_name": "dim_product",
     "fields": [
         {"name": "product_id", "type": "INT64", "mode": "NULLABLE"},
         {"name": "brand_id", "type": "INT64", "mode": "NULLABLE"},
