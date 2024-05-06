@@ -1,4 +1,4 @@
-INSERT INTO data_platform_abdelrahman_tamer.junk_dim (payment_type_code, payment_type_name, channel_code, channel_name)
+INSERT INTO data_platform_abdelrahman_tamer.dim_junk (payment_type_code, payment_type_name, channel_code, channel_name)
 with payment_types as
 (
 select pt.payment_type_id payment_type_code, pt.name payment_type_name from SRC_06.payment_type pt
