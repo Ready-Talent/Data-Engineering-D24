@@ -13,4 +13,9 @@ create table if not exists `ready-data-engineering-p24.Data_Platform_Abduallah.d
     holiday_flag STRING,
     weekend_flag STRING,
     record_updated_date timestamp default CURRENT_TIMESTAMP()
-)
+);
+ INSERT INTO `ready-data-engineering-p24.Data_Platform_Abduallah.dim_date` (date_key,date,day_of_week,day_name,day_of_month,day_of_year,week_of_year,month_name,month_of_year,quarter,year,holiday_flag,weekend_flag)
+             SELECT 
+            date_key,date,day_of_week,day_name,day_of_month,day_of_year,week_of_year,month_name,month_of_year,quarter,year,holiday_flag,weekend_flag
+            FROM
+                `ready-data-engineering-p24.data_platform.dim_date`
