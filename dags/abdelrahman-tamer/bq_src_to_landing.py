@@ -75,7 +75,7 @@ end_task = EmptyOperator(task_id="end_task", dag=dag)
 
 for table in dim_tables:
     
-    schema_file_path = f"schemas/{table}.json"
+    schema_file_path = f"/home/airflow/gcs/dags/abdelrahman-tamer/schemas/{table}.json"
     with open(schema_file_path, 'r') as f:
         schema_data = json.load(f)
         
