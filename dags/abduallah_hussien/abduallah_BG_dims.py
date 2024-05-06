@@ -21,10 +21,10 @@ dag = DAG(
 )
 table_list = ['dim_product','dim_date']
 table_list_sql = ['dim_product.sql','dim_date.sql']
+
 start_task = EmptyOperator(task_id="start_task", dag=dag)
 
-#parent_path = str(Path(__file__).parent)
-#path = os.path.join(parent_path, "product.json" )
+
 for i in range(len(table_list)):
     create_table = BigQueryExecuteQueryOperator(
         task_id=table_list[i],
@@ -35,4 +35,8 @@ for i in range(len(table_list)):
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
-start_task >> create_table >> end_task
+
+start_task >> create_table[0]
+for i in range(1, len(create_table)):
+    create_table[i-1] >> create_table[i]
+create_table[-1]>> end_task
