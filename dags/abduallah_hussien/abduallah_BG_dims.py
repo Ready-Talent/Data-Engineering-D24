@@ -19,18 +19,18 @@ dag = DAG(
     start_date=datetime(2021, 1, 1),
     catchup=False,
 )
-import os
+table_list = ['dim_product','dim_date']
 start_task = EmptyOperator(task_id="start_task", dag=dag)
 
 #parent_path = str(Path(__file__).parent)
 #path = os.path.join(parent_path, "product.json" )
-
-create_table = BigQueryExecuteQueryOperator(
-    task_id="create_product_table",
-    sql='dim_product.sql',
-    use_legacy_sql=False,
-    dag=dag
-)
+for name in table_list:
+    create_table = BigQueryExecuteQueryOperator(
+        task_id="create_{name}_table",
+        sql='{name}.sql',
+        use_legacy_sql=False,
+        dag=dag
+    )
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
