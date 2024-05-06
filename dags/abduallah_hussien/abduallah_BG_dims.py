@@ -25,18 +25,18 @@ start_task = EmptyOperator(task_id="start_task", dag=dag)
 table_list = ['dim_product','dim_date','dim_customer']
 table_list_sql = ['dim_product.sql','dim_date.sql','dim_customer.sql']
 
-
-
-
-for i in range(len(table_list)):
-    create_table = BigQueryExecuteQueryOperator(
+tasks = [BigQueryExecuteQueryOperator(
         task_id=table_list[i],
         sql=table_list_sql[i],
         use_legacy_sql=False,
         dag=dag
-    )
+    ) for i in range(len(table_list))]
+
 
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
 
-start_task >> create_table >> end_task
+start_task >> tasks[0]
+for i in range(1, len(tasks)):
+    tasks[i] << tasks[i-1]
+tasks[-1] >> end_task
