@@ -39,7 +39,5 @@ for i in range(len(table_list)):
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
 
-start_task >> create_table[1]
 for i in range(1, len(create_table)):
     create_table[i-1] >> create_table[i]
-create_table[-1]>> end_task
