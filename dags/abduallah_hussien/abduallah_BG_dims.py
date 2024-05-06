@@ -33,9 +33,9 @@ with TaskGroup('dynamic_tasks_group') as dynamic_group:
             use_legacy_sql=False,
             dag=dag
         ) for i in range(len(table_list))]
-
-
+    
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
 
-start_task >> dynamic_group >> end_task
+start_task >> dynamic_group
+dynamic_group>> end_task
