@@ -1,4 +1,4 @@
-INSERT INTO data_platform_abdelrahman_tamer.customer (customer_id, customer_name, address_id, address_street, zipcode, created_by, created_at, modified_by, modified_at)
+INSERT INTO data_platform_abdelrahman_tamer.dim_customer (customer_id, customer_name, address_id, address_street, zipcode, created_by, created_at, modified_by, modified_at)
 select 
 	customer.customer_id as customer_id,
 	customer.name as customer_name,
