@@ -5,10 +5,6 @@
         {"name": "payment_type_code", "type": "INT64", "mode": "NULLABLE"},
         {"name": "payment_type_name", "type": "STRING", "mode": "NULLABLE"},
         {"name": "channel_code", "type": "INT64", "mode": "NULLABLE"},
-        {"name": "channel_name", "type": "STRING", "mode": "NULLABLE"},
-        {"name": "created_by", "type": "STRING", "mode": "NULLABLE"},
-        {"name": "created_at", "type": "TIMESTAMP", "mode": "NULLABLE"},
-        {"name": "modified_by", "type": "STRING", "mode": "NULLABLE"},
-        {"name": "modified_at", "type": "TIMESTAMP", "mode": "NULLABLE"}
+        {"name": "channel_name", "type": "STRING", "mode": "NULLABLE"}
     ]
 }
