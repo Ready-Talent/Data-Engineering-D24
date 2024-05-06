@@ -1,9 +1,9 @@
 CREATE TABLE IF NOT EXISTS `ready-data-engineering-p24.Data_Platform_Abduallah.Fact_sales` (
-    customer_key INT64 references `ready-data-engineering-p24.Data_Platform_Abduallah.dim_customer`(customer_key),
-    product_key INT64 references `ready-data-engineering-p24.Data_Platform_Abduallah.dim_product`(product_key),
-    date_key INT64 references `ready-data-engineering-p24.Data_Platform_Abduallah.dim_date`(date_key),
+    customer_key INT64,
+    product_key INT64,
+    date_key INT64,
     --time_key INT64 references `ready-data-engineering-p24.Data_Platform_Abduallah.dim_time`(time_key),
-    junk_key INT64 references `ready-data-engineering-p24.Data_Platform_Abduallah.junk_dim`(junk_key),
+    junk_key INT64,
     quantity INT64,
     price FLOAT64,
     amount FLOAT64,
