@@ -22,8 +22,8 @@ dag = DAG(
 
 start_task = EmptyOperator(task_id="start_task", dag=dag)
 
-table_list = ['dim_product','dim_date','dim_customer']
-table_list_sql = ['dim_product.sql','dim_date.sql','dim_customer.sql']
+table_list = ['dim_product','dim_date','dim_customer','junk_dim']
+table_list_sql = ['dim_product.sql','dim_date.sql','dim_customer.sql','junk_dim.sql']
 
 tasks = [BigQueryExecuteQueryOperator(
         task_id=table_list[i],
