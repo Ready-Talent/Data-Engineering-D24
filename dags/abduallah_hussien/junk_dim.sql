@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS PL.junk_dim (
+CREATE TABLE IF NOT EXISTS `ready-data-engineering-p24.Data_Platform_Abduallah.junk_dim` (
     junk_key INT64,
     payment_type_code INT64,
     payment_type_name STRING,
