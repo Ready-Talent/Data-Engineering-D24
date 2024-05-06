@@ -5,7 +5,7 @@
         {"name": "customer_name", "type": "STRING", "mode": "NULLABLE"},
         {"name": "address_id", "type": "INT64", "mode": "NULLABLE"},
         {"name": "address_street", "type": "STRING", "mode": "NULLABLE"},
-        {"name": "zipcode", "type": "STRING", "mode": "NULLABLE"},
+        {"name": "zipcode", "type": "INT64", "mode": "NULLABLE"},
         {"name": "created_by", "type": "STRING", "mode": "NULLABLE"},
         {"name": "created_at", "type": "TIMESTAMP", "mode": "NULLABLE"},
         {"name": "modified_by", "type": "STRING", "mode": "NULLABLE"},
