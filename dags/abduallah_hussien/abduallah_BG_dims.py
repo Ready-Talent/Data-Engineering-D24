@@ -19,10 +19,13 @@ dag = DAG(
     start_date=datetime(2021, 1, 1),
     catchup=False,
 )
+
+start_task = EmptyOperator(task_id="start_task", dag=dag)
+
 table_list = ['dim_product','dim_date']
 table_list_sql = ['dim_product.sql','dim_date.sql']
 
-start_task = EmptyOperator(task_id="start_task", dag=dag)
+
 
 
 for i in range(len(table_list)):
@@ -36,7 +39,7 @@ for i in range(len(table_list)):
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
 
-start_task >> create_table[0]
+start_task >> create_table[1]
 for i in range(1, len(create_table)):
     create_table[i-1] >> create_table[i]
 create_table[-1]>> end_task
