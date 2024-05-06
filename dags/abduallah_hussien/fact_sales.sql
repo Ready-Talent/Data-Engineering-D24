@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS `ready-data-engineering-p24.Data_Platform_Abduallah.F
     modified_by STRING,
     modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );
+delete from `ready-data-engineering-p24.Data_Platform_Abduallah.Fact_sales` where cast (customer_key as int) <= 5000;
  INSERT INTO `ready-data-engineering-p24.Data_Platform_Abduallah.Fact_sales` (customer_key,product_key,date_key,junk_key,quantity,price,amount,paid_amount,created_by,created_at,modified_by,modified_at)
              SELECT 
             customer_key,product_key,date_key,junk_key,quantity,price,amount,paid_amount,created_by,created_at,modified_by,modified_at

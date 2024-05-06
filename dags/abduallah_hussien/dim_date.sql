@@ -14,6 +14,7 @@ create table if not exists `ready-data-engineering-p24.Data_Platform_Abduallah.d
     --weekend_flag STRING,
     record_updated_date timestamp default CURRENT_TIMESTAMP()
 );
+delete from `ready-data-engineering-p24.Data_Platform_Abduallah.dim_date` where cast (date_key as int) <= 5000;
  INSERT INTO `ready-data-engineering-p24.Data_Platform_Abduallah.dim_date` (date_key,date,day_of_week,day_name,day_of_month,day_of_year,week_of_year,month_name,month_of_year,quarter,year)
              SELECT 
             date_key,date,day_of_week,day_name,day_of_month,day_of_year,week_of_year,month_name,month_of_year,quarter,year

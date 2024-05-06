@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS `ready-data-engineering-p24.Data_Platform_Abduallah.j
     modified_by STRING,
     modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );
+delete from `ready-data-engineering-p24.Data_Platform_Abduallah.junk_dim` where cast (junk_key as int) <= 5000;
  INSERT INTO `ready-data-engineering-p24.Data_Platform_Abduallah.junk_dim` (junk_key,payment_type_code,payment_type_name,channel_code,channel_name,created_by,created_at,modified_by,modified_at)
              SELECT 
             junk_key,payment_type_code,payment_type_name,channel_code,channel_name,created_by,created_at,modified_by,modified_at
