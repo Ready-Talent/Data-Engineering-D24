@@ -26,7 +26,7 @@ start_task = EmptyOperator(task_id="start_task", dag=dag)
 #path = os.path.join(parent_path, "product.json" )
 for name in table_list:
     create_table = BigQueryExecuteQueryOperator(
-        task_id="create_{name}_table",
+        task_id=name,
         sql='{name}.sql',
         use_legacy_sql=False,
         dag=dag
