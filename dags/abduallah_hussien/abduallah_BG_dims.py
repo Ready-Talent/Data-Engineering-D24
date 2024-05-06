@@ -22,8 +22,8 @@ dag = DAG(
 
 start_task = EmptyOperator(task_id="start_task", dag=dag)
 
-table_list = ['dim_product','dim_date']
-table_list_sql = ['dim_product.sql','dim_date.sql']
+table_list = ['dim_product','dim_date','dim_customer']
+table_list_sql = ['dim_product.sql','dim_date.sql','dim_customer.sql']
 
 
 
@@ -39,5 +39,4 @@ for i in range(len(table_list)):
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
 
-for i in range(1, len(create_table)):
-    create_table[i-1] >> create_table[i]
+start_task >> create_table >> end_task
