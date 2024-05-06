@@ -1,4 +1,4 @@
-INSERT INTO data_platform_abdelrahman_tamer.product
+INSERT INTO data_platform_abdelrahman_tamer.dim_product
 (product_id, brand_id, category_id, product_name, price, description, brand_name, category_name)
 
 SELECT
