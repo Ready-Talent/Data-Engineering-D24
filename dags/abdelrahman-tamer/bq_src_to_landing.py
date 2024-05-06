@@ -14,56 +14,90 @@ dag  = DAG(
         catchup=False
     )
 
-# current_dir = os.path.dirname(__file__)
 
-# schema_file_path = os.path.join(current_dir, "abdelrahman-tamer/schemas/product.json")
-# schema_file_path = "product.json"
-# with open(schema_file_path, 'r') as f:
-#     product_schema = json.load(f)
+# customer_schema = {
+#     "table_name": "dim_customer",
+#     "fields": [
+#         {"name": "customer_id", "type": "INT64", "mode": "NULLABLE"},
+#         {"name": "customer_name", "type": "STRING", "mode": "NULLABLE"},
+#         {"name": "address_id", "type": "INT64", "mode": "NULLABLE"},
+#         {"name": "address_street", "type": "STRING", "mode": "NULLABLE"},
+#         {"name": "zipcode", "type": "STRING", "mode": "NULLABLE"},
+#         {"name": "created_by", "type": "STRING", "mode": "NULLABLE"},
+#         {"name": "created_at", "type": "TIMESTAMP", "mode": "NULLABLE"},
+#         {"name": "modified_by", "type": "STRING", "mode": "NULLABLE"},
+#         {"name": "modified_at", "type": "TIMESTAMP", "mode": "NULLABLE"}
+#     ]
+# }
 
+# product_schema = {
+    
+#     "table_name": "dim_product",
+#     "fields": [
+#         {"name": "product_id", "type": "INT64", "mode": "NULLABLE"},
+#         {"name": "brand_id", "type": "INT64", "mode": "NULLABLE"},
+#         {"name": "category_id", "type": "INT64", "mode": "NULLABLE"},
+#         {"name": "product_name", "type": "STRING", "mode": "NULLABLE"},
+#         {"name": "price", "type": "FLOAT64", "mode": "NULLABLE"},
+#         {"name": "description", "type": "STRING", "mode": "NULLABLE"},
+#         {"name": "brand_name", "type": "STRING", "mode": "NULLABLE"},
+#         {"name": "category_name", "type": "STRING", "mode": "NULLABLE"},
+#         {"name": "created_by", "type": "STRING", "mode": "NULLABLE"},
+#         {"name": "created_at", "type": "TIMESTAMP", "mode": "NULLABLE"},
+#         {"name": "modified_by", "type": "STRING", "mode": "NULLABLE"},
+#         {"name": "modified_at", "type": "TIMESTAMP", "mode": "NULLABLE"}
+#     ]
+# }
 
-product_schema = [
-        {"name": "product_id", "type": "INT64", "mode": "NULLABLE"},
-        {"name": "brand_id", "type": "INT64", "mode": "NULLABLE"},
-        {"name": "category_id", "type": "INT64", "mode": "NULLABLE"},
-        {"name": "product_name", "type": "STRING", "mode": "NULLABLE"},
-        {"name": "price", "type": "FLOAT64", "mode": "NULLABLE"},
-        {"name": "description", "type": "STRING", "mode": "NULLABLE"},
-        {"name": "brand_name", "type": "STRING", "mode": "NULLABLE"},
-        {"name": "category_name", "type": "STRING", "mode": "NULLABLE"},
-        {"name": "created_by", "type": "STRING", "mode": "NULLABLE"},
-        {"name": "created_at", "type": "TIMESTAMP", "mode": "NULLABLE"},
-        {"name": "modified_by", "type": "STRING", "mode": "NULLABLE"},
-        {"name": "modified_at", "type": "TIMESTAMP", "mode": "NULLABLE"}
-]
-
-
+# junk_dim_schema = {
+    
+#     "table_name": "dim_junk",    
+#     "fields": [
+#         {"name": "junk_id", "type": "INT64", "mode": "NULLABLE"},
+#         {"name": "payment_type_code", "type": "INT64", "mode": "NULLABLE"},
+#         {"name": "payment_type_name", "type": "STRING", "mode": "NULLABLE"},
+#         {"name": "channel_code", "type": "INT64", "mode": "NULLABLE"},
+#         {"name": "channel_name", "type": "STRING", "mode": "NULLABLE"},
+#         {"name": "created_by", "type": "STRING", "mode": "NULLABLE"},
+#         {"name": "created_at", "type": "TIMESTAMP", "mode": "NULLABLE"},
+#         {"name": "modified_by", "type": "STRING", "mode": "NULLABLE"},
+#         {"name": "modified_at", "type": "TIMESTAMP", "mode": "NULLABLE"}
+#     ]
+# }
        
 
-
+dim_tables = ["dim_customer", "dim_product", "dim_junk"]
     
 
 start_task = EmptyOperator(task_id="start_task", dag=dag)
-
-
-create_table = BigQueryCreateEmptyTableOperator(
-    task_id=f"create_table",
-    dataset_id=DATA_PLATFORM,
-    table_id="product",
-    exists_ok=True,
-    schema_fields=product_schema,
-    dag=dag
-)
-
-populate_table = BigQueryExecuteQueryOperator(
-    task_id="populate_table",
-    sql="sql/populate_dim_product.sql",
-    use_legacy_sql=False,
-    dag=dag
-)
-
-
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
 
-start_task >> create_table >> populate_table >> end_task
+for table in dim_tables:
+    
+    schema_file_path = f"schemas/{table}.json"
+    with open(schema_file_path, 'r') as f:
+        schema_data = json.load(f)
+        
+    create_table = BigQueryCreateEmptyTableOperator(
+        task_id=f"create_table_{table}",
+        dataset_id=DATA_PLATFORM,
+        table_id=table,
+        exists_ok=True,
+        schema_fields=schema_data["fields"],
+        dag=dag
+    )
+
+    populate_table = BigQueryExecuteQueryOperator(
+        task_id="populate_table",
+        sql=f"sql/populate_{table}.sql",
+        use_legacy_sql=False,
+        dag=dag
+    )
+    
+    start_task >> create_table >> populate_table >> end_task
+
+
+
+
+# start_task >> create_table >> populate_table >> end_task
