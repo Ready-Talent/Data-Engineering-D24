@@ -2,7 +2,6 @@ import logging
 from datetime import datetime
 from pathlib import Path
 from airflow import DAG
-from airflow.utils.task_group import TaskGroup
 from airflow.operators.empty import EmptyOperator
 from airflow.providers.google.cloud.operators.bigquery import BigQueryInsertJobOperator
 from airflow.providers.google.cloud.operators.bigquery import BigQueryCreateEmptyTableOperator
@@ -26,16 +25,18 @@ start_task = EmptyOperator(task_id="start_task", dag=dag)
 table_list = ['dim_product','dim_date','dim_customer']
 table_list_sql = ['dim_product.sql','dim_date.sql','dim_customer.sql']
 
-with TaskGroup('dynamic_tasks_group') as dynamic_group:
-    tasks = [BigQueryExecuteQueryOperator(
-            task_id=table_list[i],
-            sql=table_list_sql[i],
-            use_legacy_sql=False,
-            dag=dag
-        ) for i in range(len(table_list))]
-    
+tasks = [BigQueryExecuteQueryOperator(
+        task_id=table_list[i],
+        sql=table_list_sql[i],
+        use_legacy_sql=False,
+        dag=dag
+    ) for i in range(len(table_list))]
+
+
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
 
-start_task >> dynamic_group
-dynamic_group>> end_task
+start_task >> tasks[0]
+for i in range(1, len(tasks)):
+    tasks[i] << tasks[i-1]
+tasks[-1] >> end_task
