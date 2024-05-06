@@ -13,7 +13,7 @@ def print_hello():
     return "printed"
 
 dag = DAG(
-    dag_id="Abduallah_transfer_dims_Dag",
+    dag_id="Abduallah_transfer_all_dims_Dag",
     description="Transfer",
     schedule_interval=None,
     start_date=datetime(2021, 1, 1),
