@@ -20,8 +20,6 @@ end_task = EmptyOperator(task_id="end_task", dag=dag)
 
 
 tables = ['product','order','order_detail','channel','payment','payment_type','address','customer',]
-
-
 for table in tables:
     postgres_to_gcs = PostgresToGCSOperator(
     task_id=f"postgres_to_gcs{table}",
@@ -33,7 +31,8 @@ for table in tables:
     gzip=False,
     dag = dag
     )
-
+    
+    
     gcs_to_bigquery = GCSToBigQueryOperator(
     task_id=f"gcs_to_bigquery{table}",
     bucket="postgres-to-gcs",
