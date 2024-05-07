@@ -19,7 +19,7 @@ end = EmptyOperator(task_id="end", dag=dag)
 
 transfer_tables = BigQueryExecuteQueryOperator(
     task_id="transfer_all_tables",
-    sql = "/Sql/create_dim_customer.sql",
+    sql = "/Sql/create_tables.sql",
     use_legacy_sql=False,
     dag=dag,
 )
