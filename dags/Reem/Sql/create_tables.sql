@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS Data_Platform_Reema.dim_customer (
 );
 
 
-CREATE TABLE IF NOT EXISTSData_Platform_Reema.dim_product (
+CREATE TABLE IF NOT EXISTS Data_Platform_Reema.dim_product (
     product_key INT64,
     brand_id INT64,
     category_id INT64,
