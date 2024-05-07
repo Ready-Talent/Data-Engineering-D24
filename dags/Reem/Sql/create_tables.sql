@@ -73,3 +73,22 @@ CREATE TABLE IF NOT EXISTS Data_Platform_Reema.junk_dim (
     modified_by STRING,
     modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );
+
+
+CREATE TABLE IF NOT EXISTS Data_Platform_Reema.Fact_sales (
+    customer_key INTEGER references PL.dim_customer(customer_key),
+    product_key INTEGER references PL.dim_product(product_key),
+    date_key INTEGER references PL.dim_date(date_key),
+    time_key INTEGER references PL.dim_time(time_key),
+    junk_key INTEGER references PL.junk_dim(junk_key),
+
+    quantity INTEGER,
+    price DECIMAL(10, 2),
+    amount DECIMAL(10, 2),
+    paid_amount DECIMAL(10, 2),
+
+    created_by VARCHAR(100) DEFAULT 'user',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    modified_by VARCHAR(100),
+    modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
