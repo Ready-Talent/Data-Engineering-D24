@@ -25,4 +25,4 @@ transfer_tables = BigQueryExecuteQueryOperator(
 )
 
 
-start >> transfer_tables>> end
+start >> transfer_tables >> end
