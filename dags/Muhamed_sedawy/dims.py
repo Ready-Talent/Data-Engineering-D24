@@ -8,7 +8,7 @@ from airflow.providers.google.cloud.operators.bigquery import BigQueryExecuteQue
 
 
 dag = DAG(
-    dag_id="Sedawy_Dag",
+    dag_id="using_sql_sedawy",
     description="Simple tutorial DAG",
     schedule_interval=None,
     start_date=datetime(2021, 1, 1),

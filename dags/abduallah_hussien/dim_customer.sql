@@ -21,6 +21,7 @@ CREATE TABLE IF NOT EXISTS `ready-data-engineering-p24.Data_Platform_Abduallah.d
     modified_by STRING(100),
     modified_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP()
 );
+delete from `ready-data-engineering-p24.Data_Platform_Abduallah.dim_customer` where cast (customer_id as int) <= 5000;
  INSERT INTO `ready-data-engineering-p24.Data_Platform_Abduallah.dim_customer` (customer_key,customer_id,customer_name,email,phone,address_id,address_street,address_zipcode,city_id,city_name,state_id,state_name,country_id,country_name)
             SELECT 
             customer_key,customer_id,customer_name,email,phone,address_id,address_street,address_zipcode,city_id,city_name,state_id,state_name,country_id,country_name

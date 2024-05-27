@@ -22,11 +22,11 @@ dag = DAG(
 
 start_task = EmptyOperator(task_id="start_task", dag=dag)
 
-table_list = ['dim_product','dim_date','dim_customer']
-table_list_sql = ['dim_product.sql','dim_date.sql','dim_customer.sql']
+table_list = ['dim_product','dim_customer','junk_dim','dim_date','fact_sales']
+table_list_sql = ['dim_product.sql','dim_customer.sql','junk_dim.sql','dim_date.sql','fact_sales.sql']
 
 tasks = [BigQueryExecuteQueryOperator(
-        task_id=table_list[i],
+        task_id=f'create_and_insert_{table_list[i]}',
         sql=table_list_sql[i],
         use_legacy_sql=False,
         dag=dag
