@@ -29,7 +29,6 @@ WITH fct_trip AS (
         dim_date.day_of_week AS day_of_week,
         dim_date.day_of_month AS day_of_month,
         dim_date.is_weekend AS is_weekend,
-        dim_date.public_holiday_name AS public_holiday_name
     FROM 
         `ready-data-engineering-p24.chicago_taxi_OT.chicago-taxi-test-de24_OT` trips
     LEFT JOIN
