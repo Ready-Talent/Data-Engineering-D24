@@ -22,18 +22,18 @@ WITH fct_trip AS (
         `ready-data-engineering-p24.chicago_taxi_OT.chicago-taxi-test-de24_OT` tr
     left join 
         {{ ref('dim_location') }} pl on
-        pickup_location = location
-        and pickup_latitude = latitude
-        and pickup_longitude = longitude
-        and pickup_census_tract = census_tract
-        and pickup_community_area = community_area
+        pickup_location = pl.location
+        and pickup_latitude = pl.latitude
+        and pickup_longitude = pl.longitude
+        and pickup_census_tract = pl.census_tract
+        and pickup_community_area = pl.community_area
     left join 
         {{ ref('dim_location') }} dl on
-        dropoff_location = location
-        and dropoff_latitude = latitude
-        and dropoff_longitude = longitude
-        and dropoff_census_tract = census_tract
-        and dropoff_community_area = community_area
+        dropoff_location = dl.location
+        and dropoff_latitude = dl.latitude
+        and dropoff_longitude = dl.longitude
+        and dropoff_census_tract = dl.census_tract
+        and dropoff_community_area = dl.community_area
     left join 
          {{ ref('dim_payment_type') }} pt on
          pt.payment_type = tr.payment_type
