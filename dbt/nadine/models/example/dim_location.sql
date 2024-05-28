@@ -1,10 +1,9 @@
-select 
-    dropoff_longitude,
-    dropoff_latitude,
-    dropoff_location,
-    pickup_longitude,
+SELECT 
     pickup_latitude,
+    pickup_longitude,
     pickup_location,
-    pickup_community_area
+    dropoff_latitude,
+    dropoff_longitude,
+    dropoff_location
 
-from ready-data-engineering-p24.Nadine_Airflow.chicago-taxi
+ FROM `ready-data-engineering-p24.Nadine_Airflow.chicago-taxi` 
