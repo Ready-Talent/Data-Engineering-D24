@@ -10,4 +10,4 @@ dropoff_latitude,
 dropoff_longitude,
 dropoff_location,
 
-FROM ready-data-engineering-p24.Reema_AirFlow.chicago-taxi-test-de24
+FROM 'ready-data-engineering-p24.Reema_AirFlow.chicago-taxi-test-de24'
