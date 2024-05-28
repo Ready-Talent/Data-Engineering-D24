@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+select *
+from ready-data-engineering-p24.chicago_11.chicago_taxi
+=======
 
 /*
     Welcome to your first dbt model!
@@ -25,3 +29,4 @@ from source_data
 */
 
 -- where id is not null
+>>>>>>> f2343ed624ea7d203119562bb68600940aec15b0
