@@ -22,7 +22,7 @@ SELECT
     t.extras,
     t.trip_total,
     payment.payment_method,
-    company.company,
+    taxi.company,
     date_info.date_id,
     date_info.year,
     date_info.month,
@@ -45,7 +45,7 @@ ON
 LEFT JOIN
     {{ ref('taxi') }} AS taxi
 ON
-    t.taxi_id = company.taxi_id
+    t.taxi_id = taxi.taxi_id
 LEFT JOIN
     {{ ref('time') }} AS date_info
 ON
