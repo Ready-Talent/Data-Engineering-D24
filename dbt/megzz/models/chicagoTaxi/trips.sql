@@ -45,7 +45,7 @@ ON
 LEFT JOIN
     {{ ref('taxi') }} AS taxi
 ON
-    t.taxi_id = company.taxi_id
+    t.taxi_id = taxi.taxi_id
 LEFT JOIN
     {{ ref('time') }} AS date_info
 ON
