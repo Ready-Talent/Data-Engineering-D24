@@ -5,7 +5,7 @@ SELECT
         pickup_longitude AS longitude,
         pickup_location AS location
 FROM `ready-data-engineering-p24.SRC_08.trips`
-UNION
+UNION all
 SELECT
     dropoff_census_tract AS census_tract,
     dropoff_community_area AS community_area,
