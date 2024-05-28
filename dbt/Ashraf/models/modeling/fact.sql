@@ -4,6 +4,7 @@ WITH fact AS (
         taxi_id,
         company,
         date_id,
+        trip_start_timestamp,
         trip_end_timestamp,
         trip_seconds,
         trip_miles,
@@ -27,7 +28,5 @@ WITH fact AS (
 
     FROM 
         `ready-data-engineering-p24.chicago_taxi_01.chicago-taxi-test-de24` trips
-    LEFT JOIN
-        {{ ref('dim_date') }}  ON  CAST(FORMAT_DATE('%d', DATE(trip_end_timestamp)) AS INT64) = dim_date.day_of_month
 )
 SELECT * FROM fact
