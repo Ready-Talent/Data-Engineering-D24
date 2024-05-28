@@ -41,6 +41,6 @@ WITH fct_trip AS (
          {{ ref('dim_taxi') }} t on
          t.taxi_id = tr.taxi_id
     LEFT JOIN
-        {{ ref('dim_date') }}  ON CAST(FORMAT_DATE('%Y%m%d', DATE(trips.trip_end_timestamp)) AS INT64) = dim_date.date_id
+        {{ ref('dim_date') }} dd  ON CAST(FORMAT_DATE('%Y%m%d', DATE(trip_end_timestamp)) AS INT64) = dd.date_id
 )
 SELECT * FROM fct_trip
