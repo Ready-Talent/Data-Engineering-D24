@@ -31,22 +31,22 @@ SELECT
 FROM
     `ready-data-engineering-p24.SRC_08.trips` AS t
 LEFT JOIN
-    {{ ref('chicagoTaxi.location') }} AS pickup
+    {{ ref('location') }} AS pickup
 ON
     t.pickup_census_tract = pickup.census_tract
 LEFT JOIN
-    {{ ref('chicagoTaxi.location') }} AS dropoff
+    {{ ref('location') }} AS dropoff
 ON
     t.dropoff_census_tract = dropoff.census_tract
 LEFT JOIN
-    {{ ref('chicagoTaxi.payment') }} AS payment
+    {{ ref('payment') }} AS payment
 ON
     t.payment_type = payment.payment_method
 LEFT JOIN
-    {{ ref('chicagoTaxi.taxi') }} AS taxi
+    {{ ref('taxi') }} AS taxi
 ON
     t.taxi_id = company.taxi_id
 LEFT JOIN
-    {{ ref('chicagoTaxi.date_dimension') }} AS date_info
+    {{ ref('time') }} AS date_info
 ON
     DATE(t.trip_start_timestamp) = date_info.date_id
