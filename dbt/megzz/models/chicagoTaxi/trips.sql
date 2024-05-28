@@ -22,7 +22,7 @@ SELECT
     t.extras,
     t.trip_total,
     payment.payment_method,
-    company.company,
+    taxi.company,
     date_info.date_id,
     date_info.year,
     date_info.month,
