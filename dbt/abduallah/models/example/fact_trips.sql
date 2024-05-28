@@ -11,7 +11,7 @@ WITH fct_trip AS (
         tolls,
         extras,
         trip_total,
-        pt.payment_type_id,
+        pt.payment_typ_id,
         pl.location_id as pickup_location_id,
         dl.location_id as dropoff_location_id,
         dim_date.date AS trip_date,
