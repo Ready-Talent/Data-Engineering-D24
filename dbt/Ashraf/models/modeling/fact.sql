@@ -3,7 +3,6 @@ WITH fact AS (
         unique_key,
         taxi_id,
         company,
-        date_id,
         trip_start_timestamp,
         trip_end_timestamp,
         trip_seconds,
@@ -27,6 +26,6 @@ WITH fact AS (
         dropoff_community_area,
 
     FROM 
-        `ready-data-engineering-p24.chicago_taxi_01.chicago-taxi-test-de24` trips
+        `ready-data-engineering-p24.chicago_taxi_01.chicago-taxi-test-de24` 
 )
 SELECT * FROM fact
