@@ -6,4 +6,4 @@ trip_miles,
 trip_total,
 
 
-FROM FROM `ready-data-engineering-p24.Reema_AirFlow.chicago-taxi-test-de24`
+FROM `ready-data-engineering-p24.Reema_AirFlow.chicago-taxi-test-de24`
