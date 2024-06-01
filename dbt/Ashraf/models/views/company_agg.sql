@@ -1,5 +1,5 @@
 create view company_agg as (
-
+with cte as (
      select
       sum(trip_total) as money_generated,
       sum(trip_miles) as distance,
@@ -7,4 +7,7 @@ create view company_agg as (
 
     from dbt_mashraf.fact
     group by company
+    )
+
+    select * from cte
 )
