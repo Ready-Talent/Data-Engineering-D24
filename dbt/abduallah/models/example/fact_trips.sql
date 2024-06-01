@@ -27,20 +27,20 @@ WITH fct_trip AS (
         and pickup_longitude = pl.longitude
         and pickup_census_tract = pl.census_tract
         and pickup_community_area = pl.community_area
-    left join 
+    join 
         {{ ref('dim_location') }} dl on
         dropoff_location = dl.location
         and dropoff_latitude = dl.latitude
         and dropoff_longitude = dl.longitude
         and dropoff_census_tract = dl.census_tract
         and dropoff_community_area = dl.community_area
-    left join 
+    join 
          {{ ref('dim_payment_type') }} pt on
          pt.payment_type = tr.payment_type
-    left join
+    join
          {{ ref('dim_taxi') }} t on
          t.taxi_id = tr.taxi_id
-    LEFT JOIN
+    JOIN
         {{ ref('dim_date') }} dd  ON CAST(FORMAT_DATE('%Y%m%d', DATE(trip_end_timestamp)) AS INT64) = dd.date_id
 )
 SELECT * FROM fct_trip
