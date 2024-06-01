@@ -1,3 +1,7 @@
+
+{{ config(
+    materialized="view"
+) }}
 create view company_agg as (
 with cte as (
      select
