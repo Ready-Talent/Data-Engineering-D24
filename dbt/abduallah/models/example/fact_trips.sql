@@ -20,7 +20,7 @@ WITH fct_trip AS (
         dd.day_of_month AS day_of_month,
     FROM 
         `ready-data-engineering-p24.chicago_taxi_OT.chicago-taxi-test-de24_OT` tr
-    left join 
+    join 
         {{ ref('dim_date') }} dd  ON CAST(FORMAT_DATE('%Y%m%d', DATE(trip_end_timestamp)) AS INT64) = dd.date_id
     join 
         {{ ref('dim_location') }} dl on
