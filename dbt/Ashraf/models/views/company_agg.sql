@@ -1,8 +1,4 @@
 
-{{ config(
-    materialized="view"
-) }}
-create view company_agg as (
 with cte as (
      select
       sum(trip_total) as money_generated,
@@ -11,7 +7,6 @@ with cte as (
 
     from dbt_mashraf.fact
     group by company
-    )
-
-    select * from cte
 )
+
+select * from cte
