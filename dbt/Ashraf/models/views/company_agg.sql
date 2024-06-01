@@ -1,7 +1,7 @@
 
 with cte as (
      select
-     company
+     company,
       sum(trip_total) as money_generated,
       sum(trip_miles) as distance,
       sum(trip_seconds) as trip_time
