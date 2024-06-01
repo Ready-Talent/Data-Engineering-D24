@@ -14,10 +14,10 @@ WITH fct_trip AS (
         pt.payment_typ_id,
         pl.location_id as pickup_location_id,
         dl.location_id as dropoff_location_id,
-        dim_date.date AS trip_date,
-        dim_date.day_name AS trip_day_name,
-        dim_date.day_of_week AS day_of_week,
-        dim_date.day_of_month AS day_of_month,
+        dd.date AS trip_date,
+        dd.day_name AS trip_day_name,
+        dd.day_of_week AS day_of_week,
+        dd.day_of_month AS day_of_month,
     FROM 
         `ready-data-engineering-p24.chicago_taxi_OT.chicago-taxi-test-de24_OT` tr
     left join 
