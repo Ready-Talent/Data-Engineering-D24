@@ -20,13 +20,8 @@ WITH fct_trip AS (
         dd.day_of_month AS day_of_month,
     FROM 
         `ready-data-engineering-p24.chicago_taxi_OT.chicago-taxi-test-de24_OT` tr
-    left join 
-        {{ ref('dim_location') }} pl on
-        pickup_location = pl.location
-        and pickup_latitude = pl.latitude
-        and pickup_longitude = pl.longitude
-        and pickup_census_tract = pl.census_tract
-        and pickup_community_area = pl.community_area
+    join 
+        {{ ref('dim_date') }} dd  ON CAST(FORMAT_DATE('%Y%m%d', DATE(trip_end_timestamp)) AS INT64) = dd.date_id
     join 
         {{ ref('dim_location') }} dl on
         dropoff_location = dl.location
@@ -41,6 +36,11 @@ WITH fct_trip AS (
          {{ ref('dim_taxi') }} t on
          t.taxi_id = tr.taxi_id
     JOIN
-        {{ ref('dim_date') }} dd  ON CAST(FORMAT_DATE('%Y%m%d', DATE(trip_end_timestamp)) AS INT64) = dd.date_id
+        {{ ref('dim_location') }} pl on
+        pickup_location = pl.location
+        and pickup_latitude = pl.latitude
+        and pickup_longitude = pl.longitude
+        and pickup_census_tract = pl.census_tract
+        and pickup_community_area = pl.community_area
 )
 SELECT * FROM fct_trip
