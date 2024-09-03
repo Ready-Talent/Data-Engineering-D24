@@ -35,3 +35,5 @@ insert_dim_customer = BigQueryExecuteQueryOperator(
 end_task = EmptyOperator(task_id="end_task", dag=dag)
 
 start_task >> create_dim_customer_table >> insert_dim_customer >> end_task
+
+# trigger cloudbuild
