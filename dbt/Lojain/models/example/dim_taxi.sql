@@ -1,0 +1,1 @@
+select taxi_id,company  from ready-data-engineering-p24.chicago_11.chicago_taxi
